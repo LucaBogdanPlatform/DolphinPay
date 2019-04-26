@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "806071370102",
+    "firebase_url": "https://dolphinpay-d90e4.firebaseio.com",
+    "project_id": "dolphinpay-d90e4",
+    "storage_bucket": "dolphinpay-d90e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806071370102:android:f011aa253303bdc2",
+        "android_client_info": {
+          "package_name": "com.dolphinpay.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806071370102-hrqrkdqkhkgdrci01qi4ovaml2hki4jv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQdIGINlOnXybfBhCFxe8W-a9xsPkBjZU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806071370102-hrqrkdqkhkgdrci01qi4ovaml2hki4jv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
