@@ -6,6 +6,6 @@
         </trust-anchors>
     </base-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">dolphinpay.us-west-2.elasticbeanstalk.com</domain>
+        <domain includeSubdomains="true">dolphinpaysv.us-west-2.elasticbeanstalk.com</domain>
     </domain-config>
 </network-security-config>

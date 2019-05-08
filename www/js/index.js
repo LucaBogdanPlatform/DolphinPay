@@ -9,22 +9,21 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-/*
 
-    const options = {
-      method: 'get',
-    };
+        const options = {
+          method: 'get',
+        };
 
-    cordova.plugin.http.sendRequest('http://dolphinpay.us-west-2.elasticbeanstalk.com/ts', options, function(response) {
-      // prints 200
-      console.log(response.data);
-    }, function(response) {
-      // prints 403
-      console.log(response.status);
+        cordova.plugin.http.sendRequest('http://dolphinpaysv.us-west-2.elasticbeanstalk.com:80/rest_api/v1/states', options, function(response) {
+          // prints 200
+          console.log(response.data);
+        }, function(response) {
+          // prints 403
+          console.log(response.status);
 
-      //prints Permission denied
-      console.log(response.error);
-    });
+          //prints Permission denied
+          console.log(response.error);
+        });
 
         window.FirebasePlugin.getToken(function(token) {
             // save this server-side and use it to push notifications to this device
@@ -49,7 +48,6 @@ var app = {
             console.error(error);
         });
 
-*/
 
     },
     onPause: function() {
