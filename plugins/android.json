@@ -15,10 +15,16 @@
     },
     "cordova-plugin-advanced-http": {
       "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "com.paypal.cordova.mobilesdk": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "card.io.cordova.mobilesdk": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     }
   }

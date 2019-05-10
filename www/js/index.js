@@ -1,3 +1,4 @@
+
 var app = {
     initialize: function() {
         this.bindEvents();
@@ -59,4 +60,3 @@ var app = {
     }
 }
 app.initialize();
-
