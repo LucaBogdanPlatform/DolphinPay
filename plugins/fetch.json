@@ -31,14 +31,6 @@
     "is_top_level": false,
     "variables": {}
   },
-  "com.paypal.cordova.mobilesdk": {
-    "source": {
-      "type": "registry",
-      "id": "com.paypal.cordova.mobilesdk"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "card.io.cordova.mobilesdk": {
     "source": {
       "type": "registry",
@@ -46,5 +38,23 @@
     },
     "is_top_level": false,
     "variables": {}
+  },
+  "cordova-plugin-compat": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-compat@^1.0.0"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-googleplus": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus"
+    },
+    "is_top_level": true,
+    "variables": {
+      "REVERSED_CLIENT_ID": "806071370102-mgv13smtmnbdi5lfevug7oln5ejko518.apps.googleusercontent.com"
+    }
   }
 }

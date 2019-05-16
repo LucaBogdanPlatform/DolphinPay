@@ -7,25 +7,10 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-firebase": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    },
-    "cordova-plugin-advanced-http": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    },
-    "com.paypal.cordova.mobilesdk": {
+    "cordova-plugin-googleplus": {
+      "PLAY_SERVICES_VERSION": "11.8.0",
       "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
-  "dependent_plugins": {
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    },
-    "card.io.cordova.mobilesdk": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    }
-  }
+  "dependent_plugins": {}
 }

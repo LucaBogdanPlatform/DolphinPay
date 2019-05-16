@@ -11,6 +11,8 @@ var app = {
     },
     onDeviceReady: function() {
 
+
+/*
         const options = {
           method: 'get',
         };
@@ -49,14 +51,28 @@ var app = {
             console.error(error);
         });
 
-
+*/
     },
     onPause: function() {
 
     },
     onResume: function(event) {
-        $("#xxx").append("<p> hello world again</p>");
 
     }
 }
 app.initialize();
+
+
+function gpluslogin(){
+    window.plugins.googleplus.login(
+        {
+        },
+        function (obj) {
+          alert(JSON.stringify(obj)); // do something useful instead of alerting
+        },
+        function (msg) {
+          alert('error: ' + msg);
+        }
+    );
+
+}
