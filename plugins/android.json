@@ -7,9 +7,6 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-advanced-http": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    },
     "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
@@ -21,6 +18,12 @@
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-advanced-http": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
