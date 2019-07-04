@@ -158,7 +158,7 @@ function getStoredCredentials(){
 function login(successCallback, failureCallback, hasCredentialsRefreshed = false){
     cordova.plugin.http.setDataSerializer('json');
 
-    var credentials = getCredentials();
+    var credentials = getStoredCredentials();
     const options = {
         method: 'post',
         data: {

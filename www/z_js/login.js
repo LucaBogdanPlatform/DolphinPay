@@ -33,7 +33,7 @@ function handleGetFirebaseTokenError(e){
 }
 
 function handleGetFirebaseTokenAbort(){
-    // TODO
+    showAbortDialog(stringKeys.unexpected_error_description, stringKeys.unexpected_error);
 }
 
 function getGoogleLogin(){
@@ -59,10 +59,11 @@ function handleGetGoogleLoginError(e, hasToExplicitLogin){
 }
 
 function handleGoogleLoginAbortError(){
-    // TODO
+    showAbortDialog(stringKeys.unexpected_error_description, stringKeys.unexpected_error);
 }
 
 function handleLoginError(e){
+    alert(e.error);
     // TODO handle login error
 }
 
@@ -71,6 +72,7 @@ function handleMissingInternetConnectionError(){
 }
 
 function successLogin(){
+    alert("AAAAA");
     // TODO success login
 }
 
@@ -80,10 +82,16 @@ function onConfirmAbort() {
 }
 
 function showAbortDialog(message, title){
-    navigator.notification.confirm(
-        message, // message
-        onConfirm,            // callback to invoke with index of button pressed
-        title,           // title
-        ['Exit']     // buttonLabels
-    );
+    getStringsResources([
+        stringKeys.unexpected_error_description,
+        stringKeys.unexpected_error,
+        stringKeys.exit
+    ], function(translations){
+        navigator.notification.confirm(
+            translations[0], // message
+            onConfirmAbort,            // callback to invoke with index of button pressed
+            translations[1],           // title
+            [translations[2]]     // buttonLabels
+        );
+    });
 }

@@ -25,6 +25,13 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-localization-strings": {
+      "TRANSLATION_PATH": "translations/app/",
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-locale": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
   "dependent_plugins": {

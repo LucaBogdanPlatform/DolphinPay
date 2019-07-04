@@ -1,0 +1,10 @@
+{
+  "config_android" : {
+      "app_name": "DolphinPay"
+  },
+  "app" : {
+    "UNEXPECTED_ERROR": "Unexpected error",
+    "UNEXPECTED_ERROR_DESCRIPTION": "Oh! Sorry, something goes wrong... Try later!",
+    "EXIT": "Exit"
+  }
+}

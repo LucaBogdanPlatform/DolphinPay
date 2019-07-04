@@ -72,5 +72,21 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-localization-strings": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-localization-strings"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-locale": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/sevinlim/cordova-plugin-locale.git"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }
