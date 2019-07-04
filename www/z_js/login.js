@@ -9,7 +9,6 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-        getFirebaseToken();
     },
     onPause: function() {
 
@@ -68,6 +67,7 @@ function handleLoginError(e){
 }
 
 function handleMissingInternetConnectionError(){
+    alert("bbbbbb");
     // TODO
 }
 
@@ -89,8 +89,8 @@ function showAbortDialog(message, title){
     ], function(translations){
         navigator.notification.confirm(
             translations[0], // message
-            onConfirmAbort,            // callback to invoke with index of button pressed
-            translations[1],           // title
+            onConfirmAbort,       // callback to invoke with index of button pressed
+            translations[1],      // title
             [translations[2]]     // buttonLabels
         );
     });

@@ -80,7 +80,7 @@ function firebaseGetToken(successCallback, failureCallback){
         firebaseSaveToken(token);
         firebaseRefreshToken(successCallback, failureCallback);
     }, function(error) {
-        checkNetworkOrUnknownError();
+        checkNetworkOrUnknownError(failureCallback);
     });
 }
 
@@ -89,7 +89,7 @@ function firebaseRefreshToken(successCallback, failureCallback){
         firebaseSaveToken(token);
         successCallback(token);
     }, function(error) {
-        checkNetworkOrUnknownError();
+        checkNetworkOrUnknownError(failureCallback);
     });
 }
 //END FIREBASE
@@ -114,7 +114,7 @@ function googleSilentLogin(successCallback, failureCallback){
             successCallback(obj);
         },
         function (msg) {
-            checkNetworkOrUnknownError();
+            checkNetworkOrUnknownError(failureCallback);
         }
     );
 }
@@ -129,7 +129,7 @@ function googleExplicitLogin(successCallback, failureCallback){
             successCallback(obj);
         },
         function (msg) {
-            checkNetworkOrUnknownError();
+            checkNetworkOrUnknownError(failureCallback);
         }
     );
 }
