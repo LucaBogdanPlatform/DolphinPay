@@ -2,20 +2,20 @@ var BASE_API_URL = 'http://dolphinpaysv.us-west-2.elasticbeanstalk.com:80/dolphi
 var API_VERSION = 'v1';
 var REST_API_URL = BASE_API_URL + API_VERSION;
 
-------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 // REQUESTS PATHS DEFINITIONS
 var REQ_AUTH_PATH = REST_API_URL + '/auth';
 // END REQUESTS PATHS DEFINITIONS
 
-------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 // ERROR OBJECT DEFINITION
 var CODE_UNKNOWN = -1;
 var CODE_NETWORK_ABSENT = 0;
 var Error = function (error){
     this.error = error;
-}:
+};
 
 Error.prototype.isUnauthorized = function(){
     return this.error.status == 401;
@@ -34,7 +34,7 @@ Error.prototype.isUnknownError = function(){
 };
 // END ERROR OBJECT DEFINITION
 
-------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 // GLOBAL ERROR HANDLER
 function errorHandler(retryRequest, failureCallback, error, hasCredentialsRefreshed){
@@ -66,7 +66,7 @@ function checkNetworkOrUnknownError(failureCallback){
 
 // END GLOBAL ERROR HANDLER
 
-------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 // FIREBASE
 
@@ -94,7 +94,7 @@ function firebaseRefreshToken(successCallback, failureCallback){
 }
 //END FIREBASE
 
-------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 // GOOGLE AUTH
 var WEB_CLIENT_ID = '806071370102-hrqrkdqkhkgdrci01qi4ovaml2hki4jv.apps.googleusercontent.com';
@@ -135,7 +135,7 @@ function googleExplicitLogin(successCallback, failureCallback){
 }
 // END GOOGLE AUTH
 
-------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 // GENERAL CREDENTIALS DEFINITION
 function getStoredCredentials(){
@@ -150,7 +150,7 @@ function getStoredCredentials(){
 }
 // END GENERAL CREDENTIALS DEFINITION
 
-------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
 // REQUESTS DEFINITIONS
 
@@ -182,4 +182,4 @@ function login(successCallback, failureCallback, hasCredentialsRefreshed = false
 }
 // END REQUESTS
 
-------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
