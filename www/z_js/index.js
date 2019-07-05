@@ -9,8 +9,11 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
+        receivedEvent('deviceready');
+        navigator.splashscreen.show();
         init();
     },
+
     onPause: function() {
 
     },
@@ -25,5 +28,6 @@ var START_ACTIVITY_DELAY_MILLIS = 3000;
 function init(){
     setTimeout(function(){
         window.location = "z_pages/login.html"
+        navigator.splashscreen.hide();
     }, START_ACTIVITY_DELAY_MILLIS);
 }
