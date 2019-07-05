@@ -88,5 +88,21 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "com.paypal.cordova.mobilesdk": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/paypal/PayPal-Cordova-Plugin"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-console": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-console"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

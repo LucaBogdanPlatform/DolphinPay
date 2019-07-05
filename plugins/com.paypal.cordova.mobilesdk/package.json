@@ -1,0 +1,61 @@
+{
+  "_from": "git+https://github.com/paypal/PayPal-Cordova-Plugin.git",
+  "_id": "com.paypal.cordova.mobilesdk@3.5.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/com.paypal.cordova.mobilesdk",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/paypal/PayPal-Cordova-Plugin",
+    "rawSpec": "https://github.com/paypal/PayPal-Cordova-Plugin",
+    "saveSpec": "git+https://github.com/paypal/PayPal-Cordova-Plugin.git",
+    "fetchSpec": "https://github.com/paypal/PayPal-Cordova-Plugin.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/paypal/PayPal-Cordova-Plugin.git#776cf079386816fce66b38f39be5817b4ce0d5b7",
+  "_spec": "https://github.com/paypal/PayPal-Cordova-Plugin",
+  "_where": "C:\\Users\\Luke\\Desktop\\DolphinPay",
+  "author": {
+    "name": "paypal"
+  },
+  "bugs": {
+    "url": "https://github.com/paypal/PayPal-Cordova-Plugin/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "com.paypal.cordova.mobilesdk",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "deprecated": false,
+  "description": "This plugin allows to add to add PayPal Payments to your application using PayPal Mobile SDK Native library",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "homepage": "https://github.com/paypal/PayPal-Cordova-Plugin#readme",
+  "keywords": [
+    "paypal",
+    "sdk",
+    "payments",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "BSD License, see LICENSE for details",
+  "name": "com.paypal.cordova.mobilesdk",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/paypal/PayPal-Cordova-Plugin.git"
+  },
+  "version": "3.5.0"
+}

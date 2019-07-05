@@ -11,6 +11,7 @@ var app = {
     onDeviceReady: function() {
         init();
     },
+
     onPause: function() {
 
     },
@@ -23,7 +24,12 @@ app.initialize();
 var START_ACTIVITY_DELAY_MILLIS = 3000;
 
 function init(){
+    var elements = document.getElementsByTagName('body');
     setTimeout(function(){
-        window.location = "z_pages/login.html"
+        elements[0].style.opacity = 1;
+            (function fade(){
+                var opacloader = parseFloat(elements[0].style.opacity);
+                (elements[0].style.opacity = opacloader - .1)<0.1?
+                window.location = 'z_pages/login.html':setTimeout(fade,40)})();
     }, START_ACTIVITY_DELAY_MILLIS);
 }

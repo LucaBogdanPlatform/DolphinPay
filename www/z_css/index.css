@@ -1,8 +1,23 @@
-body{
-    background: #5eafe3;
+body {
+  background-color: #F07260;
+  font-size: 64px;
 }
-
-
+.container {
+    height: 100%;
+    line-height: 200px;
+    text-align: center;
+}
+.resize_fit_center {
+    margin-top:30%;
+    max-width:100%;
+    vertical-align: middle;
+}
+#main {
+  position: absolute;
+  top: 78%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .background-logo{
     position: absolute;
     top: 25%;
@@ -12,4 +27,11 @@ body{
     text-align: center;
 
     padding:0;
+}
+
+.button-pay {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: rgb(28, 184, 65); /* this is a green */
 }
