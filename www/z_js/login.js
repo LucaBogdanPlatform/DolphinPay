@@ -26,7 +26,7 @@ function getFirebaseToken(){
 function handleGetFirebaseTokenError(e){
     if(e.isMissingInternetConnection()){
         handleMissingInternetConnectionError();
-    }else if(e.isUnknownError()){
+    }else{
         handleGetFirebaseTokenAbort();
     }
 }
