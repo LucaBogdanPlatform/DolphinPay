@@ -160,11 +160,14 @@ function login(successCallback, failureCallback, hasCredentialsRefreshed = false
     cordova.plugin.http.setDataSerializer('json');
 
     var credentials = getStoredCredentials();
+    console.log("GOOGLE TOKEN -> " + credentials.idToken);
+    console.log("EMAIL -> " + credentials.email);
+    console.log("FIREBASE TOKEN -> " + credentials.firebaseToken);
     const options = {
         method: 'post',
         data: {
             idToken: credentials.idToken,
-            username: credentials.email,
+            email: credentials.email,
             firebaseToken: credentials.firebaseToken
         }
     };
