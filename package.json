@@ -24,7 +24,6 @@
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
     "cordova-plugin-network-information": "^2.0.1",
-    "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-universal-links-plugin-fix": "1.2.1"
   },
   "cordova": {
@@ -39,8 +38,7 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-advanced-http": {},
       "com.paypal.cordova.mobilesdk": {},
-      "cordova-plugin-console": {},
-      "cordova-plugin-splashscreen": {}
+      "cordova-plugin-console": {}
     },
     "platforms": [
       "android"

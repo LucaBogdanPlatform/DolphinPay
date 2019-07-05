@@ -1,3 +1,4 @@
+//DA CHIAMARE PER CARICARE IL PAGAMENTO
 receivedEvent = function() {
     initPaymentUI();   // start to initialize PayPalMobile library
 }

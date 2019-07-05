@@ -31,9 +31,6 @@
     },
     "cordova-plugin-console": {
       "PACKAGE_NAME": "com.dolphinpay.app"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
   "dependent_plugins": {
