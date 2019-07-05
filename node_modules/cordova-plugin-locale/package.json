@@ -1,0 +1,57 @@
+{
+  "_from": "git+https://github.com/sevinlim/cordova-plugin-locale.git",
+  "_id": "cordova-plugin-locale@1.0.2",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/cordova-plugin-locale",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/sevinlim/cordova-plugin-locale.git",
+    "rawSpec": "https://github.com/sevinlim/cordova-plugin-locale.git",
+    "saveSpec": "git+https://github.com/sevinlim/cordova-plugin-locale.git",
+    "fetchSpec": "https://github.com/sevinlim/cordova-plugin-locale.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/sevinlim/cordova-plugin-locale.git#d1e0572fc685db7903bd03be991eb86de5b40b77",
+  "_spec": "https://github.com/sevinlim/cordova-plugin-locale.git",
+  "_where": "C:\\Users\\U374332\\Desktop\\DolphinPay\\DolphinPay",
+  "author": {
+    "name": "Sevin Lim",
+    "email": "sevin.lim@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/sevinlim/cordova-plugin-locale/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-locale",
+    "platforms": [
+      "android"
+    ]
+  },
+  "deprecated": false,
+  "description": "Get device localised strings",
+  "homepage": "https://github.com/sevinlim/cordova-plugin-locale.git#readme",
+  "keywords": [
+    "cordova",
+    "locale",
+    "globalization",
+    "strings",
+    "xml",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "Apache-2.0",
+  "name": "cordova-plugin-locale",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sevinlim/cordova-plugin-locale.git"
+  },
+  "version": "1.0.2"
+}
