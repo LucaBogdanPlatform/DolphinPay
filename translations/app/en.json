@@ -5,6 +5,11 @@
   "app" : {
     "UNEXPECTED_ERROR": "Unexpected error",
     "UNEXPECTED_ERROR_DESCRIPTION": "Oh! Sorry, something goes wrong... Try later!",
-    "EXIT": "Exit"
+    "GOOGLE_AUTHENTICATION": "Google authentication",
+    "GOOGLE_AUTHENTICATION_REQUIRED_DESCRIPTION": "DolphinPay requires a google account!",
+    "MISSING_INTERNET_CONNECTION": "Missing internet",
+    "MISSING_INTERNET_CONNECTION_DESCRIPTION": "No internet connection found! Please check it and try again.",
+    "EXIT": "Exit",
+    "OK": "Ok"
   }
 }

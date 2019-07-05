@@ -1,7 +1,12 @@
 var stringKeys = {
     exit : "EXIT",
+    ok : "OK",
     unexpected_error : "UNEXPECTED_ERROR",
-    unexpected_error_description : "UNEXPECTED_ERROR_DESCRIPTION"
+    unexpected_error_description : "UNEXPECTED_ERROR_DESCRIPTION",
+    missing_internet_connection : "MISSING_INTERNET_CONNECTION",
+    missing_internet_connection_description : "MISSING_INTERNET_CONNECTION_DESCRIPTION",
+    google_authentication : "GOOGLE_AUTHENTICATION",
+    google_authentication_required_description : "GOOGLE_AUTHENTICATION_REQUIRED_DESCRIPTION"
 }
 
 

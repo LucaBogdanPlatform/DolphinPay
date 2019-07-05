@@ -1,4 +1,5 @@
 var BASE_API_URL = 'http://dolphinpaysv.us-west-2.elasticbeanstalk.com:80/dolphinpayREST-API/';
+var TEST_API_URL = '192.168.43.51:5000/dolphinpayREST-API/'
 var API_VERSION = 'v1';
 var REST_API_URL = BASE_API_URL + API_VERSION;
 
@@ -175,6 +176,7 @@ function login(successCallback, failureCallback, hasCredentialsRefreshed = false
             function(wasTokenRefreshed){
                 login(successCallback, failureCallback, wasTokenRefreshed);
             },
+            failureCallback,
             error,
             hasCredentialsRefreshed
         );

@@ -20,7 +20,7 @@ var app = {
 app.initialize();
 
 function getFirebaseToken(){
-    firebaseGetToken(getGoogleLogin, handleGetFirebaseTokenError);
+    firebaseGetToken(getGoogleExplicitLogin, handleGetFirebaseTokenError);
 }
 
 function handleGetFirebaseTokenError(e){
@@ -32,33 +32,26 @@ function handleGetFirebaseTokenError(e){
 }
 
 function handleGetFirebaseTokenAbort(){
-    showAbortDialog(stringKeys.unexpected_error_description, stringKeys.unexpected_error);
+    showAbortDialog(
+        stringKeys.unexpected_error_description,
+        stringKeys.unexpected_error,
+        stringKeys.exit,
+        function(){navigator.app.exitApp();}
+    );
 }
 
-function getGoogleLogin(){
-    googleSilentLogin(function(){
+function getGoogleExplicitLogin(){
+    googleExplicitLogin(function(){
         login(successLogin, handleLoginError);
-    }, function(e){
-        handleGetGoogleLoginError(e, true);
+    }, function(ex){
+        handleGetGoogleLoginError(ex);
     });
 }
 
-function handleGetGoogleLoginError(e, hasToExplicitLogin){
+function handleGetGoogleLoginError(e){
     if(e.isMissingInternetConnection()){
         handleMissingInternetConnectionError();
-    }else if(e.isUnknownError() && hasToExplicitLogin){
-        googleExplicitLogin(function(){
-            login(successLogin, handleLoginError);
-        }, function(){
-            handleGetGoogleLoginError(e, false);
-        });
-    }else{
-        handleGoogleLoginAbortError();
     }
-}
-
-function handleGoogleLoginAbortError(){
-    showAbortDialog(stringKeys.unexpected_error_description, stringKeys.unexpected_error);
 }
 
 function handleLoginError(e){
@@ -67,29 +60,28 @@ function handleLoginError(e){
 }
 
 function handleMissingInternetConnectionError(){
-    alert("bbbbbb");
-    // TODO
+    showAbortDialog(
+        stringKeys.missing_internet_connection_description,
+        stringKeys.missing_internet_connection,
+        stringKeys.ok,
+        null
+    );
 }
 
 function successLogin(){
-    alert("AAAAA");
-    // TODO success login
+// TODO request available ambient and go next
+    window.location = "../z_pages/main.html"
 }
 
-
-function onConfirmAbort() {
-    navigator.app.exitApp();
-}
-
-function showAbortDialog(message, title){
+function showAbortDialog(message, title, buttonTxt, confirmCallback){
     getStringsResources([
-        stringKeys.unexpected_error_description,
-        stringKeys.unexpected_error,
-        stringKeys.exit
+        message,
+        title,
+        buttonTxt
     ], function(translations){
         navigator.notification.confirm(
             translations[0], // message
-            onConfirmAbort,       // callback to invoke with index of button pressed
+            confirmCallback,       // callback to invoke with index of button pressed
             translations[1],      // title
             [translations[2]]     // buttonLabels
         );
