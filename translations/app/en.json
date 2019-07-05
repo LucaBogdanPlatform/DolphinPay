@@ -9,6 +9,8 @@
     "GOOGLE_AUTHENTICATION_REQUIRED_DESCRIPTION": "DolphinPay requires a google account!",
     "MISSING_INTERNET_CONNECTION": "Missing internet",
     "MISSING_INTERNET_CONNECTION_DESCRIPTION": "No internet connection found! Please check it and try again.",
+    "SERVER_AUTHENTICATION_ERROR" : "Authentication failed",
+    "SERVER_AUTHENTICATION_ERROR_DESCRIPTION" : "DolphinPay's server refused your authentication! Try again later please...",
     "EXIT": "Exit",
     "OK": "Ok"
   }

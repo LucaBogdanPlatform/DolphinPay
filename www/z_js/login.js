@@ -55,8 +55,12 @@ function handleGetGoogleLoginError(e){
 }
 
 function handleLoginError(e){
-    alert(e.error);
-    // TODO handle login error
+    showAbortDialog(
+        stringKeys.server_authentication_error_description,
+        stringKeys.server_authentication_error,
+        stringKeys.ok,
+        null
+    );
 }
 
 function handleMissingInternetConnectionError(){
