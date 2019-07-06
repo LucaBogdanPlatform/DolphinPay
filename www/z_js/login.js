@@ -100,6 +100,7 @@ function showAbortDialog(message, title, buttonTxt, confirmCallback){
         );
     });
 }
+
 function disableButton(disable) {
     var logo = document.getElementById('logo-google');
     var anim = document.getElementById('animation-google');
