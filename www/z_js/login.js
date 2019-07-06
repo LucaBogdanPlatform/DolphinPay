@@ -55,6 +55,8 @@ function getGoogleExplicitLogin(){
 function handleGetGoogleLoginError(e){
     if(e.isMissingInternetConnection()){
         handleMissingInternetConnectionError();
+    }else{
+        handleLoginError(e);
     }
 }
 
@@ -65,7 +67,9 @@ function handleLoginError(e){
         stringKeys.ok,
         null
     );
+    disableButton(false);
 }
+
 
 function handleMissingInternetConnectionError(){
     showAbortDialog(
@@ -74,6 +78,7 @@ function handleMissingInternetConnectionError(){
         stringKeys.ok,
         null
     );
+    disableButton(false);
 }
 
 function successLogin(){
