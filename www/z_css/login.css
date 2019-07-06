@@ -10,26 +10,19 @@ body {
   box-sizing: border-box;
   position: relative;
   /* width: 13em;  - apply for fixed size */
-  margin: 0.2em;
-  padding: 0 15px 0 70px;
-  width: 240px;
-  height: 50px;
   border: none;
   text-align: left;
-  line-height: 34px;
-  white-space: nowrap;
-  border-radius: 0.8em;
   font-size: 16px;
   color: #FFF;
 }
 .loginBtn:before {
   content: "";
-  box-sizing: border-box;
+  margin: auto; /* Important */
   position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 50px;
-  height: 50px;
+  top: 6%;
+  left: 6%;
+  width: 100%;
+  height: 100%;
 }
 .loginBtn:focus {
   outline: none;
@@ -80,4 +73,77 @@ body {
     top: 25%;
 }
 
+#inline{
+    width:100%;
+    height:auto;
+    display:flex;
+}
+
+.firstSegment{
+       border-top-left-radius: 10px;
+       border-bottom-left-radius: 10px;
+       width:14%;
+       height:45px;
+       background-color:white;
+   }
+.secondSegment{
+       border-top-right-radius: 10px;
+       border-bottom-right-radius: 10px;
+       //width:32%;
+       height:45px;
+       background-color:white;
+}
+
+.buttonPressed{
+       opacity:0.9 !important;
+}
+
+section {
+    display: flex;
+    width: 50%;
+    height: 200px;
+}
+
+p {
+    margin: auto; /* Important */
+    text-align: center;
+}
+
+/* CSS */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left:25%;
+  padding-bottom:33%;
+  height: 100%;
+}
+.ball {
+  width: 8px;
+  height: 8px;
+  border-radius: 11px;
+  margin: 0.7px;
+
+  animation: 1s bounce ease infinite;
+}
+.blue {
+  background-color: #4285F5;
+}
+.red {
+  background-color: #EA4436;
+  animation-delay: .25s;
+}
+.yellow {
+  background-color: #FBBD06;
+  animation-delay: .5s;
+}
+.green {
+  background-color: #34A952;
+  animation-delay: .75s;
+}
+@keyframes bounce {
+    50% {
+        transform: translateY(15px);
+    }
+}
 /* Progress */

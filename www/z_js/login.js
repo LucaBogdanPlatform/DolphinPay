@@ -19,8 +19,12 @@ var app = {
 }
 app.initialize();
 
+
+
 function getFirebaseToken(){
+    disableButton(true);
     firebaseGetToken(getGoogleExplicitLogin, handleGetFirebaseTokenError);
+
 }
 
 function handleGetFirebaseTokenError(e){
@@ -90,4 +94,24 @@ function showAbortDialog(message, title, buttonTxt, confirmCallback){
             [translations[2]]     // buttonLabels
         );
     });
+}
+function disableButton(disable) {
+    var logo = document.getElementById('logo-google');
+    var anim = document.getElementById('animation-google');
+    var text = document.getElementById('google-text');
+    var wrapper = document.getElementById('inline');
+    if(disable){
+        logo.style.display = 'none';
+        anim.style.display = 'block';
+        anim.classList.add("buttonPressed");
+        text.classList.add("buttonPressed");
+        wrapper.onclick = function(){}
+    }
+    else{
+        anim.style.display = 'none';
+        logo.style.display = 'block';
+        anim.classList.remove("buttonPressed");
+        text.classList.remove("buttonPressed");
+        wrapper.onclick = function(){getFirebaseToken();}
+    }
 }
