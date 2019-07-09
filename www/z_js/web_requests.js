@@ -189,7 +189,6 @@ function login(successCallback, failureCallback, hasCredentialsRefreshed = false
         saveUser(response.data);
         successCallback(response.data);
     }, function(error) {
-        alert(JSON.stringify(error));
         errorHandler(
             function(wasTokenRefreshed){
                 login(successCallback, failureCallback, wasTokenRefreshed);
