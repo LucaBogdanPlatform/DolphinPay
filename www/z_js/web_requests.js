@@ -139,6 +139,19 @@ function googleExplicitLogin(successCallback, failureCallback){
 //----------------------------------------------------------------------------------------------------------------------
 
 // GENERAL CREDENTIALS DEFINITION
+var KEY_APP_USER = "KAU";
+function saveUser(obj){
+    window.localStorage.setItem(KEY_APP_USER,  JSON.stringify(obj));
+}
+
+function getUserInfo(){
+    if(localStorage.getItem(this.KEY_APP_USER) === null){
+        return null;
+    }else{
+        return JSON.parse(localStorage.getItem(this.KEY_APP_USER));
+    }
+}
+
 function getStoredCredentials(){
     if(localStorage.getItem(this.KEY_GOOGLE_CREDENTIALS) === null ||
         localStorage.getItem(this.KEY_FIREBASE_TOKEN) === null){
@@ -173,8 +186,10 @@ function login(successCallback, failureCallback, hasCredentialsRefreshed = false
     };
 
     cordova.plugin.http.sendRequest(REQ_AUTH_PATH, options, function(response) {
-        successCallback(response);
+        saveUser(response.data);
+        successCallback(response.data);
     }, function(error) {
+        alert(JSON.stringify(error));
         errorHandler(
             function(wasTokenRefreshed){
                 login(successCallback, failureCallback, wasTokenRefreshed);
