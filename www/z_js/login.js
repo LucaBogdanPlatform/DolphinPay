@@ -19,32 +19,8 @@ var app = {
 }
 app.initialize();
 
-
-
-function getFirebaseToken(){
-    disableButton(true);
-    firebaseGetToken(getGoogleExplicitLogin, handleGetFirebaseTokenError);
-
-}
-
-function handleGetFirebaseTokenError(e){
-    if(e.isMissingInternetConnection()){
-        handleMissingInternetConnectionError();
-    }else{
-        handleGetFirebaseTokenAbort();
-    }
-}
-
-function handleGetFirebaseTokenAbort(){
-    showAbortDialog(
-        stringKeys.unexpected_error_description,
-        stringKeys.unexpected_error,
-        stringKeys.exit,
-        function(){navigator.app.exitApp();}
-    );
-}
-
 function getGoogleExplicitLogin(){
+    disableButton(true);
     googleExplicitLogin(function(){
         login(successLogin, handleLoginError);
     }, function(ex){
@@ -61,7 +37,7 @@ function handleGetGoogleLoginError(e){
 }
 
 function handleLoginError(e){
-    showAbortDialog(
+    showDialogSingleAction(
         stringKeys.server_authentication_error_description,
         stringKeys.server_authentication_error,
         stringKeys.ok,
@@ -72,7 +48,7 @@ function handleLoginError(e){
 
 
 function handleMissingInternetConnectionError(){
-    showAbortDialog(
+    showDialogSingleAction(
         stringKeys.missing_internet_connection_description,
         stringKeys.missing_internet_connection,
         stringKeys.ok,
@@ -81,24 +57,8 @@ function handleMissingInternetConnectionError(){
     disableButton(false);
 }
 
-function successLogin(){
-// TODO request available ambient and go next
-    window.location = "../z_pages/main.html"
-}
-
-function showAbortDialog(message, title, buttonTxt, confirmCallback){
-    getStringsResources([
-        message,
-        title,
-        buttonTxt
-    ], function(translations){
-        navigator.notification.confirm(
-            translations[0], // message
-            confirmCallback,       // callback to invoke with index of button pressed
-            translations[1],      // title
-            [translations[2]]     // buttonLabels
-        );
-    });
+function successLogin(result){
+    loadPageDelayed("../z_pages/main.html");
 }
 
 function disableButton(disable) {
@@ -118,6 +78,6 @@ function disableButton(disable) {
         logo.style.display = 'block';
         anim.classList.remove("buttonPressed");
         text.classList.remove("buttonPressed");
-        wrapper.onclick = function(){getFirebaseToken();}
+        wrapper.onclick = function(){getGoogleExplicitLogin();}
     }
 }

@@ -9,7 +9,7 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-        init();
+        getFirebaseToken();
     },
 
     onPause: function() {
@@ -21,15 +21,44 @@ var app = {
 }
 app.initialize();
 
-var START_ACTIVITY_DELAY_MILLIS = 3000;
+function getFirebaseToken(){
+    firebaseGetToken(trySilentGoogleLogin, handleGetFirebaseTokenError);
+}
 
-function init(){
-    var elements = document.getElementsByTagName('body');
-    setTimeout(function(){
-        elements[0].style.opacity = 1;
-            (function fade(){
-                var opacloader = parseFloat(elements[0].style.opacity);
-                (elements[0].style.opacity = opacloader - .1)<0.1?
-                window.location = 'z_pages/login.html':setTimeout(fade,40)})();
-    }, START_ACTIVITY_DELAY_MILLIS);
+function handleGetFirebaseTokenError(e){
+    if(e.isMissingInternetConnection()){
+        handleMissingInternetConnectionError(function(){
+            navigator.app.exitApp();
+        });
+    }else{
+        showDialogSingleAction(
+            stringKeys.unexpected_error_description,
+            stringKeys.unexpected_error,
+            stringKeys.exit,
+            function(){navigator.app.exitApp();}
+        );
+    }
+}
+
+function handleMissingInternetConnectionError(action){
+     showDialogSingleAction(
+         stringKeys.missing_internet_connection_description,
+         stringKeys.missing_internet_connection,
+         stringKeys.ok,
+         action
+     );
+}
+
+function trySilentGoogleLogin(){
+     googleSilentLogin(function(){
+        login(successLogin, function(){
+            loadPageDelayed('z_pages/login.html');
+        });
+     }, function(ex){
+        loadPageDelayed('z_pages/login.html');
+     });
+}
+
+function successLogin(result){
+    loadPageDelayed('z_pages/main.html');
 }
