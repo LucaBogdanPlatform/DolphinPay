@@ -7,6 +7,7 @@ var REST_API_URL = BASE_API_URL + API_VERSION;
 
 // REQUESTS PATHS DEFINITIONS
 var REQ_AUTH_PATH = REST_API_URL + '/auth';
+var REQ_PARTNERSHIPS_PLATFORMS = REST_API_URL + '/platforms/partnerships/';
 // END REQUESTS PATHS DEFINITIONS
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -169,8 +170,16 @@ function getStoredCredentials(){
 // REQUESTS DEFINITIONS
 
 // This method must be called after google or facebook authentication
-function login(successCallback, failureCallback, hasCredentialsRefreshed = false){
-    cordova.plugin.http.setDataSerializer('json');
+
+function execHttpRequest(path, options, successCallback, failureCallback, retryRequest, hasCredentialsRefreshed = false){
+    cordova.plugin.http.sendRequest(path, options, function(response) {
+        successCallback(response.data);
+    }, function(error) {
+        errorHandler(retryRequest, failureCallback, error, hasCredentialsRefreshed);
+    });
+}
+
+function login(successCallback, failureCallback, wasTokenRefreshed = false){
 
     var credentials = getStoredCredentials();
     console.log("GOOGLE TOKEN -> " + credentials.idToken);
@@ -182,22 +191,32 @@ function login(successCallback, failureCallback, hasCredentialsRefreshed = false
             idToken: credentials.idToken,
             email: credentials.email,
             firebaseToken: credentials.firebaseToken
-        }
+        },
+        serializer: 'json'
     };
 
-    cordova.plugin.http.sendRequest(REQ_AUTH_PATH, options, function(response) {
+    execHttpRequest(REQ_AUTH_PATH, options, function(response){
         saveUser(response.data);
         successCallback(response.data);
-    }, function(error) {
-        errorHandler(
-            function(wasTokenRefreshed){
-                login(successCallback, failureCallback, wasTokenRefreshed);
-            },
-            failureCallback,
-            error,
-            hasCredentialsRefreshed
-        );
-    });
+    }, failureCallback, function(wasTokenRefreshed){
+           login(successCallback, failureCallback, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function getPartnershipsPlatforms(successCallback, failureCallback, offset, count, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'get'
+    };
+    var formattedRequest = REQ_PARTNERSHIPS_PLATFORMS +
+        "?token=" +credentials.idToken +
+        "&email=" +credentials.email +
+        "&offset=" +offset +
+        "&count=" +count;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        getPartnershipsPlatforms(successCallback, failureCallback, offset, count, wasTokenRefreshed);
+    }, wasTokenRefreshed);
 }
 // END REQUESTS
 
