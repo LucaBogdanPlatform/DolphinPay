@@ -21,11 +21,12 @@ app.initialize();
 
 function getGoogleExplicitLogin(){
     disableButton(true);
-    googleExplicitLogin(function(){
+    window.open('../z_pages/dashboard.html','_self');
+    /*googleExplicitLogin(function(){
         login(successLogin, handleLoginError);
     }, function(ex){
         handleGetGoogleLoginError(ex);
-    });
+    });*/
 }
 
 function handleGetGoogleLoginError(e){
