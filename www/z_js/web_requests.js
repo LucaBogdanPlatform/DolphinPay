@@ -8,6 +8,7 @@ var REST_API_URL = BASE_API_URL + API_VERSION;
 // REQUESTS PATHS DEFINITIONS
 var REQ_AUTH_PATH = REST_API_URL + '/auth';
 var REQ_PARTNERSHIPS_PLATFORMS = REST_API_URL + '/platforms/partnerships/';
+var REQ_STANDS = REST_API_URL + '/stands';
 // END REQUESTS PATHS DEFINITIONS
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -203,14 +204,13 @@ function login(successCallback, failureCallback, wasTokenRefreshed = false){
     }, wasTokenRefreshed);
 }
 
-function getPartnershipsPlatforms(successCallback, failureCallback, offset, count, wasTokenRefreshed = false){
+function getStands(successCallback, failureCallback, offset, count, wasTokenRefreshed = false){
     var credentials = getStoredCredentials();
     const options = {
         method: 'get'
     };
-    var formattedRequest = REQ_PARTNERSHIPS_PLATFORMS +
+    var formattedRequest = REQ_STANDS +
         "?token=" +credentials.idToken +
-        "&email=" +credentials.email +
         "&offset=" +offset +
         "&count=" +count;
 

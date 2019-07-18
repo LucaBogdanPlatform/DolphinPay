@@ -9,10 +9,10 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-//        getPartnershipsPlatforms(function(data){
-//            alert(data);
-//        }, function(e){
-//        }, 0, 20);
+        getStands(function(data){
+            alert(data);
+        }, function(e){
+        }, 0, 20);
     },
     onPause: function() {
 
