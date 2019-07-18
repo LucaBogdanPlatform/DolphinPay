@@ -52,7 +52,9 @@ function windowEffect(){
     var onlyVisible = elements.filter(function(elem){
         return elem.style.visibility === "visible";
     });
-    console.log(elements.indexOf(onlyVisible[0]))
+    var startWin = elements.indexOf(onlyVisible[0]);
+    var endWin = elements.indexOf(onlyVisible[onlyVisible.length-1]);
+
 }
 
 
