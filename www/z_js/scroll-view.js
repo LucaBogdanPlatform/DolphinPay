@@ -1,7 +1,9 @@
 var elements = new Array();
+var scrollWindowSize = 7;
+var offset = 0.5;
 
 /**
-* This function is used for implement a similar scroll view
+* This function is used for intercept scroll event and implement a similar scroll view
 */
 $(document).ready(function() {
 	var win = $(window);
@@ -11,11 +13,11 @@ $(document).ready(function() {
 		if ($(document).height() - win.height() <= win.scrollTop()) {
 		    //here the code for call web service
 			setTimeout(function(){
-                for(var i = 0 ; i<5 ;i++){
+                for(var i = 0 ; i<4 ;i++){
                     var elem = document.createElement("div");
                     elem.style.borderRadius = "15px";
                     elem.className = "media flex-column";
-                    if(i != 0) elem.style.visibility = "hidden";
+                    elem.style.visibility = "hidden";
                     elem.innerHTML = '<br>'+
                                      '<span class="message_userpic">'+
                                      '<img class="d-flex mr-3" src="../img/user-header.png" alt="Generic user image"'+
@@ -41,20 +43,48 @@ $(document).ready(function() {
 * This function is used for make the scroll view light weight
 */
 function windowEffect(){
-    for(var i = 0 ; i < elements.length ; i++){
-        if(!isElementInViewport(elements[i])){
-            elements[i].style.visibility = "hidden";
-        }
-        else{
-            elements[i].style.visibility = "visible";
+    var middleElementIndex = middleVisibleElementIndex();
+    if((middleElementIndex - (scrollWindowSize / 2) - offset) < 0 &&
+        (middleElementIndex + (scrollWindowSize / 2) - offset) > elements.length -1){
+           for( var i = 0 ; i < elements.length ; i++ ){elements[i].style.visibility = "visible";}
+    }
+    else if (middleElementIndex - (scrollWindowSize / 2) - offset < 0){
+        //parto da 0 e rendo visibili scrollWindowSize elementi
+        for( var i = 0 ; i < elements.length ; i++ ){
+            if(i < scrollWindowSize) elements[i].style.visibility = "visible";
+            else elements[i].style.visibility = "hidden";
         }
     }
-    var onlyVisible = elements.filter(function(elem){
-        return elem.style.visibility === "visible";
-    });
-    var startWin = elements.indexOf(onlyVisible[0]);
-    var endWin = elements.indexOf(onlyVisible[onlyVisible.length-1]);
+    else{
+        //parto da middleElementIndex - (scrollWindowSize / 2) - offset e rendo visibili scrollWindowSize elementi
+        for( var i = 0 ; i < elements.length ; i++ ){
+            if( i >= middleElementIndex - (scrollWindowSize / 2) - offset &&
+                i <= middleElementIndex + (scrollWindowSize / 2) - offset){
+                elements[i].style.visibility = "visible";
+            }
+            else elements[i].style.visibility = "hidden";
+        }
+    }
+}
 
+
+/**
+* This function return the middle visible element in the view
+*/
+function middleVisibleElementIndex(){
+    var completed = false;
+    var indexSum = 0;
+    var elemNumber = 0;
+    for(var i = 0 ; (i < elements.length && !completed); i++){
+        if(isElementInViewport(elements[i])){
+            indexSum+= elements.indexOf(elements[i]);
+            elemNumber++;
+        }
+        else{
+            if(elemNumber != 0) completed = true;
+        }
+    }
+    return (elemNumber > 0) ? parseInt(indexSum/elemNumber) : 0;
 }
 
 
@@ -74,11 +104,12 @@ function isElementInViewport (el) {
     );
 }
 
+
 /**
 * This function is used for load the initial elements
 */
 function initialContent () {
-    for(var i = 0 ; i < 5 ;i++){
+    for(var i = 0 ; i < 4 ;i++){
         var elem = document.createElement("div");
         elem.style.borderRadius = "15px";
         elem.className = "media flex-column";
