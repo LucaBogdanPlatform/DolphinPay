@@ -3,3 +3,31 @@ body {
     background-repeat: no-repeat;
     text-align: center;
 }
+
+.searchbar{
+    margin-bottom: 7%;
+    margin-top: auto;
+    background-color: white;
+    border-radius: 30px;
+    padding: 10px;
+    width:100%;
+}
+
+.search_input{
+    color: black;
+    width:80%;
+    border: 0;
+    outline: 0;
+    background: none;
+}
+
+.search_icon{
+    height: 23px;
+    width: 10%;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:black;
+}

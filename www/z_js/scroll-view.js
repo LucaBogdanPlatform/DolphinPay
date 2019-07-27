@@ -1,6 +1,7 @@
 var elements = new Array();
 var scrollWindowSize = 7;
 var offset = 0.5;
+var downloadingContent = false;
 
 /**
 * This function is used for intercept scroll event and implement a similar scroll view
@@ -10,9 +11,10 @@ $(document).ready(function() {
 	// Each time the user scrolls
 	win.scroll(function() {
         windowEffect();
-		if ($(document).height() - win.height() <= win.scrollTop()) {
+		if ($(document).height() - win.height() <= win.scrollTop() && !downloadingContent) {
 		    //here the code for call web service
 			setTimeout(function(){
+			downloadingContent = true;
                 for(var i = 0 ; i<4 ;i++){
                     var elem = document.createElement("div");
                     elem.style.borderRadius = "15px";
@@ -32,6 +34,7 @@ $(document).ready(function() {
                     elements.push(elem);
                     windowEffect();
                 }
+                downloadingContent = false;
             }, 2000);
 
 		}
@@ -126,4 +129,5 @@ function initialContent () {
         $('#scrollable-content').append(elem);
         elements.push(elem);
     }
+    windowEffect();
 }
