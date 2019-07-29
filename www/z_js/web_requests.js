@@ -11,6 +11,9 @@ var REQ_PARTNERSHIPS_PLATFORMS = REST_API_URL + '/platforms/partnerships/';
 var REQ_STANDS = REST_API_URL + '/stands';
 // END REQUESTS PATHS DEFINITIONS
 
+// DEFAULT CONSTANTS
+var DEFAULT_CHUNK_SIZE = 20;
+// END DEFAULT CONSTANTS
 //----------------------------------------------------------------------------------------------------------------------
 
 // ERROR OBJECT DEFINITION
@@ -174,7 +177,7 @@ function getStoredCredentials(){
 
 function execHttpRequest(path, options, successCallback, failureCallback, retryRequest, hasCredentialsRefreshed = false){
     cordova.plugin.http.sendRequest(path, options, function(response) {
-        successCallback(response.data);
+        successCallback(JSON.parse(response.data));
     }, function(error) {
         errorHandler(retryRequest, failureCallback, error, hasCredentialsRefreshed);
     });
@@ -215,7 +218,7 @@ function getStands(successCallback, failureCallback, offset, count, wasTokenRefr
         "&count=" +count;
 
     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
-        getPartnershipsPlatforms(successCallback, failureCallback, offset, count, wasTokenRefreshed);
+        getStands(successCallback, failureCallback, offset, count, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
 // END REQUESTS

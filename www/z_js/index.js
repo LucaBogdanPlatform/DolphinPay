@@ -60,5 +60,5 @@ function trySilentGoogleLogin(){
 }
 
 function successLogin(result){
-    loadPageDelayed('z_pages/main.html');
+    loadPageDelayed('z_pages/dashboard.html');
 }

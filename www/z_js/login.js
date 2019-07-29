@@ -21,12 +21,11 @@ app.initialize();
 
 function getGoogleExplicitLogin(){
     disableButton(true);
-    window.open('../z_pages/dashboard.html','_self');
-    /*googleExplicitLogin(function(){
+    googleExplicitLogin(function(){
         login(successLogin, handleLoginError);
     }, function(ex){
         handleGetGoogleLoginError(ex);
-    });*/
+    });
 }
 
 function handleGetGoogleLoginError(e){
@@ -59,7 +58,7 @@ function handleMissingInternetConnectionError(){
 }
 
 function successLogin(result){
-    loadPageDelayed("../z_pages/main.html");
+    loadPageDelayed("../z_pages/dashboard.html");
 }
 
 function disableButton(disable) {

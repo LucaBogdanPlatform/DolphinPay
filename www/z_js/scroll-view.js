@@ -1,46 +1,24 @@
 var elements = new Array();
-var scrollWindowSize = 7;
+var scrollWindowSize = 3;
 var offset = 0.5;
 var downloadingContent = false;
+var lastPageResult = null;
 
 /**
 * This function is used for intercept scroll event and implement a similar scroll view
 */
 $(document).ready(function() {
-	var win = $(window);
 	// Each time the user scrolls
-	win.scroll(function() {
-        windowEffect();
-		if ($(document).height() - win.height() <= win.scrollTop() && !downloadingContent) {
-		    //here the code for call web service
-			setTimeout(function(){
-			downloadingContent = true;
-                for(var i = 0 ; i<4 ;i++){
-                    var elem = document.createElement("div");
-                    elem.style.borderRadius = "15px";
-                    elem.className = "media flex-column";
-                    elem.style.visibility = "hidden";
-                    elem.innerHTML = '<br>'+
-                                     '<span class="message_userpic">'+
-                                     '<img class="d-flex mr-3" src="../img/user-header.png" alt="Generic user image"'+
-                                     '<span class="user-status bg-success "></span>'+
-                                     '</span>'+
-                                     '<div class="media-body">'+
-                                     '<h6 class="mt-0 mb-1">Chiosco delfino</h6>'+
-                                     'Bibione, IT'+
-                                     '</div>'+
-                                     '<br>';
-                    $('#scrollable-content').append(elem);
-                    elements.push(elem);
-                    windowEffect();
-                }
-                downloadingContent = false;
-            }, 2000);
-
-		}
-	});
+	$(window).scroll(onScrollListener);
 });
 
+function onScrollListener(){
+	var win = $(window);
+    if ($(document).height() - win.height() <= win.scrollTop() && !downloadingContent) {
+        //here the code for call web service
+        loadPagedContent();
+    }
+}
 
 /**
 * This function is used for make the scroll view light weight
@@ -111,23 +89,39 @@ function isElementInViewport (el) {
 /**
 * This function is used for load the initial elements
 */
-function initialContent () {
-    for(var i = 0 ; i < 4 ;i++){
-        var elem = document.createElement("div");
-        elem.style.borderRadius = "15px";
-        elem.className = "media flex-column";
-        elem.innerHTML = '<br>'+
-                         '<span class="message_userpic">'+
-                         '<img class="d-flex mr-3" src="../img/user-header.png" alt="Generic user image"'+
-                         '<span class="user-status bg-success "></span>'+
-                         '</span>'+
-                         '<div class="media-body">'+
-                         '<h6 class="mt-0 mb-1">Chiosco delfino</h6>'+
-                         'Bibione, IT'+
-                         '</div>'+
-                         '<br>';
-        $('#scrollable-content').append(elem);
-        elements.push(elem);
+function loadPagedContent () {
+    if(lastPageResult != null && lastPageResult.links.next == null){
+        alert("FINISH");
+        return;
     }
+
     windowEffect();
+    downloadingContent = true;
+    getStands(function(result){
+        alert(JSON.stringify(result));
+        lastPageResult = result;
+
+        for(var i = 0 ; i<result.list.length ;i++){
+            var elem = document.createElement("div");
+            elem.style.borderRadius = "15px";
+            elem.className = "media flex-column";
+            elem.style.visibility = "hidden";
+            elem.innerHTML = '<br>'+
+                             '<span class="message_userpic">'+
+                             '<img class="d-flex mr-3" src="../img/user-header.png" alt="Generic user image"'+
+                             '<span class="user-status bg-success "></span>'+
+                             '</span>'+
+                             '<div class="media-body">'+
+                             '<h6 class="mt-0 mb-1">Chiosco delfino</h6>'+
+                             'Bibione, IT'+
+                             '</div>'+
+                             '<br>';
+            $('#scrollable-content').append(elem);
+            elements.push(elem);
+            windowEffect();
+        }
+        downloadingContent = false;
+    }, function(error){
+        alert("Error loading data");
+    }, elements.length, DEFAULT_CHUNK_SIZE);
 }
