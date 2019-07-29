@@ -123,5 +123,5 @@ function loadPagedContent () {
         downloadingContent = false;
     }, function(error){
         alert("Error loading data");
-    }, elements.length, DEFAULT_CHUNK_SIZE);
+    }, elements.length, 2);
 }
