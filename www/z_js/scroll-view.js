@@ -1,8 +1,9 @@
 var elements = new Array();
-var scrollWindowSize = 7;
-var offset = 0.5;
+var scrollWindowSize = parseInt($(window).height() / 146) + 4;
+var offset = (scrollWindowSize % 2 == 0) ? 0 : 0.5;
 var downloadingContent = false;
-
+var N_TOTAL_ELEM = 0;
+var INDEX_ELEM = 0;
 /**
 * This function is used for intercept scroll event and implement a similar scroll view
 */
@@ -14,29 +15,22 @@ $(document).ready(function() {
 		if ($(document).height() - win.height() <= win.scrollTop() && !downloadingContent) {
 		    //here the code for call web service
 			setTimeout(function(){
-			downloadingContent = true;
-                for(var i = 0 ; i<4 ;i++){
-                    var elem = document.createElement("div");
-                    elem.style.borderRadius = "15px";
-                    elem.className = "media flex-column";
-                    elem.style.visibility = "hidden";
-                    elem.innerHTML = '<br>'+
-                                     '<span class="message_userpic">'+
-                                     '<img class="d-flex mr-3" src="../img/user-header.png" alt="Generic user image"'+
-                                     '<span class="user-status bg-success "></span>'+
-                                     '</span>'+
-                                     '<div class="media-body">'+
-                                     '<h6 class="mt-0 mb-1">Chiosco delfino</h6>'+
-                                     'Bibione, IT'+
-                                     '</div>'+
-                                     '<br>';
-                    $('#scrollable-content').append(elem);
-                    elements.push(elem);
-                    windowEffect();
+			    downloadingContent = true;
+                for(var i = 0 ; i<scrollWindowSize ;i++){
+                    if(INDEX_ELEM === N_TOTAL_ELEM){
+                        document.getElementById('spinner-container').style.display = "none";
+                        break;
+                    }
+                    else{
+                        var elem = elemFactory('Bibione, IT','Chiosco Delfino','hidden');
+                        $('#scrollable-content').append(elem);
+                        elements.push(elem);
+                        INDEX_ELEM ++;
+                        windowEffect();
+                    }
                 }
                 downloadingContent = false;
             }, 2000);
-
 		}
 	});
 });
@@ -62,9 +56,7 @@ function windowEffect(){
         //parto da middleElementIndex - (scrollWindowSize / 2) - offset e rendo visibili scrollWindowSize elementi
         for( var i = 0 ; i < elements.length ; i++ ){
             if( i >= middleElementIndex - (scrollWindowSize / 2) - offset &&
-                i <= middleElementIndex + (scrollWindowSize / 2) - offset){
-                elements[i].style.visibility = "visible";
-            }
+                i <= middleElementIndex + (scrollWindowSize / 2) - offset) elements[i].style.visibility = "visible";
             else elements[i].style.visibility = "hidden";
         }
     }
@@ -95,15 +87,10 @@ function middleVisibleElementIndex(){
 * This function is used for know if an element is out or in the current viewPort
 */
 function isElementInViewport (el) {
-    if (typeof jQuery === "function" && el instanceof jQuery) {
-       el = el[0];
-    }
+    if (typeof jQuery === "function" && el instanceof jQuery) el = el[0];
     var rect = el.getBoundingClientRect();
     return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= $(window).height() &&
-        rect.right <= $(window).width()
+        rect.top >= 0 && rect.left >= 0 && rect.bottom <= $(window).height() && rect.right <= $(window).width()
     );
 }
 
@@ -112,22 +99,31 @@ function isElementInViewport (el) {
 * This function is used for load the initial elements
 */
 function initialContent () {
-    for(var i = 0 ; i < 4 ;i++){
-        var elem = document.createElement("div");
-        elem.style.borderRadius = "15px";
-        elem.className = "media flex-column";
-        elem.innerHTML = '<br>'+
-                         '<span class="message_userpic">'+
-                         '<img class="d-flex mr-3" src="../img/user-header.png" alt="Generic user image"'+
-                         '<span class="user-status bg-success "></span>'+
-                         '</span>'+
-                         '<div class="media-body">'+
-                         '<h6 class="mt-0 mb-1">Chiosco delfino</h6>'+
-                         'Bibione, IT'+
-                         '</div>'+
-                         '<br>';
-        $('#scrollable-content').append(elem);
-        elements.push(elem);
+    N_TOTAL_ELEM = 10; // SETTARE NUMERO TOTALE ELEMENTI DA CHIAMATA
+    for(var i = 0 ; i < scrollWindowSize ;i++){
+        if(INDEX_ELEM === N_TOTAL_ELEM){
+            document.getElementById('spinner-container').style.display = "none";
+            break;
+        }
+        else{
+            var elem = elemFactory('Bibione, IT', 'Chiosco delfino','visible');
+            $('#scrollable-content').append(elem);
+            elements.push(elem);
+            INDEX_ELEM ++;
+        }
     }
     windowEffect();
+}
+
+function elemFactory(position,name,visibility){
+    var elem = document.createElement("div");
+    elem.style.borderRadius = "15px";
+    elem.style.visibility = visibility;
+    elem.className = "media flex-column";
+    elem.innerHTML = '<br>'+
+        '<span class="message_userpic">'+
+        '<img class="d-flex mr-3" src="../img/user-header.png" alt="Generic user image"'+
+        '<span class="user-status bg-success"></span>'+'</span>'+'<div class="media-body">'+
+        '<h6 class="mt-0 mb-1">'+name+'</h6>'+position+'</div>'+'<br>';
+    return elem;
 }
