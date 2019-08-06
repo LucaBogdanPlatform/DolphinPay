@@ -12,7 +12,7 @@ var REQ_STANDS = REST_API_URL + '/stands';
 // END REQUESTS PATHS DEFINITIONS
 
 // DEFAULT CONSTANTS
-var DEFAULT_CHUNK_SIZE = 20;
+var DEFAULT_CHUNK_SIZE = 2;
 // END DEFAULT CONSTANTS
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -207,7 +207,7 @@ function login(successCallback, failureCallback, wasTokenRefreshed = false){
     }, wasTokenRefreshed);
 }
 
-function getStands(successCallback, failureCallback, offset, count, wasTokenRefreshed = false){
+function getStands(successCallback, failureCallback, offset, count = DEFAULT_CHUNK_SIZE, wasTokenRefreshed = false){
     var credentials = getStoredCredentials();
     const options = {
         method: 'get'

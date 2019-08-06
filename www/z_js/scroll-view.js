@@ -8,33 +8,32 @@ var INDEX_ELEM = 0;
 * This function is used for intercept scroll event and implement a similar scroll view
 */
 $(document).ready(function() {
-	var win = $(window);
+	initialContent();
+	setScrollListener();
+});
+
+/**
+* Set's the scroll listener to the scrollview.
+* New chunk of elements are loaded when the listView is scrolled to the end
+*/
+function setScrollListener(){
+    var win = $(window);
 	// Each time the user scrolls
 	win.scroll(function() {
         windowEffect();
-		if ($(document).height() - win.height() <= win.scrollTop() && !downloadingContent) {
+		if ($(document).height() - win.height() <= win.scrollTop() && !downloadingContent && INDEX_ELEM != N_TOTAL_ELEM) {
 		    //here the code for call web service
-			setTimeout(function(){
-			    downloadingContent = true;
-                for(var i = 0 ; i<scrollWindowSize ;i++){
-                    if(INDEX_ELEM === N_TOTAL_ELEM){
-                        document.getElementById('spinner-container').style.display = "none";
-                        break;
-                    }
-                    else{
-                        var elem = elemFactory('Bibione, IT','Chiosco Delfino','hidden');
-                        $('#scrollable-content').append(elem);
-                        elements.push(elem);
-                        INDEX_ELEM ++;
-                        windowEffect();
-                    }
-                }
+			downloadingContent = true;
+		    getStands(function(data){
+                addChunk(data.list);
                 downloadingContent = false;
-            }, 2000);
+		    }, function(error){
+                alert("ERROR LOADING STANDS"); // FIXME mmanage it
+                downloadingContent = false;
+		    }, elements.length);
 		}
 	});
-});
-
+}
 
 /**
 * This function is used for make the scroll view light weight
@@ -99,20 +98,37 @@ function isElementInViewport (el) {
 * This function is used for load the initial elements
 */
 function initialContent () {
-    N_TOTAL_ELEM = 10; // SETTARE NUMERO TOTALE ELEMENTI DA CHIAMATA
+
+    getStands(function(data){
+        N_TOTAL_ELEM = data.total;
+        addChunk(data.list, true);
+    }, function(error){
+        alert("ERROR LOADING"); // TODO fixed
+    }, 0);
+
+}
+
+function addChunk(chunkArray, isFirstCall = false){
+    var chunkSize = chunkArray.length;
+    var checkElemIndex = 0;
     for(var i = 0 ; i < scrollWindowSize ;i++){
         if(INDEX_ELEM === N_TOTAL_ELEM){
             document.getElementById('spinner-container').style.display = "none";
             break;
-        }
-        else{
-            var elem = elemFactory('Bibione, IT', 'Chiosco delfino','visible');
+        }else if((checkElemIndex = (chunkArray.length - chunkSize)) < chunkArray.length){
+            var elem = elemFactory('Bibione, IT ' + chunkArray[checkElemIndex].id, 'Chiosco delfino','visible');
             $('#scrollable-content').append(elem);
             elements.push(elem);
+            chunkSize --;
             INDEX_ELEM ++;
+            if(!isFirstCall){
+                windowEffect();
+            }
         }
     }
-    windowEffect();
+    if(isFirstCall){
+        windowEffect();
+    }
 }
 
 function elemFactory(position,name,visibility){
