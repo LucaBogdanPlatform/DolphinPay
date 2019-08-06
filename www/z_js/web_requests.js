@@ -12,7 +12,7 @@ var REQ_STANDS = REST_API_URL + '/stands';
 // END REQUESTS PATHS DEFINITIONS
 
 // DEFAULT CONSTANTS
-var DEFAULT_CHUNK_SIZE = 2;
+var DEFAULT_CHUNK_SIZE = 20;
 // END DEFAULT CONSTANTS
 //----------------------------------------------------------------------------------------------------------------------
 
