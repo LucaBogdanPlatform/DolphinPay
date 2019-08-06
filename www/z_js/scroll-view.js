@@ -133,8 +133,9 @@ function addChunk(chunkArray, isFirstCall = false){
 
 function elemFactory(position,name,visibility){
     var elem = document.createElement("div");
-    elem.style.borderRadius = "15px";
+    elem.style.borderRadius = "10px";
     elem.style.visibility = visibility;
+    elem.style.background = "#FFFFFF"
     elem.className = "media flex-column";
     elem.innerHTML = '<br>'+
         '<span class="message_userpic">'+
