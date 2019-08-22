@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="../z_css/dashboard.css" type="text/css">
     <link rel="stylesheet" href="../z_css/spinner.css" type="text/css">
 </head>
-<body class="menuclose menuclose-right" onload="loadPagedContent();">
+<body class="menuclose menuclose-right">
 
 <!-- adding JQUERY and JS for pageView-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -55,12 +55,7 @@
                 <li class="nav-item">
                     <button class="btn-link btn userprofile"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="userpic" style="border-radius:15px;"><img src="../img/user-header.png" alt="user pic"></span></button>
-                    <div class="dropdown-menu"> <a class="dropdown-item" href="customerprofile.html">Profile</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="sign-in2.html" class="dropdown-item" >Logout</a>
-                    </div>
+                    <div class="dropdown-menu" w3-include-html="z_common_components/base-dropdown-menu-content.html"></div>
                 </li>
             </ul>
         </div>
@@ -74,9 +69,15 @@
                 <span class="media-body"> <span class="mt-0 mb-1">Maxartkiller</span>
     <span>New Jersey, UK.</span> </span>
             </button>
-            <div class="dropdown-menu"> <a class="dropdown-item" href="customerprofile.html">Profile</a> <a class="dropdown-item" href="inbox.html">Mailbox</a> <a class="dropdown-item" href="#">Application</a> <a class="dropdown-item" href="#">Analytics Report</a> <a class="dropdown-item" href="#">Preferances</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="customerprofile.html">Profile</a>
+                <a class="dropdown-item" href="inbox.html">Mailbox</a>
+                <a class="dropdown-item" href="#">Application</a>
+                <a class="dropdown-item" href="#">Analytics Report</a>
+                <a class="dropdown-item" href="#">Preferances</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Setting</a> </div>
+                <a class="dropdown-item" href="#">Setting</a>
+            </div>
         </div>
     </div>
     <br>
@@ -389,6 +390,13 @@
 
 </div>
 
+<!-- html include -->
+<script src="../z_utils/html-includer.js" type="text/javascript"></script>
+<script>
+    includeHTML();
+</script>
+
+
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="../js/jquery-2.1.1.min.js" type="text/javascript"></script>
 <script src="../vendor/bootstrap4alpha/js/tether.min.js"></script>
@@ -410,6 +418,7 @@
 <script src="../z_utils/user_interface.js" type="text/javascript"></script>
 <script src="../z_js/web_requests.js" type="text/javascript"></script>
 <script src="../z_js/dashboard.js" type="text/javascript"></script>
+<script src="../z_js/base-menu-listeners.js" type="text/javascript"></script>
 
 <!--sparklines js-->
 <script type="text/javascript" src="../vendor/sparklines/jquery.sparkline.min.js"></script>
