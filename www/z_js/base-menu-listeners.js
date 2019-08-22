@@ -10,7 +10,6 @@ var app = {
     },
     onDeviceReady: function() {
         attachBaseMenuListeners();
-
     },
     onPause: function() {
 
@@ -30,5 +29,5 @@ function attachBaseMenuListeners(){
 }
 
 function environmentsOnClickListener(e){
-    window.open("../z_pages/environments.html", "_parent", "", false);
+    cordova.InAppBrowser.open('../z_pages/environments.html', '_blank', 'location=no');
 }

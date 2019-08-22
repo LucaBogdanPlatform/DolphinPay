@@ -26,6 +26,9 @@
       "PLAY_SERVICES_VERSION": "11.8.0",
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
     "cordova-plugin-locale": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
