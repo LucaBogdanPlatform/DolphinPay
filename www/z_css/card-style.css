@@ -5,6 +5,7 @@
   border-left-style: solid;
   border-left-color: #92a8d1;
   border-left-width: 10px;
+  border-radius:10px;
 }
 
 .card:hover {
