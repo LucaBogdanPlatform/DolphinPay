@@ -24,10 +24,9 @@ app.initialize();
 function attachBaseMenuListeners(){
     var userEnvironmentsButton = document.getElementById('user-environments-button');
     var logoutButton = document.getElementById('logout-button');
-
     userEnvironmentsButton.onclick = environmentsOnClickListener;
 }
 
 function environmentsOnClickListener(e){
-    cordova.InAppBrowser.open('../z_pages/environments.html', '_blank', 'location=no');
+    cordova.InAppBrowser.open('../z_pages/environments.html', '_blank', 'location=no,hidenavigationbuttons=yes,zoom=no');
 }
