@@ -8,6 +8,7 @@ var REST_API_URL = BASE_API_URL + API_VERSION;
 // REQUESTS PATHS DEFINITIONS
 var REQ_AUTH_PATH = REST_API_URL + '/auth';
 var REQ_PARTNERSHIPS_PLATFORMS = REST_API_URL + '/platforms/partnerships/';
+var REQ_PLATFORMS_ALL = REST_API_URL + '/platforms/all';
 var REQ_STANDS = REST_API_URL + '/stands';
 // END REQUESTS PATHS DEFINITIONS
 
@@ -219,6 +220,18 @@ function getStands(successCallback, failureCallback, offset, count = DEFAULT_CHU
 
     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
         getStands(successCallback, failureCallback, offset, count, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function getUserPlatforms(successCallback, failureCallback, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'get'
+    };
+    var formattedRequest = REQ_PLATFORMS_ALL + "?token=" +credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        getUserPlatforms(successCallback, failureCallback, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
 // END REQUESTS

@@ -28,5 +28,6 @@ function attachBaseMenuListeners(){
 }
 
 function environmentsOnClickListener(e){
-    cordova.InAppBrowser.open('../z_pages/environments.html', '_blank', 'location=no,hidenavigationbuttons=yes,zoom=no');
+    var ref = window.open('../z_pages/environments.html', '_self', 'location=no,hidenavigationbuttons=yes,zoom=no');
+    //cordova.InAppBrowser.open('../z_pages/environments.html', '_blank', 'location=no,hidenavigationbuttons=yes,zoom=no');
 }
