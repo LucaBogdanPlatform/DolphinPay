@@ -9,7 +9,6 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-        window.open("z_pages/companyprofile.html","_self")
         getFirebaseToken();
     },
 
