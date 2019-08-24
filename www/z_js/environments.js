@@ -65,6 +65,23 @@ function getEnvironmentHTMLObject(environment){
     cardContainer.appendChild(creationDate);
     card.appendChild(cardContainer);
 
+    card.onclick = function(){
+        onClickEnvironmentListener(environment);
+    };
 
     return card;
+}
+
+function onClickEnvironmentListener(environment){
+    var dashboardPath;
+    if(isStandardPlatform(environment)){
+        dashboardPath = "../z_pages/dashboard.html";
+    }else if(isSubscriberPlatform(environment)){
+        dashboardPath = "../z_pages/dashboard-subscriber.html";
+    }else if(isPartnershipPlatform(environment)){
+        dashboardPath = "../z_pages/dashboard-partnership.html";
+    }else{
+        return;
+    }
+    window.open(dashboardPath);
 }

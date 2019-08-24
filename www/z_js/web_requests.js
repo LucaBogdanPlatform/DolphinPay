@@ -150,6 +150,12 @@ function saveUser(obj){
     window.localStorage.setItem(KEY_APP_USER,  JSON.stringify(obj));
 }
 
+function updatePlatform(platform){
+    var userInfo = getUserInfo();
+    userInfo.genericPlatform = platform;
+    saveUser(userInfo);
+}
+
 function getUserInfo(){
     if(localStorage.getItem(this.KEY_APP_USER) === null){
         return null;
@@ -201,7 +207,7 @@ function login(successCallback, failureCallback, wasTokenRefreshed = false){
     };
 
     execHttpRequest(REQ_AUTH_PATH, options, function(response){
-        saveUser(response.data);
+        saveUser(response);
         successCallback(response.data);
     }, failureCallback, function(wasTokenRefreshed){
            login(successCallback, failureCallback, wasTokenRefreshed);
