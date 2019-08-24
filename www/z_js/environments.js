@@ -1,4 +1,5 @@
 var environmentsContainerDOM;
+var backButtonDOM;
 
 var app = {
     initialize: function() {
@@ -12,6 +13,8 @@ var app = {
     },
     onDeviceReady: function() {
         environmentsContainerDOM = document.getElementById("environments-container");
+        backButtonDOM = document.getElementById("back-button");
+        setBackButtonListener();
         getUserEnvironments();
     },
 
@@ -98,4 +101,10 @@ function onClickEnvironmentListener(environment){
         return;
     }
     window.open(dashboardPath);
+}
+
+function setBackButtonListener(){
+    backButtonDOM.onclick = function(){
+        window.history.back();
+    }
 }
