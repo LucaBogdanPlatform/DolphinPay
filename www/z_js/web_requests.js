@@ -164,6 +164,16 @@ function getUserInfo(){
     }
 }
 
+function userInvalidateCredentials(successCallback){
+    window.plugins.googleplus.logout(
+        function (msg) {
+            saveUser(null);
+            googleSaveCredentials(null);
+            successCallback();
+        }
+    );
+}
+
 function getStoredCredentials(){
     if(localStorage.getItem(this.KEY_GOOGLE_CREDENTIALS) === null ||
         localStorage.getItem(this.KEY_FIREBASE_TOKEN) === null){

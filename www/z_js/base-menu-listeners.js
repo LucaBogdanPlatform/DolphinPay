@@ -25,9 +25,16 @@ function attachBaseMenuListeners(){
     var userEnvironmentsButton = document.getElementById('user-environments-button');
     var logoutButton = document.getElementById('logout-button');
     userEnvironmentsButton.onclick = environmentsOnClickListener;
+    logoutButton.onclick = logoutOnClickListener;
 }
 
 function environmentsOnClickListener(e){
     var ref = window.open('../z_pages/environments.html', '_self', 'location=no,hidenavigationbuttons=yes,zoom=no');
     //cordova.InAppBrowser.open('../z_pages/environments.html', '_blank', 'location=no,hidenavigationbuttons=yes,zoom=no');
+}
+
+function logoutOnClickListener(e){
+    userInvalidateCredentials(function(){
+        var ref = window.open('../z_pages/login.html', '_self', 'location=no,hidenavigationbuttons=yes,zoom=no');
+    });
 }
