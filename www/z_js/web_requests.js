@@ -8,6 +8,7 @@ var REST_API_URL = BASE_API_URL + API_VERSION;
 // REQUESTS PATHS DEFINITIONS
 var REQ_AUTH_PATH = REST_API_URL + '/auth';
 var REQ_PARTNERSHIPS_PLATFORMS = REST_API_URL + '/platforms/partnerships/';
+var REQ_PLATFORMS_ALL = REST_API_URL + '/platforms/all';
 var REQ_STANDS = REST_API_URL + '/stands';
 // END REQUESTS PATHS DEFINITIONS
 
@@ -149,12 +150,33 @@ function saveUser(obj){
     window.localStorage.setItem(KEY_APP_USER,  JSON.stringify(obj));
 }
 
+function updatePlatform(platform){
+    var userInfo = getUserInfo();
+    userInfo.genericPlatform = platform;
+    saveUser(userInfo);
+}
+
+function isCurrentPlatform(platform){
+    var userInfo = getUserInfo();
+    return JSON.stringify(platform) == JSON.stringify(userInfo.genericPlatform);
+}
+
 function getUserInfo(){
     if(localStorage.getItem(this.KEY_APP_USER) === null){
         return null;
     }else{
         return JSON.parse(localStorage.getItem(this.KEY_APP_USER));
     }
+}
+
+function userInvalidateCredentials(successCallback){
+    window.plugins.googleplus.logout(
+        function (msg) {
+            saveUser(null);
+            googleSaveCredentials(null);
+            successCallback();
+        }
+    );
 }
 
 function getStoredCredentials(){
@@ -200,7 +222,7 @@ function login(successCallback, failureCallback, wasTokenRefreshed = false){
     };
 
     execHttpRequest(REQ_AUTH_PATH, options, function(response){
-        saveUser(response.data);
+        saveUser(response);
         successCallback(response.data);
     }, failureCallback, function(wasTokenRefreshed){
            login(successCallback, failureCallback, wasTokenRefreshed);
@@ -219,6 +241,18 @@ function getStands(successCallback, failureCallback, offset, count = DEFAULT_CHU
 
     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
         getStands(successCallback, failureCallback, offset, count, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function getUserPlatforms(successCallback, failureCallback, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'get'
+    };
+    var formattedRequest = REQ_PLATFORMS_ALL + "?token=" +credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        getUserPlatforms(successCallback, failureCallback, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
 // END REQUESTS

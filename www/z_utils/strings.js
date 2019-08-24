@@ -11,6 +11,19 @@ var stringKeys = {
     server_authentication_error_description : "SERVER_AUTHENTICATION_ERROR_DESCRIPTION"
 }
 
+String.prototype.replaceAll = function(searchStr, replaceStr) {
+	var str = this;
+
+    // no match exists in string?
+    if(str.indexOf(searchStr) === -1) {
+        // return string
+        return str;
+    }
+
+    // replace and remove first match, and do another recursirve search/replace
+    return (str.replace(searchStr, replaceStr)).replaceAll(searchStr, replaceStr);
+}
+
 
 function getStringsResources(names, retrievedCallback){
     if(names == null || names.length == 0){

@@ -3,9 +3,22 @@
   transition: 0.3s;
   width: 95%;
   border-left-style: solid;
-  border-left-color: #92a8d1;
-  border-left-width: 10px;
   border-radius:10px;
+}
+
+.card-green-indicator{
+  border-left-color: #8bc34a;
+  border-left-width: 10px;
+}
+
+.card-orange-indicator{
+  border-left-color: #ff9800;
+  border-left-width: 10px;
+}
+
+.card-red-indicator{
+  border-left-color: #c41c00;
+  border-left-width: 10px;
 }
 
 .card:hover {
@@ -15,5 +28,9 @@
 .card-container {
   padding: 16px 16px;
   align-content: left;
+}
+
+.card-current{
+    background:#efebe9;
 }
 
