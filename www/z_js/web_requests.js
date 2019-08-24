@@ -156,6 +156,11 @@ function updatePlatform(platform){
     saveUser(userInfo);
 }
 
+function isCurrentPlatform(platform){
+    var userInfo = getUserInfo();
+    return JSON.stringify(platform) == JSON.stringify(userInfo.genericPlatform);
+}
+
 function getUserInfo(){
     if(localStorage.getItem(this.KEY_APP_USER) === null){
         return null;

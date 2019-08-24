@@ -41,6 +41,20 @@ function buildEnvironmentsList(environmentsArray){
 function getEnvironmentHTMLObject(environment){
     var card = document.createElement("div");
     card.classList.add("card");
+    if(isStandardPlatform(environment)){
+        card.classList.add("card-green-indicator");
+    }else if(isSubscriberPlatform(environment)){
+        card.classList.add("card-orange-indicator");
+    }else if(isPartnershipPlatform(environment)){
+        card.classList.add("card-red-indicator");
+    }else{
+        return null;
+    }
+
+    if(isCurrentPlatform(environment)){
+        card.classList.add("card-current");
+    }
+
 
     var cardContainer = document.createElement("div");
     cardContainer.classList.add("card-container");
