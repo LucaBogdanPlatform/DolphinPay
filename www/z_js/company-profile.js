@@ -72,4 +72,7 @@ function setWaitingTime(time){
 
 function setCartCounter(){document.getElementById("cart-counter").textContent="10";}
 
-function goToCategoryPage(){window.open("../z_pages/category.html","_self");}
+function goToCategoryPage(){
+    //cordova.InAppBrowser.open('../z_pages/category.html','_blank','location=no,hidenavigationbuttons=yes,zoom=yes);
+    window.open("../z_pages/category.html","_self");
+}
