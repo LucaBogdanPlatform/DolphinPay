@@ -83,6 +83,12 @@ function getEnvironmentHTMLObject(environment){
     card.appendChild(cardContainer);
 
     card.onclick = function(){
+
+        if(isCurrentPlatform(environment)){
+            webview.Close();
+            return;
+        }
+
         onClickEnvironmentListener(environment);
     };
 
@@ -92,19 +98,20 @@ function getEnvironmentHTMLObject(environment){
 function onClickEnvironmentListener(environment){
     var dashboardPath;
     if(isStandardPlatform(environment)){
-        dashboardPath = "../z_pages/dashboard.html";
+        dashboardPath = "z_pages/dashboard.html";
     }else if(isSubscriberPlatform(environment)){
-        dashboardPath = "../z_pages/dashboard-subscriber.html";
+        dashboardPath = "z_pages/dashboard-subscriber.html";
     }else if(isPartnershipPlatform(environment)){
-        dashboardPath = "../z_pages/dashboard-partnership.html";
+        dashboardPath = "z_pages/dashboard-partnership.html";
     }else{
         return;
     }
-    window.open(dashboardPath);
+    updatePlatform(environment);
+    webview.Show(dashboardPath);
 }
 
 function setBackButtonListener(){
     backButtonDOM.onclick = function(){
-        window.history.back();
+        webview.Close();
     }
 }

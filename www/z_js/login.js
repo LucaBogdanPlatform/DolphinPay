@@ -19,6 +19,7 @@ var app = {
     }
 }
 app.initialize();
+
 function getGoogleExplicitLogin(){
     disableButton(true);
     googleExplicitLogin(function(){
@@ -58,7 +59,7 @@ function handleMissingInternetConnectionError(){
 }
 
 function successLogin(result){
-    loadPageDelayed("../z_pages/dashboard.html");
+    webview.Show("z_pages/dashboard.html");
 }
 
 function disableButton(disable) {

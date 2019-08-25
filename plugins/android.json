@@ -13,6 +13,9 @@
     "cordova-plugin-advanced-http": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
+    "cordova-plugin-backbutton": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
     "cordova-plugin-console": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
@@ -26,9 +29,6 @@
       "PLAY_SERVICES_VERSION": "11.8.0",
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    },
     "cordova-plugin-locale": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
@@ -37,6 +37,9 @@
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
     "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-second-webview": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
     "cordova-plugin-whitelist": {
