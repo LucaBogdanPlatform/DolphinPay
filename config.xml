@@ -15,7 +15,7 @@
     </plugin>
     <access origin="*" />
     <allow-intent href="http://*/*" />
-    <allow-navigation href="file:///android_asset/www/z_pages/category.html" />
+    <allow-navigation href="file:///android_asset/www/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />

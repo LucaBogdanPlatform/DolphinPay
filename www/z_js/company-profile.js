@@ -1,6 +1,8 @@
 /* Dashboard chart combo line and bar */
 var ctx = document.getElementById("linechart").getContext('2d');
 
+var company_name = getUrlVars()["company"];
+
 //HERE CALL THE WEB SERVICE FOR THE CHART DATA, POSITION DATA AND EVENT DATA
 
 var chartWrapper = {"labels":["Free","Occupied"],"data":[20, 30]};
@@ -84,4 +86,12 @@ function goToCategoryPage(){
     webview.Show(
         'z_pages/category.html'
     );
+}
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
 }

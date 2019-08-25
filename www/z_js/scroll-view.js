@@ -160,3 +160,7 @@ function elemFactory(position,name,visibility){
         '<h6 class="mt-0 mb-1">'+name+'</h6>'+position+'</div>'+'<br>';
     return elem;
 }
+
+function gotoCompany(){
+
+}
