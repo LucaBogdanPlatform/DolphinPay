@@ -9,6 +9,7 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
+        window.open("../z_pages/companyprofile.html","_self");
     },
     onPause: function() {
 
@@ -18,7 +19,6 @@ var app = {
     }
 }
 app.initialize();
-window.open("../z_pages/companyprofile.html","_self");
 function getGoogleExplicitLogin(){
     disableButton(true);
     googleExplicitLogin(function(){

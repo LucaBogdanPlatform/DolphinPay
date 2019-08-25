@@ -61,10 +61,18 @@ function setChart(chartWrapper){
 function setPosition(position){document.getElementById("company-position").src = position;}
 
 function setWaitingTime(time){
-    var minutes = time.getMinutes(); var wrpMinutes = document.getElementById('waiting-time-min');
-    var hours = time.getHours(); var wrpHours = document.getElementById('waiting-time-hour');
-    if(hours === 0 && minutes < 15){wrpMinutes.style.color = "#34A300";wrpHours.style.color = "#34A300";}
-    else if(hours === 0 && minutes < 40){wrpMinutes.style.color = "#E09600";wrpHours.style.color = "#E09600";}
+    var minutes = time.getMinutes();
+    var wrpMinutes = document.getElementById('waiting-time-min');
+    var hours = time.getHours();
+    var wrpHours = document.getElementById('waiting-time-hour');
+    if(hours === 0 && minutes < 15){
+        wrpMinutes.style.color = "#34A300";
+        wrpHours.style.color = "#34A300";
+    }
+    else if(hours === 0 && minutes < 40){
+        wrpMinutes.style.color = "#E09600";
+        wrpHours.style.color = "#E09600";
+    }
     else {wrpMinutes.style.color = "#A30000";wrpHours.style.color = "#A30000";}
     wrpHours.innerText = (hours / 10 >= 1) ? hours + " : " : "0"+hours + " : ";
     wrpMinutes.innerText = (minutes / 10 >= 1) ? minutes+"" : minutes+"0";
@@ -73,6 +81,7 @@ function setWaitingTime(time){
 function setCartCounter(){document.getElementById("cart-counter").textContent="10";}
 
 function goToCategoryPage(){
-    //cordova.InAppBrowser.open('../z_pages/category.html','_blank','location=no,hidenavigationbuttons=yes,zoom=yes);
-    window.open("../z_pages/category.html","_self");
+    webview.Show(
+        'z_pages/category.html'
+    );
 }
