@@ -26,7 +26,6 @@
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-    "cordova-plugin-inappbrowser": "^3.1.0",
     "cordova-plugin-locale": "git+https://github.com/sevinlim/cordova-plugin-locale.git",
     "cordova-plugin-localization-strings": "3.1.0",
     "cordova-plugin-network-information": "^2.0.1",
@@ -51,7 +50,6 @@
         "TRANSLATION_PATH": "translations/app/"
       },
       "cordova-plugin-locale": {},
-      "cordova-plugin-inappbrowser": {},
       "cordova-plugin-second-webview": {},
       "cordova-plugin-backbutton": {}
     },

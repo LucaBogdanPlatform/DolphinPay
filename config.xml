@@ -20,9 +20,6 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-    <allow-navigation href="http://*/*" />
-    <allow-navigation href="*" />
-    <allow-navigation href="data:*" />
     <allow-navigation href="file:///android_asset/www/*" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">

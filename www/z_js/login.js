@@ -18,7 +18,7 @@ var app = {
     }
 }
 app.initialize();
-window.open("../z_pages/companyprofile.html","_self");
+
 function getGoogleExplicitLogin(){
     disableButton(true);
     googleExplicitLogin(function(){
