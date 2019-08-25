@@ -14,14 +14,3 @@ function showDialogSingleAction(message, title, buttonTxt, confirmCallback){
         );
     });
 }
-
-function loadPageDelayed(page){
-    var elements = document.getElementsByTagName('body');
-    setTimeout(function(){
-        elements[0].style.opacity = 1;
-            (function fade(){
-                var opacloader = parseFloat(elements[0].style.opacity);
-                (elements[0].style.opacity = opacloader - .1)<0.1?
-                window.location = page:setTimeout(fade,40)})();
-    }, START_ACTIVITY_DELAY_MILLIS);
-}

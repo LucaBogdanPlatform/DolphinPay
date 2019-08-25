@@ -41,6 +41,12 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-second-webview": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-backbutton": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
   "dependent_plugins": {

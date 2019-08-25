@@ -114,7 +114,7 @@ function googleSaveCredentials(obj){
 function googleSilentLogin(successCallback, failureCallback){
     window.plugins.googleplus.trySilentLogin(
         {
-            'webClientId' : WEB_CLIENT_ID,
+            'webClientId' : WEB_CLIENT_ID
         },
         function (obj) {
             googleSaveCredentials(obj);
@@ -129,7 +129,7 @@ function googleSilentLogin(successCallback, failureCallback){
 function googleExplicitLogin(successCallback, failureCallback){
     window.plugins.googleplus.login(
         {
-            'webClientId' : WEB_CLIENT_ID,
+            'webClientId' : WEB_CLIENT_ID
         },
         function (obj) {
             googleSaveCredentials(obj);
@@ -170,7 +170,7 @@ function getUserInfo(){
 }
 
 function userInvalidateCredentials(successCallback){
-    window.plugins.googleplus.logout(
+    window.plugins.googleplus.disconnect(
         function (msg) {
             saveUser(null);
             googleSaveCredentials(null);

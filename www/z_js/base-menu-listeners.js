@@ -29,12 +29,12 @@ function attachBaseMenuListeners(){
 }
 
 function environmentsOnClickListener(e){
-    var ref = window.open('../z_pages/environments.html', '_self', 'location=no,hidenavigationbuttons=yes,zoom=no');
-    //cordova.InAppBrowser.open('../z_pages/environments.html', '_blank', 'location=no,hidenavigationbuttons=yes,zoom=no');
+    webview.Show('z_pages/environments.html');
 }
 
 function logoutOnClickListener(e){
     userInvalidateCredentials(function(){
-        var ref = window.open('../z_pages/login.html', '_self', 'location=no,hidenavigationbuttons=yes,zoom=no');
+        webview.Close();
+        webview.Show('z_pages/login.html');
     });
 }

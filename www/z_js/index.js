@@ -52,13 +52,13 @@ function handleMissingInternetConnectionError(action){
 function trySilentGoogleLogin(){
      googleSilentLogin(function(){
         login(successLogin, function(){
-            loadPageDelayed('z_pages/login.html');
+            webview.Show('z_pages/login.html');
         });
      }, function(ex){
-        loadPageDelayed('z_pages/login.html');
+            webview.Show('z_pages/login.html');
      });
 }
 
 function successLogin(result){
-    loadPageDelayed('z_pages/dashboard.html');
+    webview.Show('z_pages/dashboard.html');
 }

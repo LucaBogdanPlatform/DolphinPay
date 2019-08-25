@@ -18,9 +18,11 @@
     "com.paypal.cordova.mobilesdk": "git+https://github.com/paypal/PayPal-Cordova-Plugin.git",
     "cordova-android": "^7.1.0",
     "cordova-plugin-advanced-http": "^2.0.9",
+    "cordova-plugin-backbutton": "^0.3.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-dialogs": "^2.0.1",
+    "cordova-plugin-exitapp2": "^1.0.4",
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
@@ -28,6 +30,8 @@
     "cordova-plugin-locale": "git+https://github.com/sevinlim/cordova-plugin-locale.git",
     "cordova-plugin-localization-strings": "3.1.0",
     "cordova-plugin-network-information": "^2.0.1",
+    "cordova-plugin-second-webview": "git+https://github.com/walidowais/cordova-plugin-second-webview.git",
+    "cordova-second-webview": "^2.3.1",
     "cordova-universal-links-plugin-fix": "1.2.1"
   },
   "cordova": {
@@ -47,7 +51,9 @@
         "TRANSLATION_PATH": "translations/app/"
       },
       "cordova-plugin-locale": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-second-webview": {},
+      "cordova-plugin-backbutton": {}
     },
     "platforms": [
       "android"
