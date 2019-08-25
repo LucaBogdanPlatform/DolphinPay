@@ -8,20 +8,16 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-googleplus" spec="^5.3.0">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.806071370102-hrqrkdqkhkgdrci01qi4ovaml2hki4jv" />
         <variable name="WEB_APPLICATION_CLIENT_ID" value="806071370102-hrqrkdqkhkgdrci01qi4ovaml2hki4jv.apps.googleusercontent.com" />
     </plugin>
     <access origin="*" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <allow-navigation href="*" />
+    <allow-navigation href="file:///android_asset/www/*" />
     <allow-intent href="http://*/*" />
-    <allow-navigation href="file:///android_asset/www/*" />
     <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <allow-navigation href="file:///android_asset/www/*" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
