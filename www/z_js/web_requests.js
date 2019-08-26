@@ -10,6 +10,7 @@ var REQ_AUTH_PATH = REST_API_URL + '/auth';
 var REQ_PARTNERSHIPS_PLATFORMS = REST_API_URL + '/platforms/partnerships/';
 var REQ_PLATFORMS_ALL = REST_API_URL + '/platforms/all';
 var REQ_STANDS = REST_API_URL + '/stands';
+var REQ_CATEGORIES = REST_API_URL + '/categories/';
 // END REQUESTS PATHS DEFINITIONS
 
 // DEFAULT CONSTANTS
@@ -253,6 +254,18 @@ function getUserPlatforms(successCallback, failureCallback, wasTokenRefreshed = 
 
     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
         getUserPlatforms(successCallback, failureCallback, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function getRoomCategories(successCallback, failureCallback, roomId, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'get'
+    };
+    var formattedRequest = REQ_CATEGORIES + roomId + "?token=" +credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        getRoomCategories(successCallback, failureCallback, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
 // END REQUESTS

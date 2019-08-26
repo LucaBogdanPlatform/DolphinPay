@@ -13,7 +13,7 @@ var app = {
         backButtonDOM = document.getElementById("back-button");
         setBackButtonListener();
 
-        document.getElementById("categories-container").appendChild(getCategoryDOMObject(null));
+        getConfiguredCategories();
     },
 
     onPause: function() {
@@ -46,6 +46,17 @@ function getCategoryDOMObject(category){
     cardContainer.appendChild(categoryContainer);
 
     return cardContainer;
+}
+
+function getConfiguredCategories(){
+    var categoriesContainer = document.getElementById("categories-container");
+    getRoomCategories(function(data){
+        for(var i = 0; i<data.length; i++){
+            categoriesContainer.appendChild(getCategoryDOMObject(data[i]));
+        }
+    }, function(e){
+        alert("Impossible to load categories");
+    }, getUserInfo().genericPlatform.roomId);
 }
 
 function setBackButtonListener(){
