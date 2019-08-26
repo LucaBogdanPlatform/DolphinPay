@@ -1,0 +1,70 @@
+{
+  "_from": "phonegap-plugin-multiview",
+  "_id": "phonegap-plugin-multiview@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-jTNUAiWIVegA74EY1mjYzd9o6Oo=",
+  "_location": "/phonegap-plugin-multiview",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "phonegap-plugin-multiview",
+    "name": "phonegap-plugin-multiview",
+    "escapedName": "phonegap-plugin-multiview",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/phonegap-plugin-multiview/-/phonegap-plugin-multiview-1.0.0.tgz",
+  "_shasum": "8d335402258855e800ef8118d668d8cddf68e8ea",
+  "_spec": "phonegap-plugin-multiview",
+  "_where": "C:\\Users\\U374332\\Desktop\\DolphinPay\\DolphinPay",
+  "author": {
+    "name": "Jesse MacFadyen"
+  },
+  "bugs": {
+    "url": "https://github.com/purplecabbage/phonegap-plugin-multiview/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Sterling Gerritz",
+      "url": "https://github.com/sterlingann"
+    }
+  ],
+  "cordova": {
+    "id": "phonegap-plugin-multiview",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "deprecated": false,
+  "description": "PhoneGap Multiview Plugin",
+  "devDependencies": {
+    "jshint": "^2.9.4"
+  },
+  "homepage": "https://github.com/purplecabbage/phonegap-plugin-multiview#readme",
+  "keywords": [
+    "cordova",
+    "multiview",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "Apache-2.0",
+  "name": "phonegap-plugin-multiview",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/purplecabbage/phonegap-plugin-multiview.git"
+  },
+  "scripts": {
+    "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint demo/www",
+    "test": "npm run jshint"
+  },
+  "version": "1.0.0"
+}
