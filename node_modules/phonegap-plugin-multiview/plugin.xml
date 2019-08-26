@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="phonegap-plugin-multiview"
+    version="0.0.1">
+    <name>Multiview</name>
+    <description>Multiple Views for PhoneGap apps</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,phonegap,multiview</keywords>
+    <repo>https://github.com/purplecabbage/phonegap-plugin-multiview</repo>
+    <issue>https://github.com/purplecabbage/phonegap-plugin-multiview/issues</issue>
+
+    <js-module src="www/multiview.js" name="multiview">
+        <clobbers target="PGMultiView" />
+    </js-module>
+
+
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="PGMultiView">
+                <param name="android-package" value="phonegap.pgmultiview.PGMultiView"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="application">
+            <activity android:name="phonegap.pgmultiview.PGMultiViewActivity"
+                      android:label="PGMultiViewActivity" >
+            </activity>
+        </config-file>
+
+        <source-file src="src/android/PGMultiView.java" target-dir="src/phonegap/pgmultiview" />
+
+        <source-file src="src/android/PGMultiViewActivity.java" target-dir="src/phonegap/pgmultiview" />
+
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="PGMultiView">
+                <param name="ios-package" value="PGMultiView"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/PGMultiView.h" />
+        <source-file src="src/ios/PGMultiView.m" />
+    </platform>
+
+    <!-- windows -->
+    <platform name="windows">
+        <js-module src="src/windows/PGMultiViewProxy.js" name="PGMultiViewProxy">
+            <merges target="" />
+        </js-module>
+
+        <js-module src="src/windows/NotifyExec.js" name="NotifyExec">
+            <merges target="" />
+        </js-module>
+    </platform>
+
+</plugin>
