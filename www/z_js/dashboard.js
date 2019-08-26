@@ -9,16 +9,10 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-        document.addEventListener("backbutton", this.onBackKeyDown, false);
-
-        environmentsContainerDOM = document.getElementById("environments-container");
-        backButtonDOM = document.getElementById("back-button");
-
+        attachBaseMenuListeners();
+        attachBaseLeftMenuListeners();
         initialContent();
         setScrollListener();
-        attachBaseMenuListeners();
-        setBackButtonListener();
-        getUserEnvironments();
     },
 
     onPause: function() {
@@ -26,11 +20,11 @@ var app = {
     },
     onResume: function(event) {
 
-    },
-    onBackKeyDown: function(){
-        alert("A");
-        navigator.app.exitApp();
-        return false;
     }
+//    onBackKeyDown: function(){
+//        alert("A");
+//        navigator.app.exitApp();
+//        return false;
+//    }
 }
 app.initialize();

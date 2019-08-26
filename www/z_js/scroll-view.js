@@ -5,28 +5,6 @@ var downloadingContent = false;
 var N_TOTAL_ELEM = 0;
 var INDEX_ELEM = 0;
 
-var app = {
-    initialize: function() {
-        this.bindEvents();
-    },
-    bindEvents: function() {
-        // Here we register our callbacks for the lifecycle events we care about
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener('pause', this.onPause, false);
-        document.addEventListener('resume', this.onResume, false);
-    },
-    onDeviceReady: function() {
-        initialContent();
-        setScrollListener();
-    },
-    onPause: function() {
-
-    },
-    onResume: function(event) {
-
-    }
-}
-app.initialize();
 
 /**
 * Set's the scroll listener to the scrollview.
@@ -113,7 +91,7 @@ function isElementInViewport (el) {
 /**
 * This function is used for load the initial elements
 */
-function initialContent () {
+function initialContent() {
 
     getStands(function(data){
         N_TOTAL_ELEM = data.total;
