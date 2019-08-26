@@ -30,7 +30,7 @@ function getCategoryDOMObject(category){
     cardContainer.classList.add("card");
 
     var categoryContainer = document.createElement("h4");
-    categoryContainer.innerHTML = "Hamburgers";
+    categoryContainer.innerHTML = category.name;
     categoryContainer.style.textAlign = "left";
     categoryContainer.style.marginLeft = "16px";
     categoryContainer.style.marginTop = "8px";
