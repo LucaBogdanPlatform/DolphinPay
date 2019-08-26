@@ -25,6 +25,7 @@
 
 <!-- adding JQUERY and JS for pageView-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <header class="navbar-fixed">
 
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-faded">
@@ -38,8 +39,6 @@
                     <button class="btn-link btn userprofile"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="userpic" style="border-radius:15px;"><img src="../img/user-header.png" alt="user pic"></span>
                     </button>
-
-
                     <div class="dropdown-menu" w3-include-html="z_common_components/base-dropdown-menu-content.html">
 
                     </div>
@@ -52,13 +51,44 @@
 <div class="sidebar-left">
     <div w3-include-html="z_common_components/base-user-sidebar-left.html">
 
-
     </div>
 </div>
 <div class="wrapper-content" style="padding-bottom:5% !important;">
     <div class="container">
+        <br>
 
+        <!-- INIZIO Messaggio di notifica ordini pendenti -->
+        <div class="row">
+            <div class="col-sm-16">
+                <div class="alert alert-success" role="alert" style="border-radius:15px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                    <h4 class="alert-heading">Pending orders !</h4>
+                    <p>Click to view your pending orders and receive more information about them.</p>
+                </div>
+            </div>
+            <!-- FINE Messaggio di notifica ordini pendenti -->
 
+            <!-- Searchbar -->
+            <div class="col-sm-16">
+                <div class="d-flex justify-content-center">
+                    <div class="searchbar">
+                        <input class="search_input" type="text" name="" placeholder="Search...">
+                        <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- FINE Searchbar -->
+
+            <!-- INIZIO Card chiosco -->
+            <div class="col-md-16">
+                <div class="member-list row">
+                    <div class="col-sm-16" id="scrollable-content">
+                        <!-- Qui vanno messe le card dei chioschi -->
+                    </div>
+                </div>
+            </div>
+            <!-- FINE Card chiosco -->
+        </div>
     </div>
 </div>
 
@@ -327,8 +357,9 @@
 <script src="../z_utils/strings.js" type="text/javascript"></script>
 <script src="../z_utils/user_interface.js" type="text/javascript"></script>
 <script src="../z_js/web_requests.js" type="text/javascript"></script>
-<script src="../z_js/base-menu-listeners.js" type="text/javascript"></script>
 <script src="../z_js/base-user-sidebar-menu-listeners.js" type="text/javascript"></script>
+<script src="../z_js/base-menu-listeners.js" type="text/javascript"></script>
+<script src="../z_js/dashboard-subscriber.js" type="text/javascript"></script>
 
 <!--sparklines js-->
 <script type="text/javascript" src="../vendor/sparklines/jquery.sparkline.min.js"></script>
