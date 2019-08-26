@@ -11,6 +11,7 @@ var app = {
     onDeviceReady: function() {
         attachBaseMenuListeners();
         attachBaseLeftMenuListeners();
+        attachMenuListeners();
     },
 
     onPause: function() {
@@ -26,3 +27,14 @@ var app = {
 //    }
 }
 app.initialize();
+
+function attachMenuListeners(){
+    var userNameAndSurname = document.getElementById('menu-configuration-button');
+    userNameAndSurname.onclick = menuConfigurationButtonOnClickListener;
+
+
+}
+
+function menuConfigurationButtonOnClickListener(){
+    webview.Show("z_pages/subscriber-configuration.html");
+}
