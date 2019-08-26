@@ -55,7 +55,6 @@ function trySilentGoogleLogin(){
             webview.Show('z_pages/login.html');
         });
      }, function(ex){
-     alert("a");
             webview.Show('z_pages/login.html');
      });
 }
