@@ -28,7 +28,8 @@
     "cordova-plugin-localization-strings": "3.1.0",
     "cordova-plugin-network-information": "^2.0.1",
     "cordova-plugin-second-webview": "git+https://github.com/walidowais/cordova-plugin-second-webview.git",
-    "cordova-universal-links-plugin-fix": "1.2.1"
+    "cordova-universal-links-plugin-fix": "1.2.1",
+    "phonegap-plugin-multiview": "^1.0.0"
   },
   "cordova": {
     "plugins": {
@@ -47,7 +48,8 @@
         "TRANSLATION_PATH": "translations/app/"
       },
       "cordova-plugin-locale": {},
-      "cordova-plugin-second-webview": {}
+      "cordova-plugin-second-webview": {},
+      "phonegap-plugin-multiview": {}
     },
     "platforms": [
       "android"

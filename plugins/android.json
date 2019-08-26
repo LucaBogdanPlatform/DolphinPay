@@ -41,6 +41,9 @@
     },
     "cordova-plugin-second-webview": {
       "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "phonegap-plugin-multiview": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
   "dependent_plugins": {

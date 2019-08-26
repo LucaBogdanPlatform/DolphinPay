@@ -83,9 +83,8 @@ function setWaitingTime(time){
 function setCartCounter(){document.getElementById("cart-counter").textContent="10";}
 
 function goToCategoryPage(){
-    webview.Show(
-        'z_pages/category.html'
-    );
+
+  PGMultiView.loadView("category.html", "", function(){}, function(){});
 }
 
 function getUrlVars() {

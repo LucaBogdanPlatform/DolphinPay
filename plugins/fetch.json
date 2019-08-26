@@ -112,5 +112,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "phonegap-plugin-multiview": {
+    "source": {
+      "type": "registry",
+      "id": "phonegap-plugin-multiview"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

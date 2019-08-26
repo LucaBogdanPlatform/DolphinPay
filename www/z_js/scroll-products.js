@@ -33,5 +33,5 @@ function getUrlVars() {
 }
 
 function goBack(){
-    webview.Close();
+    PGMultiView.dismissView("");
 }

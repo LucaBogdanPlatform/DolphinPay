@@ -47,9 +47,9 @@ function elementFactory(title,imgName,description,id){
 }
 
 function goToProducts(event){
-    webview.Show("z_pages/products.html?category="+event.getAttribute("name"));
+    PGMultiView.loadView("products.html?category="+event.getAttribute("name"), "", function(){}, function(){});
 }
 
 function goBack(){
-    webview.Close();
+    PGMultiView.dismissView("");
 }
