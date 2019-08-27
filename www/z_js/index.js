@@ -60,6 +60,5 @@ function trySilentGoogleLogin(){
 }
 
 function successLogin(result){
-  PGMultiView.loadView("z_pages/companyprofile.html", "", function(){}, function(){});
-    //webview.Show('z_pages/dashboard.html');
+    PGMultiView.loadView("z_pages/dashboard.html", "", function(){}, function(){});
 }
