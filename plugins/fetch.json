@@ -120,5 +120,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-listpicker": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-listpicker@^2.2.2"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

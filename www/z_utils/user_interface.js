@@ -14,3 +14,18 @@ function showDialogSingleAction(message, title, buttonTxt, confirmCallback){
         );
     });
 }
+
+function showDialogRequireConfirm(message, title, refuseButtonTxt, acceptButtonTxt, refuseCallback, acceptCallback){
+     navigator.notification.confirm(
+            message, // message
+            function(index){
+                if(index == 1){
+                    acceptCallback();
+                }else{
+                    refuseCallback();
+                }
+            },       // callback to invoke with index of button pressed
+            title,      // title
+            [acceptButtonTxt, refuseButtonTxt]     // buttonLabels
+     );
+}

@@ -1,17 +1,28 @@
-var BASE_API_URL = 'http://dolphinpaysv.us-west-2.elasticbeanstalk.com:80/dolphinpayREST-API/';
-var TEST_API_URL = '192.168.43.51:5000/dolphinpayREST-API/'
-var API_VERSION = 'v1';
+var BASE_API_URL = "http://dolphinpaysv.us-west-2.elasticbeanstalk.com:80/dolphinpayREST-API/";
+var TEST_API_URL = "192.168.43.51:5000/dolphinpayREST-API/";
+var API_VERSION = "v1";
 var REST_API_URL = BASE_API_URL + API_VERSION;
 
 //----------------------------------------------------------------------------------------------------------------------
 
+// FORMATTED PARAMS
+var PARAM_ROOM_ID = "{roomId}";
+var PARAM_STAND_ID = "{standId}";
+var PARAM_CATEGORY_ID = "{categoryId}";
+var PARAM_PLATFORM_ID = "{platformId}";
+
 // REQUESTS PATHS DEFINITIONS
-var REQ_AUTH_PATH = REST_API_URL + '/auth';
-var REQ_PARTNERSHIPS_PLATFORMS = REST_API_URL + '/platforms/partnerships/';
-var REQ_PLATFORMS_ALL = REST_API_URL + '/platforms/all';
-var REQ_STANDS = REST_API_URL + '/stands';
-var REQ_CATEGORIES = REST_API_URL + '/categories/';
+var REQ_AUTH_PATH = REST_API_URL + "/auth";
+var REQ_PARTNERSHIPS_PLATFORMS = REST_API_URL + "/platforms/partnerships/";
+var REQ_PLATFORMS_ALL = REST_API_URL + "/platforms/all";
+var REQ_STANDS = REST_API_URL + "/stands";
+var REQ_CATEGORIES_ROOM = REST_API_URL + "/categories/" + PARAM_ROOM_ID;
+var REQ_CATEGORIES_STAND = REST_API_URL + "/categories/stand/" + PARAM_STAND_ID;
+var REQ_DELETE_CATEGORY_FROM_ROOM = REST_API_URL + "/categories/" + PARAM_CATEGORY_ID + "/rooms/" + PARAM_ROOM_ID;
+var REQ_DELETE_PLATFORM_SUBSCRIBER = REST_API_URL + "/platforms/" + PARAM_PLATFORM_ID + "/subscribers";
+var REQ_ADD_CATEGORY_TO_ROOM = REST_API_URL + "/categories/rooms";
 // END REQUESTS PATHS DEFINITIONS
+
 
 // DEFAULT CONSTANTS
 var DEFAULT_CHUNK_SIZE = 20;
@@ -262,10 +273,66 @@ function getRoomCategories(successCallback, failureCallback, roomId, wasTokenRef
     const options = {
         method: 'get'
     };
-    var formattedRequest = REQ_CATEGORIES + roomId + "?token=" +credentials.idToken;
+    var formattedRequest = REQ_CATEGORIES_ROOM.replace(PARAM_ROOM_ID, roomId.toString()) + "?token=" +credentials.idToken;
 
     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
-        getRoomCategories(successCallback, failureCallback, wasTokenRefreshed);
+        getRoomCategories(successCallback, failureCallback, roomId, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function getStandCategories(successCallback, failureCallback, standId, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'get'
+    };
+    var formattedRequest = REQ_CATEGORIES_STAND.replace(PARAM_STAND_ID, standId.toString()) + "?token=" +credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        getStandCategories(successCallback, failureCallback, standId, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function deleteCategoryFromRoom(successCallback, failureCallback, categoryId, roomId, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'delete'
+    };
+
+    var formattedRequest = REQ_DELETE_CATEGORY_FROM_ROOM
+            .replace(PARAM_CATEGORY_ID, categoryId)
+            .replace(PARAM_ROOM_ID, roomId) + "?token=" +credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        deleteCategoryFromRoom(successCallback, failureCallback, categoryId, roomId, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function deletePlatformSubscriber(successCallback, failureCallback, platformId, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'delete'
+    };
+    var formattedRequest = REQ_DELETE_PLATFORM_SUBSCRIBER.replace(PARAM_PLATFORM_ID, platformId.toString()) + "?token=" +credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        deletePlatformSubscriber(successCallback, failureCallback, platformId, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function addCategoryToRoom(successCallback, failureCallback, roomId, categoryId, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'post',
+        data: {
+            key: roomId,
+            value: categoryId,
+        },
+        serializer: 'json'
+    };
+    var formattedRequest = REQ_ADD_CATEGORY_TO_ROOM + "?token=" + credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        addCategoryToRoom(successCallback, failureCallback, roomId, categoryId, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
 // END REQUESTS

@@ -44,6 +44,9 @@
     },
     "phonegap-plugin-multiview": {
       "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-listpicker": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
   "dependent_plugins": {
