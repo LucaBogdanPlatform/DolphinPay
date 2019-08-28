@@ -3,6 +3,7 @@ var TEST_API_URL = "192.168.43.51:5000/dolphinpayREST-API/";
 var API_VERSION = "v1";
 var REST_API_URL = BASE_API_URL + API_VERSION;
 
+
 //----------------------------------------------------------------------------------------------------------------------
 
 // FORMATTED PARAMS
@@ -23,6 +24,7 @@ var REQ_DELETE_PLATFORM_SUBSCRIBER = REST_API_URL + "/platforms/" + PARAM_PLATFO
 var REQ_ADD_CATEGORY_TO_ROOM = REST_API_URL + "/categories/rooms";
 var REQ_CREATE_ROOM_FOR_STAND = REST_API_URL + "/stands/rooms";
 var REQ_GET_STAND_ROOMS = REST_API_URL + "/stands/"+ PARAM_STAND_ID +"/rooms";
+var REQ_ROOM_SUBSCRIPTION_CODE = REST_API_URL + "/rooms/"+ PARAM_ROOM_ID +"/subscriptionCode";
 // END REQUESTS PATHS DEFINITIONS
 
 
@@ -207,6 +209,13 @@ function getStoredCredentials(){
 
 //----------------------------------------------------------------------------------------------------------------------
 
+// QR-CODE manager
+var QR_CODE_GENERATOR_API = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=";
+function getQrCodeImageUrl(data){
+    return QR_CODE_GENERATOR_API + data;
+}
+// QR-CODE manager
+
 // REQUESTS DEFINITIONS
 
 // This method must be called after google or facebook authentication
@@ -365,6 +374,18 @@ function createRoomForStand(successCallback, failureCallback, roomName, standId,
 
     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
         createRoomForStand(successCallback, failureCallback, roomName, standId, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function getRoomSubscriptionCode(successCallback, failureCallback, roomId, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'get'
+    };
+    var formattedRequest = REQ_ROOM_SUBSCRIPTION_CODE.replace(PARAM_ROOM_ID, roomId) + "?token=" + credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        getRoomSubscriptionCode(successCallback, failureCallback, roomId, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
 // END REQUESTS

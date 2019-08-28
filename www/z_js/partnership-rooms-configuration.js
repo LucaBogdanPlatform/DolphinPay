@@ -43,6 +43,22 @@ function getRoomDOMObject(room){
     categoryContainer.style.marginLeft = "16px";
     categoryContainer.style.marginTop = "8px";
 
+    var publishButton = document.createElement("button");
+    publishButton.innerHTML = "PUBLISH";
+    publishButton.style.float = "right";
+    publishButton.style.marginRight = "16px";
+    publishButton.style.backgroundColor = "#D47A1";
+    publishButton.style.borderRadius = "10px";
+    publishButton.onclick = function(){
+        getRoomSubscriptionCode(function(data){
+            $('#qrCodeImage').attr("src", getQrCodeImageUrl(data.url));
+            $('#qrCodeGenerator').modal('show');
+        },function(e){
+            alert("Impossible to publish this room now");
+        }, room.id);
+    }
+
+    categoryContainer.appendChild(publishButton);
     cardContainer.appendChild(categoryContainer);
 
     return cardContainer;
