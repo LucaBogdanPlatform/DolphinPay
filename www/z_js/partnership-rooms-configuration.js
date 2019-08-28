@@ -1,3 +1,5 @@
+var backButtonDOM;
+
 var app = {
     initialize: function() {
         this.bindEvents();
@@ -9,9 +11,11 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
+        backButtonDOM = document.getElementById("back-button");
+        setBackButtonListener();
         attachBaseMenuListeners();
         attachBaseLeftMenuListeners();
-        attachLeftMenuListeners();
+
     },
 
     onPause: function() {
@@ -28,10 +32,9 @@ var app = {
 }
 app.initialize();
 
-function attachLeftMenuListeners(){
-    var roomsConfigButton = document.getElementById("menu-rooms-button");
-    roomsConfigButton.onclick = function(){
-        PGMultiView.loadView("partnership-rooms-configuration.html", "", function(){}, function(){});
-    }
 
+function setBackButtonListener(){
+    backButtonDOM.onclick = function(){
+        PGMultiView.dismissView();
+    }
 }
