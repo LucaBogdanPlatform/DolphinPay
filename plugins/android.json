@@ -47,6 +47,9 @@
     },
     "cordova-plugin-listpicker": {
       "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-qrscanner": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
   "dependent_plugins": {
