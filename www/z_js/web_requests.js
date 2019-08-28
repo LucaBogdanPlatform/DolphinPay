@@ -21,6 +21,8 @@ var REQ_CATEGORIES_STAND = REST_API_URL + "/categories/stand/" + PARAM_STAND_ID;
 var REQ_DELETE_CATEGORY_FROM_ROOM = REST_API_URL + "/categories/" + PARAM_CATEGORY_ID + "/rooms/" + PARAM_ROOM_ID;
 var REQ_DELETE_PLATFORM_SUBSCRIBER = REST_API_URL + "/platforms/" + PARAM_PLATFORM_ID + "/subscribers";
 var REQ_ADD_CATEGORY_TO_ROOM = REST_API_URL + "/categories/rooms";
+var REQ_CREATE_ROOM_FOR_STAND = REST_API_URL + "/stands/rooms";
+var REQ_GET_STAND_ROOMS = REST_API_URL + "/stands/"+ PARAM_STAND_ID +"/rooms";
 // END REQUESTS PATHS DEFINITIONS
 
 
@@ -333,6 +335,36 @@ function addCategoryToRoom(successCallback, failureCallback, roomId, categoryId,
 
     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
         addCategoryToRoom(successCallback, failureCallback, roomId, categoryId, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+
+function getStandRooms(successCallback, failureCallback, standId, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'get'
+    };
+    var formattedRequest = REQ_GET_STAND_ROOMS.replace(PARAM_STAND_ID, standId) + "?token=" + credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        getStandRooms(successCallback, failureCallback, standId, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function createRoomForStand(successCallback, failureCallback, roomName, standId, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'post',
+        data: {
+            name: roomName,
+            stand: { id: standId },
+        },
+        serializer: 'json'
+    };
+    var formattedRequest = REQ_CREATE_ROOM_FOR_STAND + "?token=" + credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        createRoomForStand(successCallback, failureCallback, roomName, standId, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
 // END REQUESTS

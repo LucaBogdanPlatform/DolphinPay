@@ -46,19 +46,51 @@
 <div class="wrapper-content">
 
     <div class="col-11 col-sm-12 page-title">
-        <h3 style="text-align:left;margin-left:16px;">Configured rooms</h3>
+        <h3 style="text-align:left;margin-left:16px;">Rooms configuration</h3>
     </div>
     <div class="col-16" >
         <div>
 
-            <div class="card" id="add-category-button" style="background:#0D47A1;color:#E0E0E0;">
-                <h4 style="text-align:center;margin-left:16px;margin-top:8px;">+ ADD ROOM</h4>
+            <div class="card" id="add-room-button" style="background:#0D47A1;color:#E0E0E0;">
+                <h4 style="text-align:center;margin-left:16px;margin-top:8px;"  data-toggle="modal" data-target="#newRoomModal">+ ADD ROOM</h4>
             </div>
-            <div id="categories-container" >
+            <div id="rooms-container" >
 
+                <!--<div class="card card-bottom-blue-top-red-indicator">-->
+                    <!--<h4 style="text-align:left;margin-left:16px;margin-top:8px;">Reparto Bibite</h4>-->
+                <!--</div>-->
 
             </div>
 
+        </div>
+    </div>
+</div>
+
+<!-- Modal create room-->
+<div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new room</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group">
+                        <p class="col-form-label" style="text-align:left;">Room alias</p>
+                        <input type="text" class="form-control" id="room-name">
+                    </div>
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="create-room-button-modal" type="button" class="btn btn-primary" style="background:#0D47A1;color:#E0E0E0;">Create</button>
+            </div>
         </div>
     </div>
 </div>

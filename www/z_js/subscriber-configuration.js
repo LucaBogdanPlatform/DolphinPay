@@ -31,6 +31,7 @@ app.initialize();
 function getCategoryDOMObject(category){
     var cardContainer = document.createElement("div");
     cardContainer.classList.add("card");
+    cardContainer.classList.add("card-bottom-blue-top-orange-indicator");
 
     var categoryContainer = document.createElement("h4");
     categoryContainer.innerHTML = category.name;

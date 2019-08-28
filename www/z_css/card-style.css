@@ -16,6 +16,21 @@
   border-left-width: 10px;
 }
 
+.card-bottom-blue-top-red-indicator{
+  border-bottom-color: #0D47A1;
+  border-bottom-width: 3px;
+  border-top-color: red;
+  border-top-width: 3px;
+}
+
+.card-bottom-blue-top-orange-indicator{
+  border-bottom-color: #0D47A1;
+  border-bottom-width: 3px;
+  border-top-color: orange;
+  border-top-width: 3px;
+}
+
+
 .card-red-indicator{
   border-left-color: #c41c00;
   border-left-width: 10px;

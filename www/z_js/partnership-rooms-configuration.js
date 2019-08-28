@@ -13,8 +13,8 @@ var app = {
     onDeviceReady: function() {
         backButtonDOM = document.getElementById("back-button");
         setBackButtonListener();
-        attachBaseMenuListeners();
-        attachBaseLeftMenuListeners();
+        setOnNewRoomListener();
+        loadStandRooms();
 
     },
 
@@ -32,9 +32,56 @@ var app = {
 }
 app.initialize();
 
+function getRoomDOMObject(room){
+    var cardContainer = document.createElement("div");
+    cardContainer.classList.add("card");
+    cardContainer.classList.add("card-bottom-blue-top-red-indicator");
+
+    var categoryContainer = document.createElement("h4");
+    categoryContainer.innerHTML = room.name;
+    categoryContainer.style.textAlign = "left";
+    categoryContainer.style.marginLeft = "16px";
+    categoryContainer.style.marginTop = "8px";
+
+    cardContainer.appendChild(categoryContainer);
+
+    return cardContainer;
+}
 
 function setBackButtonListener(){
     backButtonDOM.onclick = function(){
         PGMultiView.dismissView();
     }
+}
+
+function setOnNewRoomListener(){
+    var submitRoomCreationDOM = document.getElementById("create-room-button-modal");
+    var roomNameDOM = document.getElementById("room-name");
+    submitRoomCreationDOM.onclick = function(){
+        var roomName = roomNameDOM.value;
+        if(roomName.length === 0 || !roomName.trim()){
+           alert("Invalid room name");
+           return;
+        }
+        var roomsContainer = document.getElementById("rooms-container");
+        createRoomForStand(function(room){
+            roomsContainer.appendChild(getRoomDOMObject(room));
+            $('#newRoomModal').modal('hide')
+        },function(e){
+            alert("Impossible to create a new room");
+        }, roomName.trim(), getUserInfo().genericPlatform.standId);
+    }
+}
+
+function loadStandRooms(room){
+    getStandRooms(function(rooms){
+        var roomsContainer = document.getElementById("rooms-container");
+        for(var i = 0; i < rooms.length; i++){
+            roomsContainer.appendChild(getRoomDOMObject(rooms[i]));
+        }
+    },function(e){
+        alert("Impossible to load rooms");
+    }, getUserInfo().genericPlatform.standId);
+
+
 }
