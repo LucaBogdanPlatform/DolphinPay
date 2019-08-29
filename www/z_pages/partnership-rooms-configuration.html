@@ -21,6 +21,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../z_css/common-style.css" type="text/css">
     <link rel="stylesheet" href="../z_css/card-style.css" type="text/css">
+    <link rel="stylesheet" href="../z_css/material-style.css" type="text/css">
 
 </head>
 <body class="menuclose menuclose-right">
@@ -81,9 +82,11 @@
             <div class="modal-body">
 
                 <form>
-                    <div class="form-group">
-                        <p class="col-form-label" style="text-align:left;">Room alias</p>
-                        <input type="text" class="form-control" id="room-name">
+                    <div class="group" style="margin-top:20px;">
+                        <input id="room-name" type="text" required>
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Room alias</label>
                     </div>
                 </form>
 

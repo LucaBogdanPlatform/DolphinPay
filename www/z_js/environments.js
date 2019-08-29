@@ -15,6 +15,7 @@ var app = {
         environmentsContainerDOM = document.getElementById("environments-container");
         backButtonDOM = document.getElementById("back-button");
         setBackButtonListener();
+        setAddSubscriptionButtonListener();
         getUserEnvironments();
     },
 
@@ -114,4 +115,27 @@ function setBackButtonListener(){
     backButtonDOM.onclick = function(){
         webview.Close();
     }
+}
+
+function setAddSubscriptionButtonListener(){
+    var addSubscriptionButton = document.getElementById("add-subscription-button");
+    var scannedCodeLabel = document.getElementById("scannedCodeLabel");
+    addSubscriptionButton.onclick = function (){
+        scan(function (codeScanned){
+            scannedCodeLabel.innerHTML = "Scanned: " + codeScanned;
+            $('#newSubscriptionModal').modal('show');
+            document.getElementById("create-subscription-button").onclick = function(){
+                createSubscriptionPlatform(function(platform){
+                    onClickEnvironmentListener(platform);
+                }, function(e){
+                    alert("Impossible to create platform")
+                }, document.getElementById("platformNameInput").value, codeScanned);
+                $('#newSubscriptionModal').modal('hide');
+            }
+
+        }, function(){
+            alert("Impossible to access this function");
+        });
+    }
+
 }

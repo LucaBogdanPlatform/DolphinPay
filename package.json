@@ -28,9 +28,9 @@
     "cordova-plugin-locale": "git+https://github.com/sevinlim/cordova-plugin-locale.git",
     "cordova-plugin-localization-strings": "3.1.0",
     "cordova-plugin-network-information": "^2.0.1",
-    "cordova-plugin-qrscanner": "^3.0.1",
     "cordova-plugin-second-webview": "git+https://github.com/walidowais/cordova-plugin-second-webview.git",
     "cordova-universal-links-plugin-fix": "1.2.1",
+    "phonegap-plugin-barcodescanner": "^8.1.0",
     "phonegap-plugin-multiview": "^1.0.0"
   },
   "cordova": {
@@ -44,7 +44,6 @@
       },
       "cordova-plugin-listpicker": {},
       "cordova-plugin-network-information": {},
-      "cordova-plugin-qrscanner": {},
       "cordova-plugin-advanced-http": {},
       "com.paypal.cordova.mobilesdk": {},
       "cordova-plugin-console": {},
@@ -53,7 +52,10 @@
       },
       "cordova-plugin-locale": {},
       "cordova-plugin-second-webview": {},
-      "phonegap-plugin-multiview": {}
+      "phonegap-plugin-multiview": {},
+      "phonegap-plugin-barcodescanner": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
       "android"

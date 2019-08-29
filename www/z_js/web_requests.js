@@ -25,6 +25,7 @@ var REQ_ADD_CATEGORY_TO_ROOM = REST_API_URL + "/categories/rooms";
 var REQ_CREATE_ROOM_FOR_STAND = REST_API_URL + "/stands/rooms";
 var REQ_GET_STAND_ROOMS = REST_API_URL + "/stands/"+ PARAM_STAND_ID +"/rooms";
 var REQ_ROOM_SUBSCRIPTION_CODE = REST_API_URL + "/rooms/"+ PARAM_ROOM_ID +"/subscriptionCode";
+var REQ_CREATE_SUBSCRIPTION_PLATFORM = REST_API_URL + "/platforms/subscriptions";
 // END REQUESTS PATHS DEFINITIONS
 
 
@@ -386,6 +387,23 @@ function getRoomSubscriptionCode(successCallback, failureCallback, roomId, wasTo
 
     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
         getRoomSubscriptionCode(successCallback, failureCallback, roomId, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function createSubscriptionPlatform(successCallback, failureCallback, platformName, roomCode, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'post',
+        data: {
+            standRoomSubscriptionCode: roomCode,
+            platformSubscriptionName: platformName,
+        },
+        serializer: 'json'
+    };
+    var formattedRequest = REQ_CREATE_SUBSCRIPTION_PLATFORM + "?token=" + credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        createSubscriptionPlatform(successCallback, failureCallback, platformName, roomCode, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
 // END REQUESTS

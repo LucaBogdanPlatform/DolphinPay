@@ -48,7 +48,8 @@
     "cordova-plugin-listpicker": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
-    "cordova-plugin-qrscanner": {
+    "phonegap-plugin-barcodescanner": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },
