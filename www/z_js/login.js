@@ -9,12 +9,15 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
+        //if(!localStorage.getItem('Cart')) localStorage.setItem('Cart',{});
+        // SOLO PER LD
+        PGMultiView.loadView("companyprofile.html", "", function(){PGMultiView.dismissView("");},
+         function(){PGMultiView.dismissView("");});
     },
     onPause: function() {
 
     },
     onResume: function(event) {
-
     }
 }
 app.initialize();
@@ -58,7 +61,9 @@ function handleMissingInternetConnectionError(){
 }
 
 function successLogin(result){
-    webview.Show("z_pages/dashboard.html");
+    //here check if the cart exist ...if no, will create a new one
+    PGMultiView.loadView("dashboard.html","", function(){PGMultiView.dismissView("");},
+     function(){PGMultiView.dismissView("");});
 }
 
 function disableButton(disable) {

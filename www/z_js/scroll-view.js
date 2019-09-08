@@ -110,7 +110,7 @@ function addChunk(chunkArray, isFirstCall = false){
             document.getElementById('spinner-container').style.display = "none";
             break;
         }else if((checkElemIndex = (chunkArray.length - chunkSize)) < chunkArray.length){
-            var elem = elemFactory('Bibione, IT ' + chunkArray[checkElemIndex].id, 'Chiosco delfino','visible');
+            var elem = elemFactoryDashboard('Bibione, IT ' + chunkArray[checkElemIndex].id, 'Chiosco delfino','visible');
             $('#scrollable-content').append(elem);
             elements.push(elem);
             chunkSize --;
@@ -125,7 +125,7 @@ function addChunk(chunkArray, isFirstCall = false){
     }
 }
 
-function elemFactory(position,name,visibility){
+function elemFactoryDashboard(position,name,visibility){
     var elem = document.createElement("div");
     elem.style.borderRadius = "10px";
     elem.style.visibility = visibility;
@@ -138,6 +138,7 @@ function elemFactory(position,name,visibility){
         '<h6 class="mt-0 mb-1">'+name+'</h6>'+position+'</div>'+'<br>';
     return elem;
 }
+
 
 function gotoCompany(){
 

@@ -26,6 +26,9 @@
       "PLAY_SERVICES_VERSION": "11.8.0",
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
+    "cordova-plugin-listpicker": {
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
     "cordova-plugin-locale": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
@@ -36,20 +39,17 @@
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    },
     "cordova-plugin-second-webview": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
-    "phonegap-plugin-multiview": {
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    },
-    "cordova-plugin-listpicker": {
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
     "phonegap-plugin-barcodescanner": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "phonegap-plugin-multiview": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },

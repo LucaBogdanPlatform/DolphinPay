@@ -14,20 +14,15 @@ var app = {
         initialContent();
         setScrollListener();
     },
-
     onPause: function() {
 
     },
     onResume: function(event) {
 
     }
-//    onBackKeyDown: function(){
-//        alert("A");
-//        navigator.app.exitApp();
-//        return false;
-//    }
 }
 app.initialize();
 
-
-
+document.addEventListener("backbutton", function (e) {
+      PGMultiView.dismissView("");
+});
