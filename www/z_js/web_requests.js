@@ -149,13 +149,10 @@ function googleExplicitLogin(successCallback, failureCallback){
             'webClientId' : WEB_CLIENT_ID
         },
         function (obj) {
-            alert("LOOOL");
             googleSaveCredentials(obj);
             successCallback(obj);
         },
         function (msg) {
-        alert(msg);
-        alert(JSON.stringify(msg));
             checkNetworkOrUnknownError(failureCallback);
         }
     );
