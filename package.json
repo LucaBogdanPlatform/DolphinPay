@@ -27,7 +27,6 @@
     "cordova-plugin-locale": "git+https://github.com/sevinlim/cordova-plugin-locale.git",
     "cordova-plugin-localization-strings": "3.1.0",
     "cordova-plugin-network-information": "^2.0.1",
-    "cordova-plugin-second-webview": "git+https://github.com/walidowais/cordova-plugin-second-webview.git",
     "cordova-universal-links-plugin-fix": "1.2.1",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "phonegap-plugin-multiview": "^1.0.0"
@@ -46,15 +45,14 @@
         "TRANSLATION_PATH": "translations/app/"
       },
       "cordova-plugin-locale": {},
-      "cordova-plugin-second-webview": {},
       "phonegap-plugin-multiview": {},
       "phonegap-plugin-barcodescanner": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-plugin-googleplus": {
         "PLAY_SERVICES_VERSION": "15.0.1",
-        "WEB_APPLICATION_CLIENT_ID": "806071370102-83o3sf57mk9rqiu8lv2csd2ol5u7mfm5.apps.googleusercontent.com",
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.806071370102-83o3sf57mk9rqiu8lv2csd2ol5u7mfm5"
+        "WEB_APPLICATION_CLIENT_ID": "806071370102-h2i7k86tb9shfgkqbibgg451svi9o3o6.apps.googleusercontent.com",
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.806071370102-h2i7k86tb9shfgkqbibgg451svi9o3o6"
       }
     },
     "platforms": [
