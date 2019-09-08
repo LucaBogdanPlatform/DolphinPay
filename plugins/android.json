@@ -39,10 +39,10 @@
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
-    "cordova-plugin-second-webview": {
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-second-webview": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
     "phonegap-plugin-barcodescanner": {
