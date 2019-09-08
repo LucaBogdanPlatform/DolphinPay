@@ -51,7 +51,7 @@ function handleMissingInternetConnectionError(action){
 function trySilentGoogleLogin(){
      googleSilentLogin(function(){
         login(successLogin, function(){
-            PGMultiView.loadView("z_pages/login.html", "", function(){PGMultiView.dismissView("");},
+             PGMultiView.loadView("z_pages/login.html", "", function(){PGMultiView.dismissView("");},
              function(){PGMultiView.dismissView("");});
         });
      }, function(ex){
@@ -61,6 +61,6 @@ function trySilentGoogleLogin(){
 }
 
 function successLogin(result){
-    PGMultiView.loadView("z_pages/dashboard.html", "", function(){PGMultiView.dismissView("");},
+     PGMultiView.loadView("z_pages/dashboard.html", "", function(){PGMultiView.dismissView("");},
      function(){PGMultiView.dismissView("");});
 }
