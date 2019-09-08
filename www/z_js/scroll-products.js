@@ -36,9 +36,11 @@ var app = {
 }
 app.initialize();
 
+//populate();
+
 function populate(){
     for(var i= 0 ; i < 100 ; i++){
-        document.getElementById('scrollable-content').appendChild(elementFactoryProducts('name','cost',
+        document.getElementById('scrollable-content').appendChild(elementFactoryProducts('name',10,
         'header','description',i,'../img/product1.jpg'));
     }
 }
@@ -49,18 +51,53 @@ function elementFactoryProducts(name,cost,header,description,id,urlImg){
            '<figure class="product_img  align-items-center justify-content-between d-flex"><a href="#">'+
            '<img class="" src="'+urlImg+'" alt=""></a></figure>'+
            '<div class="card-block" style="background:#F07260 !important;" > <a href="#">'+
-           '<h5 class="card-title text-white">'+name+'<i class="fa fa-heart-o pull-right"></i></h5></a>'+
+           '<h5  class="card-title text-white">'+name+'<i class="fa fa-heart-o pull-right"></i></h5></a>'+
            '<div  data-toggle="collapse" data-target="#'+id+'" aria-expanded="false">'+
-           '<h3>$ '+cost+'<small class="text-danger"></small></h3><p class="card-text">'+header+'</p>'+
-           '<div class="collapse" id="'+id+'"><center>'+ description+
+           '<h3 >$ '+cost+'<small class="text-danger"></small></h3><p class="card-text">'+header+'</p>'+
+           '<div class="collapse" id="'+id+'" name="description"><center>'+ description+
            '</center></div></div></div>'+
            '<div class="card-block justify-content-between d-flex" style="background:#F07260 !important;">'+
            '<a onclick="addToCart(this);" class="btn btn-primary">Add to cart</a></div></div></div>';
     return div;
 }
 
-function addToCart(event){
-
+function addToCart(elem){
+    var product = {};
+    var chioscoId = '123456789';
+    if(!localStorage.getItem('Cart')) localStorage.setItem('Cart',{});
+    var nodes = elem.parentNode.parentNode.childNodes;
+    product.imageSrc = nodes[0].childNodes[0].childNodes[0].src;
+    product.name = nodes[1].childNodes[1].childNodes[0].innerText;
+    product.cost = nodes[1].childNodes[2].childNodes[0].innerText;
+    product.header = nodes[1].childNodes[2].childNodes[1].innerText;
+    product.description = nodes[1].childNodes[2].childNodes[2].innerText;
+    product.id = nodes[1].childNodes[2].childNodes[2].id;
+    product.quantity = 1;
+    var all = localStorage.getItem('Cart');
+    if(!(chioscoId in all)){
+        var data = new Array();
+        data.push(product);
+        all[chioscoId] = data;
+        localStorage.setItem('Cart',data);
+    }
+    else{
+    alert('A')
+        var item_data = localStorage.getItem('Cart')[chioscoId].filter(function(elem){
+            return elem.id == product.id;
+        });
+        if(item_data == null) {
+            item_data = new Array();
+            item_data.push(product);
+            localStorage.getItem('Cart')[chioscoId] = item_data;
+        }
+        else{
+            item_data.push(product);
+            localStorage.getItem('Cart')[chioscoId] = item_data;
+        }
+    }
+    //prima di settare la quantità verifico se esiste già lo stesso prodotto (tramite id) nel carrello...product
+    //se non c'è allora quantity = 1, se esiste già incremento la quantità esistente di 1 unità
+    alert(JSON.stringify(product));
 }
 
 function getUrlVars() {
