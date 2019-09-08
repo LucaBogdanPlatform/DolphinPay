@@ -121,7 +121,7 @@ function firebaseRefreshToken(successCallback, failureCallback){
 //----------------------------------------------------------------------------------------------------------------------
 
 // GOOGLE AUTH
-var WEB_CLIENT_ID = '806071370102-hrqrkdqkhkgdrci01qi4ovaml2hki4jv.apps.googleusercontent.com';
+var WEB_CLIENT_ID = '806071370102-h2i7k86tb9shfgkqbibgg451svi9o3o6.apps.googleusercontent.com';
 var KEY_GOOGLE_CREDENTIALS = "KGC";
 
 function googleSaveCredentials(obj){
@@ -149,10 +149,13 @@ function googleExplicitLogin(successCallback, failureCallback){
             'webClientId' : WEB_CLIENT_ID
         },
         function (obj) {
+            alert("LOOOL");
             googleSaveCredentials(obj);
             successCallback(obj);
         },
         function (msg) {
+        alert(msg);
+        alert(JSON.stringify(msg));
             checkNetworkOrUnknownError(failureCallback);
         }
     );

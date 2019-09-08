@@ -22,10 +22,6 @@
     "cordova-plugin-firebase": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
-    "cordova-plugin-googleplus": {
-      "PLAY_SERVICES_VERSION": "11.8.0",
-      "PACKAGE_NAME": "com.dolphinpay.app"
-    },
     "cordova-plugin-locale": {
       "PACKAGE_NAME": "com.dolphinpay.app"
     },
@@ -50,6 +46,10 @@
     },
     "phonegap-plugin-barcodescanner": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.dolphinpay.app"
+    },
+    "cordova-plugin-googleplus": {
+      "PLAY_SERVICES_VERSION": "15.0.1",
       "PACKAGE_NAME": "com.dolphinpay.app"
     }
   },

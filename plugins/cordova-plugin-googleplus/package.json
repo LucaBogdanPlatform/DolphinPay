@@ -1,24 +1,26 @@
 {
-  "_from": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-  "_id": "cordova-plugin-googleplus@7.0.1",
+  "_from": "cordova-plugin-googleplus",
+  "_id": "cordova-plugin-googleplus@8.0.0",
   "_inBundle": false,
-  "_integrity": "",
+  "_integrity": "sha512-fQHQ4abY9NCCJxvlkBrBkpfoqkoFLfY+XN/S9YlbfMVqJcsCD2wsroXt3mRbHvOi4DEAETc61jstdzeD210IHQ==",
   "_location": "/cordova-plugin-googleplus",
   "_phantomChildren": {},
   "_requested": {
-    "type": "git",
-    "raw": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
-    "rawSpec": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
-    "saveSpec": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-    "fetchSpec": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-    "gitCommittish": null
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-plugin-googleplus",
+    "name": "cordova-plugin-googleplus",
+    "escapedName": "cordova-plugin-googleplus",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
   },
   "_requiredBy": [
-    "#USER",
-    "/"
+    "#USER"
   ],
-  "_resolved": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git#c18ee047eb2295d77f631e9b1046e6ac84a94c67",
-  "_spec": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-googleplus/-/cordova-plugin-googleplus-8.0.0.tgz",
+  "_shasum": "92fbd44e6271dff69419514985690905cd279d70",
+  "_spec": "cordova-plugin-googleplus",
   "_where": "C:\\Users\\U374332\\Desktop\\DolphinPay\\DolphinPay",
   "bundleDependencies": false,
   "cordova_name": "Google SignIn",
@@ -53,5 +55,5 @@
     "ios"
   ],
   "repo": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-  "version": "7.0.1"
+  "version": "8.0.0"
 }
