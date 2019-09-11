@@ -26,6 +26,7 @@ var REQ_CREATE_ROOM_FOR_STAND = REST_API_URL + "/stands/rooms";
 var REQ_GET_STAND_ROOMS = REST_API_URL + "/stands/"+ PARAM_STAND_ID +"/rooms";
 var REQ_ROOM_SUBSCRIPTION_CODE = REST_API_URL + "/rooms/"+ PARAM_ROOM_ID +"/subscriptionCode";
 var REQ_CREATE_SUBSCRIPTION_PLATFORM = REST_API_URL + "/platforms/subscriptions";
+var REQ_PRODUCTS_OF_CATEGORY_OF_STAND = REST_API_URL + "/stand/"+ PARAM_STAND_ID +"/categories/"+ PARAM_CATEGORY_ID +"/products"
 // END REQUESTS PATHS DEFINITIONS
 
 
@@ -303,6 +304,20 @@ function getStandCategories(successCallback, failureCallback, standId, wasTokenR
         getStandCategories(successCallback, failureCallback, standId, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
+
+function getProductsOfCategoryOfStand(successCallback, failureCallback, standId, categoryId, wasTokenRefreshed = false){
+     var credentials = getStoredCredentials();
+     const options = {
+         method: 'get'
+     };
+     var formattedRequest = REQ_PRODUCTS_OF_CATEGORY_OF_STAND
+                                .replace(PARAM_STAND_ID, standId.toString())
+                                .replace(PARAM_CATEGORY_ID, categoryId.toString()) + "?token=" +credentials.idToken;
+
+     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+         getProductsOfCategoryOfStand(successCallback, failureCallback, standId, categoryId, wasTokenRefreshed);
+     }, wasTokenRefreshed);
+ }
 
 function deleteCategoryFromRoom(successCallback, failureCallback, categoryId, roomId, wasTokenRefreshed = false){
     var credentials = getStoredCredentials();
