@@ -13,6 +13,7 @@ var position = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2789.89380
 "63286963019402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477b92ed1beff245%3A0xde971aafed44e741!2sChio"+
 "sco+Delfino!5e0!3m2!1sit!2sit!4v1565623709037!5m2!1sit!2sit";
 
+var companyInfo = JSON.parse(window.localStorage.getItem("currentCompany"));
 
 setChart(chartWrapper);
 setPosition(position);
