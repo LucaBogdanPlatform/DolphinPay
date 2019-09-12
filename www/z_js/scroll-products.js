@@ -39,7 +39,7 @@ app.initialize();
 //populate();
 
 function populate(){
-    for(var i= 0 ; i < 100 ; i++){
+    for(var i= 0 ; i < 20 ; i++){
         document.getElementById('scrollable-content').appendChild(elementFactoryProducts('name',10,
         'header','description',i,'../img/product1.jpg'));
     }
@@ -75,13 +75,14 @@ function addToCart(elem){
     product.quantity = 1;
     var all = localStorage.getItem('Cart');
     if(!(chioscoId in all)){
+        alert(JSON.stringify(product));
         var data = new Array();
         data.push(product);
         all[chioscoId] = data;
         localStorage.setItem('Cart',data);
     }
     else{
-    alert('A')
+        alert(JSON.stringify(product));
         var item_data = localStorage.getItem('Cart')[chioscoId].filter(function(elem){
             return elem.id == product.id;
         });
@@ -91,13 +92,14 @@ function addToCart(elem){
             localStorage.getItem('Cart')[chioscoId] = item_data;
         }
         else{
+            //se il prodotto esiste già aumento la quantità
+            //se il prodotto non esiste lo aggiungo con quantità 1
             item_data.push(product);
             localStorage.getItem('Cart')[chioscoId] = item_data;
         }
     }
     //prima di settare la quantità verifico se esiste già lo stesso prodotto (tramite id) nel carrello...product
     //se non c'è allora quantity = 1, se esiste già incremento la quantità esistente di 1 unità
-    alert(JSON.stringify(product));
 }
 
 function getUrlVars() {
