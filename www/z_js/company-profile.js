@@ -1,24 +1,48 @@
-/* Dashboard chart combo line and bar */
-var ctx = document.getElementById("linechart").getContext('2d');
+var ctx;
+var chartWrapper;
+var slicesColors;
+var companyInfo;
+var company_name;
 
-var company_name = getUrlVars()["company"];
+var app = {
+    initialize: function() {
+        this.bindEvents();
+    },
+    bindEvents: function() {
+        // Here we register our callbacks for the lifecycle events we care about
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('pause', this.onPause, false);
+        document.addEventListener('resume', this.onResume, false);
+    },
+    onDeviceReady: function() {
+        companyInfo = JSON.parse(window.localStorage.getItem("currentCompany"));
+        alert(JSON.stringify(window.localStorage.getItem("Cart")))
+        /* Dashboard chart combo line and bar */
+        var position = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2789.893803961078!2d13.0641811154345!3d45."+
+        "63286963019402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477b92ed1beff245%3A0xde971aafed44e741!2sChio"+
+        "sco+Delfino!5e0!3m2!1sit!2sit!4v1565623709037!5m2!1sit!2sit";
+        ctx = document.getElementById("linechart").getContext('2d');
+        chartWrapper = {"labels":["Free","Occupied"],"data":[20, 30]};
+        slicesColors = ["#34A300","#A30000"];
+        init(chartWrapper,position);
+    },
 
-//HERE CALL THE WEB SERVICE FOR THE CHART DATA, POSITION DATA AND EVENT DATA
+    onPause: function() {
 
-var chartWrapper = {"labels":["Free","Occupied"],"data":[20, 30]};
+    },
 
-var slicesColors = ["#34A300","#A30000"];
+    onResume: function(event) {
 
-var position = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2789.893803961078!2d13.0641811154345!3d45."+
-"63286963019402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477b92ed1beff245%3A0xde971aafed44e741!2sChio"+
-"sco+Delfino!5e0!3m2!1sit!2sit!4v1565623709037!5m2!1sit!2sit";
+    }
+}
+app.initialize();
 
-var companyInfo = JSON.parse(window.localStorage.getItem("currentCompany"));
-
-setChart(chartWrapper);
-setPosition(position);
-setCartCounter();
-setWaitingTime(new Date(2018, 11, 24, 10, 50, 30));
+function init(chartWrapper,position){
+        setChart(chartWrapper);
+        setPosition(position);
+        setCartCounter();
+        setWaitingTime(new Date(2018, 11, 24, 10, 50, 30));
+}
 
 function setChart(chartWrapper){
     var myChart = new Chart(ctx, {
@@ -83,14 +107,4 @@ function setWaitingTime(time){
 
 function setCartCounter(){document.getElementById("cart-counter").textContent="10";}
 
-function goToCategoryPage(){
-  PGMultiView.loadView("category.html", "", function(){}, function(){});
-}
-
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
+function goToCategoryPage(){PGMultiView.loadView("category.html", "", function(){}, function(){});}

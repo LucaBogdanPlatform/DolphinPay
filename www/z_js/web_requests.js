@@ -310,6 +310,7 @@ function getProductsOfCategoryOfStand(successCallback, failureCallback, standId,
      const options = {
          method: 'get'
      };
+
      var formattedRequest = REQ_PRODUCTS_OF_CATEGORY_OF_STAND
                                 .replace(PARAM_STAND_ID, standId.toString())
                                 .replace(PARAM_CATEGORY_ID, categoryId.toString()) + "?token=" +credentials.idToken;

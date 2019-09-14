@@ -12,7 +12,10 @@ var app = {
     onDeviceReady: function() {
         container = document.getElementById("container-category");
         //here the function on load
-        loadCategory();
+        var currentStand = JSON.parse(window.localStorage.getItem("currentCompany"));
+        getStandCategories(function(data){loadCategory(data);},
+            function(error){alert('Connection refused by the server');},
+            currentStand.id);
     },
 
     onPause: function() {
@@ -24,30 +27,28 @@ var app = {
 }
 app.initialize();
 
-//loadCategory();
-function loadCategory(){
-    var sample = {'Sandwich':'Description1','Coffee':'Description2','Drink':'Description3','Ice Cream':'Description4'};
-    for(var elem in sample){
-        var imgName = elem.replace(' ','');
-        container.appendChild(elementFactory(elem,imgName,sample[elem],1));
+
+function loadCategory(data){
+    for(var i = 0 ; i < data.length ; i++){
+        container.appendChild(elementFactory(data[i].name,data[i].positionMapping,data[i].id));
     }
 }
 
 
-function elementFactory(title,imgName,description,id){
+function elementFactory(title,imgName,id){
     var div = document.createElement("div");
     div.className = "col-sm-16 col-md-8";
-    div.innerHTML = '<div class="media flex-column" onClick="goToProducts(this);" name="'+id+'">'+
+    div.innerHTML = '<div class="media flex-column" onClick="goToProducts(this);" id="'+id+'">'+
         '<span class="projectpic card"><img src="../z_img/'+imgName+'.jpg">'+
         '<div class="overlay category">'+
         '<h6 style="font-size: 1.8rem !important;">'+title+'</h6>'+
-        '<h6 style="font-size: 1.0rem !important;">'+description+'</h6>'+
         '</div></span></div>';
     return div;
 }
 
 function goToProducts(event){
-    PGMultiView.loadView("products.html?category="+event.getAttribute("name"), "", function(){}, function(){});
+    window.localStorage.setItem("currentCategory",event.id);
+    PGMultiView.loadView("products.html","", function(){}, function(){});
 }
 
 function goBack(){

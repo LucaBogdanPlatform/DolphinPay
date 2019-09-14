@@ -9,10 +9,6 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-        //if(!localStorage.getItem('Cart')) localStorage.setItem('Cart',{});
-        // SOLO PER LD
-        //PGMultiView.loadView("companyprofile.html", "", function(){PGMultiView.dismissView("");},
-        // function(){PGMultiView.dismissView("");});
     },
     onPause: function() {
 

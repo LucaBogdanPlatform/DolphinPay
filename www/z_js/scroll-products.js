@@ -1,11 +1,3 @@
-var categoryId;
-var elements;
-var scrollWindowSize;
-var offset;
-var downloadingContent;
-var N_TOTAL_ELEM;
-var INDEX_ELEM;
-
 var app = {
     initialize: function() {
         this.bindEvents();
@@ -17,14 +9,10 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-        elements = new Array();
-        scrollWindowSize = parseInt($(window).height() / 146) + 4;
-        offset = (scrollWindowSize % 2 == 0) ? 0 : 0.5;
-        downloadingContent = false;
-        N_TOTAL_ELEM = 0;
-        INDEX_ELEM = 0;
-        categoryId = getUrlVars()["category"];
-        populate();
+        var currentStand = JSON.parse(window.localStorage.getItem("currentCompany"));
+        getProductsOfCategoryOfStand(function(data){populate();},
+            function(error){alert('Connection refused by the server');},
+            currentStand.id, window.localStorage.getItem("currentCategory"))
     },
 
     onPause: function() {
@@ -63,8 +51,7 @@ function elementFactoryProducts(name,cost,header,description,id,urlImg){
 
 function addToCart(elem){
     var product = {};
-    var chioscoId = '123456789';
-    if(!localStorage.getItem('Cart')) localStorage.setItem('Cart',{});
+    //var chioscoId = window.localStorage.getItem("currentCompany");
     var nodes = elem.parentNode.parentNode.childNodes;
     product.imageSrc = nodes[0].childNodes[0].childNodes[0].src;
     product.name = nodes[1].childNodes[1].childNodes[0].innerText;
@@ -73,33 +60,7 @@ function addToCart(elem){
     product.description = nodes[1].childNodes[2].childNodes[2].innerText;
     product.id = nodes[1].childNodes[2].childNodes[2].id;
     product.quantity = 1;
-    var all = localStorage.getItem('Cart');
-    if(!(chioscoId in all)){
-        alert(JSON.stringify(product));
-        var data = new Array();
-        data.push(product);
-        all[chioscoId] = data;
-        localStorage.setItem('Cart',data);
-    }
-    else{
-        alert(JSON.stringify(product));
-        var item_data = localStorage.getItem('Cart')[chioscoId].filter(function(elem){
-            return elem.id == product.id;
-        });
-        if(item_data == null) {
-            item_data = new Array();
-            item_data.push(product);
-            localStorage.getItem('Cart')[chioscoId] = item_data;
-        }
-        else{
-            //se il prodotto esiste già aumento la quantità
-            //se il prodotto non esiste lo aggiungo con quantità 1
-            item_data.push(product);
-            localStorage.getItem('Cart')[chioscoId] = item_data;
-        }
-    }
-    //prima di settare la quantità verifico se esiste già lo stesso prodotto (tramite id) nel carrello...product
-    //se non c'è allora quantity = 1, se esiste già incremento la quantità esistente di 1 unità
+    alert(JSON.stringify(product))
 }
 
 function getUrlVars() {
