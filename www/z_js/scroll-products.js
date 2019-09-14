@@ -1,3 +1,4 @@
+var currentStand;
 var app = {
     initialize: function() {
         this.bindEvents();
@@ -9,7 +10,8 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-        var currentStand = JSON.parse(window.localStorage.getItem("currentCompany"));
+        setCartCounter();
+        currentStand = JSON.parse(window.localStorage.getItem("currentCompany"));
         getProductsOfCategoryOfStand(function(data){populate();},
             function(error){alert('Connection refused by the server');},
             currentStand.id, window.localStorage.getItem("currentCategory"))
@@ -19,7 +21,7 @@ var app = {
 
     },
     onResume: function(event) {
-
+        setCartCounter();
     }
 }
 app.initialize();
@@ -50,8 +52,12 @@ function elementFactoryProducts(name,cost,header,description,id,urlImg){
 }
 
 function addToCart(elem){
+    var Cart = JSON.parse(window.localStorage.getItem("Cart"));
+    if(Cart[currentStand.id] === undefined) {
+        Cart[currentStand.id] = new Array();
+        window.localStorage.setItem("Cart",JSON.stringify(Cart));
+    }
     var product = {};
-    //var chioscoId = window.localStorage.getItem("currentCompany");
     var nodes = elem.parentNode.parentNode.childNodes;
     product.imageSrc = nodes[0].childNodes[0].childNodes[0].src;
     product.name = nodes[1].childNodes[1].childNodes[0].innerText;
@@ -60,7 +66,13 @@ function addToCart(elem){
     product.description = nodes[1].childNodes[2].childNodes[2].innerText;
     product.id = nodes[1].childNodes[2].childNodes[2].id;
     product.quantity = 1;
-    alert(JSON.stringify(product))
+    var content = Cart[currentStand.id].filter(function(elem){
+        return elem.id === product.id;
+    });
+    if(content.length == 0) Cart[currentStand.id].push(product);
+    else content[0].quantity = content[0].quantity + 1;
+    window.localStorage.setItem("Cart",JSON.stringify(Cart));
+    setCartCounter();
 }
 
 function getUrlVars() {
@@ -69,6 +81,17 @@ function getUrlVars() {
         vars[key] = value;
     });
     return vars;
+}
+
+function setCartCounter(){
+    var counter = 0;
+    var Cart = JSON.parse(window.localStorage.getItem("Cart"));
+    for(var elem in Cart){
+        for(var prod in Cart[elem]) {
+            counter = counter + Cart[elem][prod].quantity;
+        }
+    }
+    document.getElementById("cart-counter").textContent = counter;
 }
 
 function goBack(){

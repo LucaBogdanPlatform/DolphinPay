@@ -10,6 +10,7 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
+        setCartCounter();
         container = document.getElementById("container-category");
         //here the function on load
         var currentStand = JSON.parse(window.localStorage.getItem("currentCompany"));
@@ -22,7 +23,7 @@ var app = {
 
     },
     onResume: function(event) {
-
+        setCartCounter();
     }
 }
 app.initialize();
@@ -53,4 +54,15 @@ function goToProducts(event){
 
 function goBack(){
     PGMultiView.dismissView("");
+}
+
+function setCartCounter(){
+    var counter = 0;
+    var Cart = JSON.parse(window.localStorage.getItem("Cart"));
+    for(var elem in Cart){
+        for(var prod in Cart[elem]) {
+            counter = counter + Cart[elem][prod].quantity;
+        }
+    }
+    document.getElementById("cart-counter").textContent = counter;
 }

@@ -9,7 +9,8 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-        if(window.localStorage.getItem("Cart") == null) window.localStorage.setItem("Cart",{})
+        var Cart = {};
+        if(window.localStorage.getItem("Cart") == null) window.localStorage.setItem("Cart",JSON.stringify(Cart));
         attachBaseMenuListeners();
         attachBaseLeftMenuListeners();
         initialContent();

@@ -16,7 +16,6 @@ var app = {
     },
     onDeviceReady: function() {
         companyInfo = JSON.parse(window.localStorage.getItem("currentCompany"));
-        alert(JSON.stringify(window.localStorage.getItem("Cart")))
         /* Dashboard chart combo line and bar */
         var position = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2789.893803961078!2d13.0641811154345!3d45."+
         "63286963019402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477b92ed1beff245%3A0xde971aafed44e741!2sChio"+
@@ -32,7 +31,7 @@ var app = {
     },
 
     onResume: function(event) {
-
+        setCartCounter();
     }
 }
 app.initialize();
@@ -105,6 +104,19 @@ function setWaitingTime(time){
     wrpMinutes.innerText = (minutes / 10 >= 1) ? minutes+"" : minutes+"0";
 }
 
-function setCartCounter(){document.getElementById("cart-counter").textContent="10";}
+function setCartCounter(){
+    var counter = 0;
+    var Cart = JSON.parse(window.localStorage.getItem("Cart"));
+    for(var elem in Cart){
+        for(var prod in Cart[elem]) {
+            counter = counter + Cart[elem][prod].quantity;
+        }
+    }
+    document.getElementById("cart-counter").textContent = counter;
+}
 
 function goToCategoryPage(){PGMultiView.loadView("category.html", "", function(){}, function(){});}
+
+function goBack(){
+    PGMultiView.dismissView("");
+}
