@@ -2,6 +2,10 @@
     text-align: center;
     padding: 5px;
     margin: 2%;
+    top:50%;
+    right:0;
+    left:0;
+
 }
 
 .qty {

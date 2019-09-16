@@ -26,7 +26,6 @@ app.initialize();
 
 function oneStandCart(Cart){
     var products = Cart[Object.keys(Cart)[0]];
-    alert('Single')
     //bottom fixed bar with total and submit button insertion
     for(var prod in products){
         //elem factory insertion
@@ -34,7 +33,6 @@ function oneStandCart(Cart){
 }
 
 function multipleStandCart(Cart){
-    alert('multiple')
     for(var stand in Cart){
         //create Stand section with name on the header and submit payment button in the footer
         for(var prod in Cart[stand]){
