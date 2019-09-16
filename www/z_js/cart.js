@@ -45,6 +45,7 @@ function elementFactory(name,img,cost,quantity,visible){
 
 }
 
+
 function goBack(){
     PGMultiView.dismissView("");
 }
