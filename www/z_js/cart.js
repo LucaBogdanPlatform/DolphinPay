@@ -50,3 +50,11 @@ function elementFactory(name,img,cost,quantity,visible){
 function goBack(){
     PGMultiView.dismissView("");
 }
+
+function addQuantity(elem){
+    elem.parentElement[1].value = parseInt(elem.parentElement[1].value) + 1;
+}
+
+function removeQuantity(elem){
+    if(parseInt(elem.parentElement[1].value) != 1)elem.parentElement[1].value = parseInt(elem.parentElement[1].value) - 1;
+}

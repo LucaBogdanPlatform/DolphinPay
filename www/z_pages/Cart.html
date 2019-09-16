@@ -7,7 +7,6 @@
     <meta name="author" content="">
     <link rel="icon" href="../favicon.ico">
     <title>Dashboard</title>
-
     <!-- Fontawesome icon CSS -->
     <link rel="stylesheet" href="../vendor/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">
 
@@ -18,7 +17,7 @@
     <link rel="stylesheet" href="../css/light_adminux.css" type="text/css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../z_css/spinner.css" type="text/css">
+    <link rel="stylesheet" href="../z_css/Cart.css" type="text/css">
     <link rel="stylesheet" href="../z_css/category-style.css" type="text/css">
     <link rel="stylesheet" href="../z_css/card-style.css" type="text/css">
 </head>
@@ -77,6 +76,31 @@
             <div class="col list-unstyled project-list ">
                 <div class="row" id="scrollable-content">
                     <!-- HERE THE BILL -->
+                    <div>
+                        <div class="card" style="overflow: hidden;">
+                            <div class="product bg-success text-white">
+                                <figure class="product_img  align-items-center justify-content-between d-flex" >
+                                    <a href="#"><img class="" src="../img/product1.jpg"  alt=""></a>
+                                </figure>
+                                <div style="display: flex; justify-content: center;">
+                                    <div class="card-block" style="background:#F07260 !important;">
+                                        <a href="#"><h5 class="card-title text-white" style="text-align: center;">Test Name</h5></a>
+                                        <a href="#"><h5 class="card-title text-white" style="text-align: center;">10 $</h5></a>
+                                    </div>
+                                    <div class="card-block" style="background:#F07260 !important;">
+                                        <div style="display: flex; justify-content: center;">
+                                            <form class ="myform" method='POST' action='#'>
+                                                <input type='button' value='-' class='qtyminus' field='quantity' onclick="removeQuantity(this);"/>
+                                                <input type='text' name='quantity' value='1' class='qty' disabled />
+                                                <input type='button' value='+' class='qtyplus' field='quantity' onclick="addQuantity(this);" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -26,7 +26,6 @@ var app = {
 }
 app.initialize();
 
-//populate();
 
 function populate(){
     for(var i= 0 ; i < 20 ; i++){
