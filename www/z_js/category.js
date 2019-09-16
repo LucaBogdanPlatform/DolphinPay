@@ -15,7 +15,7 @@ var app = {
         //here the function on load
         var currentStand = JSON.parse(window.localStorage.getItem("currentCompany"));
         getStandCategories(function(data){loadCategory(data);},
-            function(error){alert('Connection refused by the server');},
+            function(error){alert('Connection lost');},
             currentStand.id);
     },
 
@@ -65,4 +65,8 @@ function setCartCounter(){
         }
     }
     document.getElementById("cart-counter").textContent = counter;
+}
+
+function goToCart(){
+    PGMultiView.loadView("Cart.html", "", function(){}, function(){});
 }

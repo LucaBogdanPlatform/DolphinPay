@@ -18,8 +18,8 @@ var app = {
         companyInfo = JSON.parse(window.localStorage.getItem("currentCompany"));
         /* Dashboard chart combo line and bar */
         var position = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2789.893803961078!2d13.0641811154345!3d45."+
-        "63286963019402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477b92ed1beff245%3A0xde971aafed44e741!2sChio"+
-        "sco+Delfino!5e0!3m2!1sit!2sit!4v1565623709037!5m2!1sit!2sit";
+            "63286963019402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477b92ed1beff245%3A0xde971aafed44e741!2sChio"+
+            "sco+Delfino!5e0!3m2!1sit!2sit!4v1565623709037!5m2!1sit!2sit";
         ctx = document.getElementById("linechart").getContext('2d');
         chartWrapper = {"labels":["Free","Occupied"],"data":[20, 30]};
         slicesColors = ["#34A300","#A30000"];
@@ -119,4 +119,8 @@ function goToCategoryPage(){PGMultiView.loadView("category.html", "", function()
 
 function goBack(){
     PGMultiView.dismissView("");
+}
+
+function goToCart(){
+    PGMultiView.loadView("Cart.html", "", function(){}, function(){});
 }

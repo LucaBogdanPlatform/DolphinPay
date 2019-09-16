@@ -13,7 +13,7 @@ var app = {
         setCartCounter();
         currentStand = JSON.parse(window.localStorage.getItem("currentCompany"));
         getProductsOfCategoryOfStand(function(data){populate();},
-            function(error){alert('Connection refused by the server');},
+            function(error){alert('Connection lost');},
             currentStand.id, window.localStorage.getItem("currentCategory"))
     },
 
@@ -96,4 +96,8 @@ function setCartCounter(){
 
 function goBack(){
     PGMultiView.dismissView("");
+}
+
+function goToCart(){
+    PGMultiView.loadView("Cart.html", "", function(){}, function(){});
 }
