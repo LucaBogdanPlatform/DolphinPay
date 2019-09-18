@@ -209,6 +209,93 @@ function getStoredCredentials(){
 }
 // END GENERAL CREDENTIALS DEFINITION
 
+// STORAGE MANAGEMENT
+var KEY_CART = "KC";
+var KEY_STAND_SELECTED = "KSS";
+var KEY_CATEGORY_SELECTED = "KCS";
+function initCart(){
+    window.localStorage.setItem(KEY_CART,JSON.stringify({}));
+}
+
+function saveCart(cart){
+    window.localStorage.setItem(KEY_CART,JSON.stringify(cart));
+}
+
+function getCart(){
+    if(localStorage.getItem(this.KEY_CART) === null){
+        return null;
+    }else{
+        return JSON.parse(localStorage.getItem(this.KEY_CART))
+    }
+}
+
+function getCartProductsCount(){
+    var counter = 0;
+    var cart = getCart();
+    for(var elem in cart){
+        for(var prod in cart[elem]) {
+            counter = counter + cart[elem][prod].quantity;
+        }
+    }
+    return counter;
+}
+
+function addProductToCart(product){
+    var cart = getCart();
+    var standSelected = getSelectedStand();
+    var categorySelected = getSelectedCategory();
+
+    if(cart == null || standSelected == null || categorySelected == null ){
+        return false;
+    }
+
+    if(cart[standSelected.id] === undefined) {
+        cart[standSelected.id] = new Array();
+    }
+
+    var content = cart[standSelected.id].filter(function(elem){
+        return elem.id === product.id;
+    });
+
+    if(content.length == 0){
+        product.quantity = 0;
+        cart[standSelected.id].push(product);
+    } else{
+        content[0].quantity = content[0].quantity + 1;
+    }
+
+    saveCart(cart);
+    return true;
+}
+
+
+function saveStandSelected(stand){
+    window.localStorage.setItem(KEY_STAND_SELECTED,JSON.stringify(stand));
+}
+
+function getSelectedStand(){
+    if(localStorage.getItem(this.KEY_STAND_SELECTED) === null){
+        return null;
+    }else{
+        return JSON.parse(localStorage.getItem(this.KEY_STAND_SELECTED))
+    }
+}
+function saveCategorySelected(category){
+    var catSavedJSON = {};
+    catSavedJSON.id = category;
+    window.localStorage.setItem(KEY_CATEGORY_SELECTED,JSON.stringify(catSavedJSON));
+}
+
+function getSelectedCategory(){
+    if(localStorage.getItem(this.KEY_CATEGORY_SELECTED) === null){
+        return null;
+    }else{
+        return JSON.parse(localStorage.getItem(this.KEY_CATEGORY_SELECTED))
+    }
+}
+//
+
+
 //----------------------------------------------------------------------------------------------------------------------
 
 // QR-CODE manager
@@ -231,7 +318,6 @@ function execHttpRequest(path, options, successCallback, failureCallback, retryR
 }
 
 function login(successCallback, failureCallback, wasTokenRefreshed = false){
-
     var credentials = getStoredCredentials();
     console.log("GOOGLE TOKEN -> " + credentials.idToken);
     console.log("EMAIL -> " + credentials.email);
@@ -248,6 +334,7 @@ function login(successCallback, failureCallback, wasTokenRefreshed = false){
 
     execHttpRequest(REQ_AUTH_PATH, options, function(response){
         saveUser(response);
+        initCart();
         successCallback(response.data);
     }, failureCallback, function(wasTokenRefreshed){
            login(successCallback, failureCallback, wasTokenRefreshed);

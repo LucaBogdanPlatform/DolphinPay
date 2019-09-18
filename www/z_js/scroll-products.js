@@ -10,11 +10,10 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
+        attachBaseMenuListeners();
+        attachBaseLeftMenuListeners();
         setCartCounter();
-        currentStand = JSON.parse(window.localStorage.getItem("currentCompany"));
-        getProductsOfCategoryOfStand(function(data){populate();},
-            function(error){alert('Connection lost');},
-            currentStand.id, window.localStorage.getItem("currentCategory"))
+        loadProducts();
     },
 
     onPause: function() {
@@ -26,71 +25,75 @@ var app = {
 }
 app.initialize();
 
+function loadProducts(){
+    getProductsOfCategoryOfStand(
+        function(data){
+            populate(data);
+        },
+        function(error){
+            alert('Impossible to load products');
+        },
+        getSelectedStand().id,
+        getSelectedCategory().id
+    );
+}
 
-function populate(){
-    for(var i= 0 ; i < 20 ; i++){
-        document.getElementById('scrollable-content').appendChild(elementFactoryProducts('name',10,
-        'header','description',i,'../img/product1.jpg'));
+function populate(data){
+    for(var i= 0 ; i < data.length ; i++){
+        document.getElementById('container-products').appendChild(elementFactoryProducts(data[i]));
     }
 }
 
-function elementFactoryProducts(name,cost,header,description,id,urlImg){
-    var div = document.createElement("div");
-    div.innerHTML = '<div class="card" style="overflow: hidden;"><div class="product bg-success text-white">'+
-           '<figure class="product_img  align-items-center justify-content-between d-flex"><a href="#">'+
-           '<img class="" src="'+urlImg+'" alt=""></a></figure>'+
-           '<div class="card-block" style="background:#F07260 !important;" > <a href="#">'+
-           '<h5  class="card-title text-white">'+name+'<i class="fa fa-heart-o pull-right"></i></h5></a>'+
-           '<div  data-toggle="collapse" data-target="#'+id+'" aria-expanded="false">'+
-           '<h3 >$ '+cost+'<small class="text-danger"></small></h3><p class="card-text">'+header+'</p>'+
-           '<div class="collapse" id="'+id+'" name="description"><center>'+ description+
-           '</center></div></div></div>'+
-           '<div class="card-block justify-content-between d-flex" style="background:#F07260 !important;">'+
-           '<a onclick="addToCart(this);" class="btn btn-primary">Add to cart</a></div></div></div>';
-    return div;
-}
+function elementFactoryProducts(product){
+    var elem = document.createElement("div");
+    elem.classList.add("card");
+    elem.classList.add("transition");
 
-function addToCart(elem){
-    var Cart = JSON.parse(window.localStorage.getItem("Cart"));
-    if(Cart[currentStand.id] === undefined) {
-        Cart[currentStand.id] = new Array();
-        window.localStorage.setItem("Cart",JSON.stringify(Cart));
-    }
-    var product = {};
-    var nodes = elem.parentNode.parentNode.childNodes;
-    product.imageSrc = nodes[0].childNodes[0].childNodes[0].src;
-    product.name = nodes[1].childNodes[1].childNodes[0].innerText;
-    product.cost = nodes[1].childNodes[2].childNodes[0].innerText;
-    product.header = nodes[1].childNodes[2].childNodes[1].innerText;
-    product.description = nodes[1].childNodes[2].childNodes[2].innerText;
-    product.id = nodes[1].childNodes[2].childNodes[2].id;
-    product.quantity = 1;
-    var content = Cart[currentStand.id].filter(function(elem){
-        return elem.id === product.id;
-    });
-    if(content.length == 0) Cart[currentStand.id].push(product);
-    else content[0].quantity = content[0].quantity + 1;
-    window.localStorage.setItem("Cart",JSON.stringify(Cart));
-    setCartCounter();
-}
+    var elem1 = document.createElement("h3");
+    elem1.id = "prod-title";
+    elem1.setAttribute("style", "background:#f5f5f5; color:black; font-weight: 400;");
+    elem1.classList.add("transition");
+    elem1.innerHTML = product.name;
 
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
+    var elem2 = document.createElement("div");
+    elem2.setAttribute("style", "margin-top:150px;margin-left:16px;margin-right:16px;");
+
+    var elem3 = document.createElement("h6");
+    elem3.setAttribute("style", "text-align:left;");
+    elem3.innerHTML = "Prodotto di ottima qualità, fornito con certificazione Italiana dal 2016";
+
+    var elem4 = document.createElement("h5");
+    elem4.setAttribute("style", "text-align:left;color:blue;");
+    elem4.innerHTML = "PRICE " + product.price + "€";
+
+    var elem5 = document.createElement("br");
+
+    var elem6 = document.createElement("a");
+    elem6.classList.add("cta");
+    elem6.setAttribute("style", "float:center;margin-top:16px;");
+    elem6.innerHTML = "+ ADD TO CART";
+
+    elem6.onclick = function(){
+        addProductToCart(product);
+        setCartCounter();
+    };
+
+    var elem7 = document.createElement("div");
+    elem7.classList.add("card_circle");
+    elem7.classList.add("transition");
+
+    elem.appendChild(elem1);
+    elem.appendChild(elem2);
+    elem2.appendChild(elem3);
+    elem2.appendChild(elem4);
+    elem4.appendChild(elem5);
+    elem4.appendChild(elem6);
+    elem.appendChild(elem7);
+    return elem;
 }
 
 function setCartCounter(){
-    var counter = 0;
-    var Cart = JSON.parse(window.localStorage.getItem("Cart"));
-    for(var elem in Cart){
-        for(var prod in Cart[elem]) {
-            counter = counter + Cart[elem][prod].quantity;
-        }
-    }
-    document.getElementById("cart-counter").textContent = counter;
+    document.getElementById("cart-counter").textContent = getCartProductsCount();;
 }
 
 function goBack(){

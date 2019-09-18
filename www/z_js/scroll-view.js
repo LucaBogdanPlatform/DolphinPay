@@ -19,7 +19,6 @@ function setScrollListener(){
 		    //here the code for call web service
 			downloadingContent = true;
 		    getStands(function(data){
-
                 addChunk(data.list);
                 downloadingContent = false;
 		    }, function(error){
@@ -111,8 +110,12 @@ function addChunk(chunkArray, isFirstCall = false){
             document.getElementById('spinner-container').style.display = "none";
             break;
         }else if((checkElemIndex = (chunkArray.length - chunkSize)) < chunkArray.length){
-            var elem = elemFactoryDashboard('Bibione, IT ' + chunkArray[checkElemIndex].id, 'Chiosco delfino','visible',
-            chunkArray[checkElemIndex].id);
+            var elem = elemFactoryDashboard(
+                chunkArray[checkElemIndex].id,
+                chunkArray[checkElemIndex].name,
+                'visible',
+                chunkArray[checkElemIndex].id
+            );
             $('#scrollable-content').append(elem);
             elements.push(elem);
             chunkSize --;
@@ -129,22 +132,52 @@ function addChunk(chunkArray, isFirstCall = false){
 
 function elemFactoryDashboard(position,name,visibility,id){
     var elem = document.createElement("div");
-    elem.style.borderRadius = "10px";
-    elem.style.visibility = visibility;
-    elem.style.background = "#FFFFFF";
+    elem.classList.add("card");
+    elem.visibility = visibility;
     elem.id = id;
     elem.name = name+'-'+position;
-    elem.onclick =(function(){
-        var currentCompany = {'id':elem.id,'name':elem.name.split('-')[0],'position':elem.name.split('-')[1]};
-        window.localStorage.setItem("currentCompany", JSON.stringify(currentCompany));
-        PGMultiView.loadView("companyprofile.html", "", function(){}, function(){});
-    });
-    elem.className = "media flex-column";
-    elem.innerHTML = '<br>'+
-        '<span class="message_userpic">'+
-        '<img class="d-flex mr-3" src="../img/user-header.png" alt="Generic user image"'+
-        '<span class="user-status bg-success"></span>'+'</span>'+'<div class="media-body">'+
-        '<h6 class="mt-0 mb-1">'+name+'</h6>'+position+'</div>'+'<br>';
+
+    var elemImage = document.createElement("div");
+    elemImage.classList.add("card-image");
+    elemImage.classList.add("waves-effect");
+    elemImage.classList.add("waves-block");
+    elemImage.classList.add("waves-light");
+
+    var elemImageOBJ = document.createElement("img");
+    elemImageOBJ.classList.add("activator");
+    elemImageOBJ.src = "../z_img/beach-bar.jpg";
+
+    var cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+
+
+    var span = document.createElement("span");
+    span.classList.add("card-title");
+    span.classList.add("activator");
+    span.classList.add("grey-text");
+    span.classList.add("text-darken-4");
+    span.innerHTML = name;
+
+    var a = document.createElement("a");
+    a.classList.add("waves-effect");
+    a.classList.add("amber");
+    a.classList.add("lighten-1");
+    a.classList.add("btn-large");
+    a.classList.add("right");
+    a.classList.add("col-sm-12");
+    a.innerHTML = "NEW ORDER";
+
+    elemImage.appendChild(elemImageOBJ);
+    cardContent.appendChild(span);
+    cardContent.appendChild(a);
+    elem.appendChild(elemImage);
+    elem.appendChild(cardContent);
+
+    a.onclick = function(){
+         saveStandSelected({'id':elem.id,'name':elem.name.split('-')[0],'position':elem.name.split('-')[1]});
+         PGMultiView.loadView("category.html", "", function(){}, function(){});
+    };
+
     return elem;
 }
 

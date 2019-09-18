@@ -10,13 +10,16 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
+        attachBaseMenuListeners();
+        attachBaseLeftMenuListeners();
         setCartCounter();
         container = document.getElementById("container-category");
-        //here the function on load
-        var currentStand = JSON.parse(window.localStorage.getItem("currentCompany"));
-        getStandCategories(function(data){loadCategory(data);},
+
+        getStandCategories(
+            function(data){ loadCategory(data);},
             function(error){alert('Connection lost');},
-            currentStand.id);
+            getSelectedStand().id
+        );
     },
 
     onPause: function() {
@@ -37,18 +40,46 @@ function loadCategory(data){
 
 
 function elementFactory(title,imgName,id){
-    var div = document.createElement("div");
-    div.className = "col-sm-16 col-md-8";
-    div.innerHTML = '<div class="media flex-column" onClick="goToProducts(this);" id="'+id+'">'+
-        '<span class="projectpic card"><img src="../z_img/'+imgName+'.jpg">'+
-        '<div class="overlay category">'+
-        '<h6 style="font-size: 1.8rem !important;">'+title+'</h6>'+
-        '</div></span></div>';
-    return div;
+    var elem = document.createElement("div");
+    elem.classList.add("card");
+    elem.id = id;
+
+    var elemImage = document.createElement("div");
+    elemImage.classList.add("card-image");
+    elemImage.classList.add("waves-effect");
+    elemImage.classList.add("waves-block");
+    elemImage.classList.add("waves-light");
+
+    var elemImageOBJ = document.createElement("img");
+    elemImageOBJ.classList.add("activator");
+    elemImageOBJ.style="height:160px;"
+    elemImageOBJ.src = "../z_img/" + imgName.toString() +".jpg";
+
+    var cardContent = document.createElement("div");
+    cardContent.classList.add("card-content");
+
+
+    var span = document.createElement("span");
+    span.classList.add("card-title");
+    span.classList.add("activator");
+    span.classList.add("grey-text");
+    span.classList.add("text-darken-4");
+    span.innerHTML = title;
+
+    elemImage.appendChild(elemImageOBJ);
+    cardContent.appendChild(span);
+    elem.appendChild(elemImage);
+    elem.appendChild(cardContent);
+
+    elem.onclick = function(e){
+        saveCategorySelected(id);
+        goToProducts(e);
+    };
+
+    return elem;
 }
 
 function goToProducts(event){
-    window.localStorage.setItem("currentCategory",event.id);
     PGMultiView.loadView("products.html","", function(){}, function(){});
 }
 
@@ -57,14 +88,7 @@ function goBack(){
 }
 
 function setCartCounter(){
-    var counter = 0;
-    var Cart = JSON.parse(window.localStorage.getItem("Cart"));
-    for(var elem in Cart){
-        for(var prod in Cart[elem]) {
-            counter = counter + Cart[elem][prod].quantity;
-        }
-    }
-    document.getElementById("cart-counter").textContent = counter;
+    document.getElementById("cart-counter").textContent = getCartProductsCount();
 }
 
 function goToCart(){

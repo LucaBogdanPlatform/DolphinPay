@@ -21,25 +21,30 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../z_css/dashboard.css" type="text/css">
     <link rel="stylesheet" href="../z_css/spinner.css" type="text/css">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../z_css/materialize.min.css" media="screen,projection"/>
+
 </head>
 <body class="menuclose menuclose-right">
 
 <!-- adding JQUERY and JS for pageView-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<header class="navbar-fixed" >
+<header class="navbar-fixed">
 
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-faded" style="background:green;">
         <div class="sidebar-left">
-            <button class="btn btn-link icon-header mr-sm-2 pull-left menu-collapse" ><span class="fa fa-bars" style="color:white;"></span></button>
+            <button class="btn-flat icon-header mr-sm-2 pull-left menu-collapse"><span class="fa fa-bars" style="color:white;"></span>
+            </button>
         </div>
         <div class="d-flex mr-auto"> &nbsp;</div>
-        <div class="sidebar-right pull-right " >
+        <div class="sidebar-right pull-right ">
             <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item">
-                    <button class="btn-link btn userprofile"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="userpic" style="border-radius:15px;"><img src="../img/user-header.png" alt="user pic"></span>
-                    </button>
+                    <img class="userprofile circle responsive-img"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="../img/user-header.png" alt="user pic"/>
                     <div class="dropdown-menu" w3-include-html="z_common_components/base-dropdown-menu-content.html">
 
                     </div>
@@ -60,30 +65,12 @@
         <h3 style="text-align:left;margin-left:16px;">Select one of below stands</h3>
     </div>
     <div class="container">
-        <br>
-
-        <!-- INIZIO Messaggio di notifica ordini pendenti -->
         <div class="row">
-            <!--&lt;!&ndash; Searchbar &ndash;&gt;-->
-            <!--<div class="col-sm-16">-->
-                <!--<div class="d-flex justify-content-center">-->
-                    <!--<div class="searchbar">-->
-                        <!--<input class="search_input" type="text" name="" placeholder="Search...">-->
-                        <!--<a href="#" class="search_icon"><i class="fa fa-search"></i></a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; FINE Searchbar &ndash;&gt;-->
-
-            <!-- INIZIO Card chiosco -->
-            <div class="col-md-16">
-                <div class="member-list row">
-                    <div class="col-sm-16" id="scrollable-content">
-                        <!-- Qui vanno messe le card dei chioschi -->
-                    </div>
+            <div class="col list-unstyled project-list ">
+                <div class="row" id="scrollable-content">
+                    <!-- HERE THE CATEGORY CARDS -->
                 </div>
             </div>
-            <!-- FINE Card chiosco -->
         </div>
     </div>
 </div>
@@ -97,6 +84,8 @@
 <script src="../z_utils/html-includer.js" type="text/javascript"></script>
 <script>
     includeHTML();
+
+
 </script>
 
 
@@ -116,7 +105,7 @@
 <script src="../vendor/flexslider/jquery.flexslider-min.js" type="text/javascript"></script>
 
 <!-- Custom JS -->
-<script src="../cordova.js" type="text/javascript" ></script>
+<script src="../cordova.js" type="text/javascript"></script>
 <script src="../z_utils/strings.js" type="text/javascript"></script>
 <script src="../z_utils/user_interface.js" type="text/javascript"></script>
 <script src="../z_js/web_requests.js" type="text/javascript"></script>
@@ -124,6 +113,8 @@
 <script src="../z_js/base-menu-listeners.js" type="text/javascript"></script>
 <script src="../z_js/scroll-view.js" type="text/javascript"></script>
 <script src="../z_js/dashboard.js" type="text/javascript"></script>
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="../z_js/materialize.min.js"></script>
 
 <!--sparklines js-->
 <script type="text/javascript" src="../vendor/sparklines/jquery.sparkline.min.js"></script>
