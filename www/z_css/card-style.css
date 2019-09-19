@@ -3,11 +3,11 @@
   transition: 0.3s;
   width: 95%;
   border-left-style: solid;
-  border-radius:10px;
+  border-radius:2px;
 }
 
 .card-green-indicator{
-  border-left-color: #8bc34a;
+  border-left-color: #F07260;
   border-left-width: 10px;
 }
 

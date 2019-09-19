@@ -52,7 +52,7 @@ function elementFactory(title,imgName,id){
 
     var elemImageOBJ = document.createElement("img");
     elemImageOBJ.classList.add("activator");
-    elemImageOBJ.style="height:160px;"
+    elemImageOBJ.style="height:160px;";
     elemImageOBJ.src = "../z_img/" + imgName.toString() +".jpg";
 
     var cardContent = document.createElement("div");

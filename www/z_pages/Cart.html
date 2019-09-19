@@ -7,105 +7,75 @@
     <meta name="author" content="">
     <link rel="icon" href="../favicon.ico">
     <title>Dashboard</title>
+
+
     <!-- Fontawesome icon CSS -->
     <link rel="stylesheet" href="../vendor/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../vendor/bootstrap4alpha/css/bootstrap.css" type="text/css">
 
+
     <!-- Adminux CSS -->
     <link rel="stylesheet" href="../css/light_adminux.css" type="text/css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../z_css/Cart.css" type="text/css">
-    <link rel="stylesheet" href="../z_css/category-style.css" type="text/css">
-    <link rel="stylesheet" href="../z_css/card-style.css" type="text/css">
+    <link rel="stylesheet" href="../z_css/products.css" type="text/css">
+    <link rel="stylesheet" href="../z_css/common-style.css" type="text/css">
+    <link rel="stylesheet" href="../z_css/spinner.css" type="text/css">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../z_css/materialize.min.css" media="screen,projection"/>
 </head>
-<body>
+<body class="menuclose menuclose-right">
 
 <!-- adding JQUERY and JS for pageView-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-
 <header class="navbar-fixed">
 
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-faded">
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-faded" style="background:#F07260;">
         <div class="sidebar-left">
-            <button onclick="goBack();" class="btn btn-link icon-header mr-sm-2 pull-left"><span class="fa fa-chevron-left"></span></button>
+            <button onclick="goBack();" class="btn-flat icon-header mr-sm-2 pull-left">
+                <span class="fa fa-chevron-left" style="color:white;"></span>
+            </button>
         </div>
         <div class="d-flex mr-auto"> &nbsp;</div>
-        <ul class="navbar-nav content-right">
-            <li class="nav-item">
-                <button class="btn btn-link icon-header" aria-expanded="false" style="padding-right:0px;">
-                    <i class="fa">&#xf07a;</i>
-                    <span class='badge badge-warning' style="background-color:#F07260;" id='cart-counter'></span>
-                </button>
-                <button class="btn btn-link icon-header badgeCircle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-bell-o"></span><span class="badge-number bg-danger"></span></button>
-                <div class="dropdown-menu message-container">
-                    <div class="list-unstyled">
-                        <div class="media"> <span class="alert-block bg-primary"><span class="fa fa-bullhorn"></span></span>
-                            <div class="media-body"><b>Max Smith</b> updated post of <b>Astha Smith</b>. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</div>
-                        </div>
-                        <div class="media"> <span class="alert-block bg-warning"><span class="fa fa-bell-o"></span></span>
-                            <div class="media-body"><b>Max Smith</b> updated post of <b>Astha Smith</b>. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <div class="sidebar-right pull-right " >
-            <ul class="navbar-nav  justify-content-end">
-                <li class="nav-item">
-                    <button class="btn-link btn userprofile"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="userpic" style="border-radius:15px;"><img src="../img/user-header.png" alt="user pic"></span></button>
-                    <div class="dropdown-menu"> <a class="dropdown-item" href="customerprofile.html">Profile</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="sign-in2.html" class="dropdown-item" >Logout</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+
     </nav>
 
 </header>
+
+<div class="sidebar-left">
+    <div w3-include-html="z_common_components/base-user-sidebar-left.html">
+
+    </div>
+
+</div>
 <div class="wrapper-content" style="padding-bottom:5% !important;">
+    <div class="col-11 col-sm-12 page-title">
+        <h3 style="text-align:left;margin-left:16px;">Your cart's products</h3>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col list-unstyled project-list ">
-                <div class="row" id="scrollable-content">
-                    <!-- HERE THE BILL -->
-                    <div>
-                        <div class="card" style="overflow: hidden;">
-                            <div class="product bg-success text-white">
-                                <figure class="product_img  align-items-center justify-content-between d-flex" >
-                                    <a href="#"><img class="" src="../img/product1.jpg"  alt=""></a>
-                                </figure>
-                                <div style="display: flex; justify-content: center;">
-                                    <div class="card-block" style="background:#F07260 !important;">
-                                        <a href="#"><h5 class="card-title text-white" style="text-align: center;">Test Name</h5></a>
-                                        <a href="#"><h5 class="card-title text-white" style="text-align: center;">10 $</h5></a>
-                                    </div>
-                                    <div class="card-block" style="background:#F07260 !important;" >
-                                        <div style="display: flex; justify-content: center; padding-top:3%;">
-                                            <form class ="myform" method='POST' action='#'>
-                                                <input type='button' value='-' class='qtyminus' field='quantity' onclick="removeQuantity(this);"/>
-                                                <input type='text' name='quantity' value='1' class='qty' disabled />
-                                                <input type='button' value='+' class='qtyplus' field='quantity' onclick="addQuantity(this);" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row" id="container-products">
+                    <!-- HERE THE CATEGORY CARDS -->
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- html include -->
+<script src="../z_utils/html-includer.js" type="text/javascript"></script>
+<script>
+    includeHTML();
+
+</script>
 
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
@@ -124,18 +94,28 @@
 <script src="../vendor/flexslider/jquery.flexslider-min.js" type="text/javascript"></script>
 
 <!-- Custom JS -->
-<script src="../cordova.js" type="text/javascript" ></script>
+<script src="../cordova.js" type="text/javascript"></script>
 <script src="../z_utils/strings.js" type="text/javascript"></script>
 <script src="../z_utils/user_interface.js" type="text/javascript"></script>
-
+<script src="../z_js/web_requests.js" type="text/javascript"></script>
+<script src="../z_js/base-user-sidebar-menu-listeners.js" type="text/javascript"></script>
+<script src="../z_js/base-menu-listeners.js" type="text/javascript"></script>
+<script src="../z_js/cart.js" type="text/javascript"></script>
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="../z_js/materialize.min.js"></script>
 
 <!-- custome template js -->
 <script src="../js/adminux.js" type="text/javascript"></script>
 
+<!--sparklines js-->
+<script type="text/javascript" src="../vendor/sparklines/jquery.sparkline.min.js"></script>
 
-<!-- customer page js -->
-<script src="../z_js/web_requests.js" type="text/javascript"></script>
-<script src="../z_js/cart.js" type="text/javascript"></script>
+<!-- chart js -->
+<script src="../vendor/chartjs/Chart.bundle.min.js" type="text/javascript"></script>
+<script src="../vendor/chartjs/utils.js" type="text/javascript"></script>
+
+<!-- custome template js -->
+<script src="../js/adminux.js" type="text/javascript"></script>
 
 </body>
 </html>

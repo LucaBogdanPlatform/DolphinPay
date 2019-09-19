@@ -9,10 +9,7 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
-        var Cart = JSON.parse(windows.localStorage.get("Cart"));
-        if(Cart.length == 1) oneStandCart(Cart);
-        else if (Cart.length == 0){}
-        else multipleStandCart(Cart);
+        init();
     },
 
     onPause: function() {
@@ -24,25 +21,138 @@ var app = {
 }
 app.initialize();
 
+function init(){
+    var cart = getCart();
+    multipleStandCart(cart);
+}
+
+
 function oneStandCart(Cart){
     var products = Cart[Object.keys(Cart)[0]];
-    //bottom fixed bar with total and submit button insertion
+    var standBlock = getStandBlock();
     for(var prod in products){
-        //elem factory insertion
+        standBlock.append(createProductDOMObject(prod));
     }
+    document.getElementById("container-products").append(standBlock);
 }
 
 function multipleStandCart(Cart){
-    for(var stand in Cart){
-        //create Stand section with name on the header and submit payment button in the footer
-        for(var prod in Cart[stand]){
-            //elem Factory...first 3 visible...the other invisible
+    var keyCartArray = Object.keys(Cart);
+    if(keyCartArray.length == 0){
+        document.getElementById("container-products").innerHTML = "Your chart is empty";
+        return;
+    }
+
+    for(var i = 0; i< keyCartArray.length; i++){
+        var standBlock = getStandBlock();
+        var totalPrice = 0;
+        for(var j=0; j<Cart[""+keyCartArray[i]].length; j++){
+            var el = (Cart[""+keyCartArray[i]][j]);
+            totalPrice += el.price * el.quantity;
+            standBlock.append(createProductDOMObject(keyCartArray[i], el));
         }
+
+        var bSpan = document.createElement("span");
+        bSpan.style = "float:left;padding:16px;";
+        bSpan.innerHTML = " TOTAL : ";
+
+        var bA = document.createElement("a");
+        bA.id = ""+keyCartArray[i]+"_total";
+        bA.style = "float:right;padding:16px;";
+        bA.innerHTML = totalPrice + "€";
+
+        var bBuy = document.createElement("a");
+        bBuy.style = "width:100%;padding:8px;color:white;";
+        bBuy.classList.add("waves-effect");
+        bBuy.classList.add("deep-orange");
+        bBuy.classList.add("lighten-1");
+        bBuy.innerHTML = "BUY";
+
+        standBlock.append(bSpan);
+        standBlock.append(bA);
+        standBlock.append(document.createElement("br"));
+        standBlock.append(document.createElement("br"));
+        standBlock.append(bBuy);
+
+        document.getElementById("container-products").append(standBlock);
     }
 }
+function createProductDOMObject(standId, elem){
+    var li = document.createElement("li");
+    var divHeader = document.createElement("div");
+    divHeader.classList.add("collapsible-header");
 
-function elementFactory(name,img,cost,quantity,visible){
+    var span = document.createElement("span");
+    span.innerHTML = elem.name;
+    span.style = "margin-left:10px;width:45%;";
+    span.append(document.createElement("br"));
 
+    var spanPrice = document.createElement("span");
+    spanPrice.style = "float:center;";
+    spanPrice.innerHTML = (elem.price + "€");
+    span.append(spanPrice);
+
+    var divValues = document.createElement("div");
+    divValues.style = "text-align:right;width:45%;";
+
+    var a1 = document.createElement("a");
+    a1.style = "margin:16px;";
+    a1.innerHTML = elem.quantity;
+
+    var a = document.createElement("a");
+    a.classList.add("waves-effect");
+    a.classList.add("amber");
+    a.classList.add("lighten-2");
+    a.classList.add("btn");
+    a.style = "width:30px;height:30px; padding-top:0px;";
+    a.innerHTML = "-";
+    a.onclick = function(){
+        var removed = removeCartElement(standId, elem);
+        if(removed){
+            if(isCartEmptyForStand(standId)){
+                document.getElementById("container-products").removeChild(li.parentNode);
+            }else{
+                li.parentNode.removeChild(li);
+                updateStandTotal(standId, elem, false);
+            }
+        }else{
+            a1.innerHTML = parseInt(a1.innerHTML) - 1
+            updateStandTotal(standId, elem, false);
+        }
+    }
+
+    var a2 = document.createElement("a");
+    a2.classList.add("waves-effect");
+    a2.classList.add("amber");
+    a2.classList.add("lighten-2");
+    a2.classList.add("btn");
+    a2.style = "width:30px;height:30px; padding-top:0px;";
+    a2.innerHTML = "+";
+    a2.onclick = function(){
+        addProductToCartStand(standId, elem);
+        a1.innerHTML = parseInt(a1.innerHTML) + 1;
+        updateStandTotal(standId, elem, true);
+    }
+
+    li.append(divHeader);
+    divHeader.append(divValues);
+    divHeader.append(span);
+    divValues.append(a);
+    divValues.append(a1);
+    divValues.append(a2);
+    return li;
+}
+
+function updateStandTotal(standId, elem, addToTotal){
+    document.getElementById(standId + "_total").innerHTML =
+    parseInt(document.getElementById(standId + "_total").innerHTML) + (addToTotal? elem.price : -elem.price) + "€";
+}
+
+function getStandBlock(){
+    var standBlock = document.createElement("ul");
+    standBlock.classList.add("collapsible");
+    standBlock.style="width:100%;"
+    return standBlock;
 }
 
 
