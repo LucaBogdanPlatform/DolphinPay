@@ -12,6 +12,12 @@ var app = {
         attachBaseMenuListeners();
         attachBaseLeftMenuListeners();
         attachMenuListeners();
+
+        window.FirebasePlugin.onNotificationOpen(function(notification) {
+        alert("aarrrivataNotifica");
+        }, function(error) {
+        alert("aaaaa");
+        });
     },
 
     onPause: function() {
