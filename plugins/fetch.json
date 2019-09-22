@@ -39,14 +39,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-firebase": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-firebase"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-network-information": {
     "source": {
       "type": "registry",
@@ -138,5 +130,13 @@
       "WEB_APPLICATION_CLIENT_ID": "806071370102-83o3sf57mk9rqiu8lv2csd2ol5u7mfm5.apps.googleusercontent.com",
       "REVERSED_CLIENT_ID": "com.googleusercontent.apps.806071370102-83o3sf57mk9rqiu8lv2csd2ol5u7mfm5"
     }
+  },
+  "cordova-plugin-firebase-lib": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-firebase-lib@3.3.0"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

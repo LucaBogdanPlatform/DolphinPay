@@ -6,12 +6,9 @@ function attachBaseMenuListeners(){
 }
 
 function environmentsOnClickListener(e){
-    webview.Show('z_pages/environments.html');
+    PGMultiView.loadView("environments.html","", function(){PGMultiView.dismissView("")});
 }
 
 function logoutOnClickListener(e){
-    userInvalidateCredentials(function(){
-        webview.Close();
-        webview.Show('z_pages/login.html');
-    });
+    userInvalidateCredentials(function(){PGMultiView.loadView("login.html","", function(){PGMultiView.dismissView("");})});
 }

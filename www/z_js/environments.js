@@ -99,16 +99,16 @@ function getEnvironmentHTMLObject(environment){
 function onClickEnvironmentListener(environment){
     var dashboardPath;
     if(isStandardPlatform(environment)){
-        dashboardPath = "z_pages/dashboard.html";
+        dashboardPath = "dashboard.html";
     }else if(isSubscriberPlatform(environment)){
-        dashboardPath = "z_pages/dashboard-subscriber.html";
+        dashboardPath = "dashboard-subscriber.html";
     }else if(isPartnershipPlatform(environment)){
-        dashboardPath = "z_pages/dashboard-partnership.html";
+        dashboardPath = "dashboard-partnership.html";
     }else{
         return;
     }
     updatePlatform(environment);
-    webview.Show(dashboardPath);
+    PGMultiView.loadView(dashboardPath,"", function(){PGMultiView.dismissView("")});
 }
 
 function setBackButtonListener(){

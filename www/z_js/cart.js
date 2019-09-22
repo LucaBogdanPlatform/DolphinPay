@@ -26,16 +26,6 @@ function init(){
     multipleStandCart(cart);
 }
 
-
-function oneStandCart(Cart){
-    var products = Cart[Object.keys(Cart)[0]];
-    var standBlock = getStandBlock();
-    for(var prod in products){
-        standBlock.append(createProductDOMObject(prod));
-    }
-    document.getElementById("container-products").append(standBlock);
-}
-
 function multipleStandCart(Cart){
     var keyCartArray = Object.keys(Cart);
     if(keyCartArray.length == 0){
@@ -67,6 +57,10 @@ function multipleStandCart(Cart){
         bBuy.classList.add("deep-orange");
         bBuy.classList.add("lighten-1");
         bBuy.innerHTML = "BUY";
+        var standIdIndex = i;
+        bBuy.onclick = function(e){
+            sendNewOrder(getCart()[""+keyCartArray[standIdIndex]], ""+keyCartArray[standIdIndex], standBlock);
+        };
 
         standBlock.append(bSpan);
         standBlock.append(bA);
@@ -77,6 +71,26 @@ function multipleStandCart(Cart){
         document.getElementById("container-products").append(standBlock);
     }
 }
+
+function sendNewOrder(elements, standId, standBlock){
+    var requestData = [];
+    for(var i = 0; i<elements.length; i++){
+        requestData.push({
+            productId : elements[i].id ,
+            productQuantity : elements[i].quantity
+        });
+    }
+
+    createOrder(function(data){
+        initCart();
+        standBlock.classList.remove("collapsible");
+        standBlock.innerHTML = getConfirmOrder();
+    }, function(error){
+        alert("Impossible to make new order");
+    }, standId, requestData);
+
+}
+
 function createProductDOMObject(standId, elem){
     var li = document.createElement("li");
     var divHeader = document.createElement("div");
@@ -141,6 +155,10 @@ function createProductDOMObject(standId, elem){
     divValues.append(a1);
     divValues.append(a2);
     return li;
+}
+
+function getConfirmOrder(){
+    return '<div class="row"> <div class="col s12 m5"><div class="card-panel teal"><span class="white-text">New Order succeeded</span></div></div></div>';
 }
 
 function updateStandTotal(standId, elem, addToTotal){

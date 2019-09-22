@@ -26,7 +26,8 @@ var REQ_CREATE_ROOM_FOR_STAND = REST_API_URL + "/stands/rooms";
 var REQ_GET_STAND_ROOMS = REST_API_URL + "/stands/"+ PARAM_STAND_ID +"/rooms";
 var REQ_ROOM_SUBSCRIPTION_CODE = REST_API_URL + "/rooms/"+ PARAM_ROOM_ID +"/subscriptionCode";
 var REQ_CREATE_SUBSCRIPTION_PLATFORM = REST_API_URL + "/platforms/subscriptions";
-var REQ_PRODUCTS_OF_CATEGORY_OF_STAND = REST_API_URL + "/stand/"+ PARAM_STAND_ID +"/categories/"+ PARAM_CATEGORY_ID +"/products"
+var REQ_PRODUCTS_OF_CATEGORY_OF_STAND = REST_API_URL + "/stand/"+ PARAM_STAND_ID +"/categories/"+ PARAM_CATEGORY_ID +"/products";
+var REQ_CREATE_ORDER = REST_API_URL + "/stands/"+ PARAM_STAND_ID +"/orders";
 // END REQUESTS PATHS DEFINITIONS
 
 
@@ -117,6 +118,15 @@ function firebaseRefreshToken(successCallback, failureCallback){
         checkNetworkOrUnknownError(failureCallback);
     });
 }
+
+function firebaseObserveNotification(successCallback, failureCallback){
+    window.FirebasePlugin.onNotificationOpen(function(notification) {
+        successCallback(notification);
+    }, function(error) {
+        failureCallback(error);
+    });
+}
+
 //END FIREBASE
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -264,7 +274,6 @@ function removeCartElement(standId, product){
     }else{
         content[0].quantity --;
         if(content[0].quantity <= 0){
-            // TODO remove element
             cart[standId] = cart[standId].filter(function(elem){
                 return elem.id != content[0].id;
             });
@@ -563,6 +572,22 @@ function createSubscriptionPlatform(successCallback, failureCallback, platformNa
 
     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
         createSubscriptionPlatform(successCallback, failureCallback, platformName, roomCode, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function createOrder(successCallback, failureCallback, standId, data, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'post',
+        data: {
+            products : data
+        },
+        serializer: 'json'
+    };
+    var formattedRequest = REQ_CREATE_ORDER.replace(PARAM_STAND_ID, standId) + "?token=" + credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        createOrder(successCallback, failureCallback, standId, data, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
 // END REQUESTS
