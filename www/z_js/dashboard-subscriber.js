@@ -32,6 +32,11 @@ app.initialize();
 var ordersPendingSize = [];
 
 function handleNewNotification(n){
+    if(n.p_code != "0"){
+        return;
+    }
+
+
     var order = JSON.parse(n.order);
     var existingOrderDOM = document.getElementById("order_" + order.id);
     if(existingOrderDOM !== null){

@@ -9,6 +9,7 @@ var app = {
         document.addEventListener('resume', this.onResume, false);
     },
     onDeviceReady: function() {
+        init();
         attachBaseMenuListeners();
         initialContent();
         setScrollListener();
@@ -27,11 +28,19 @@ document.addEventListener("backbutton", function (e) {
       PGMultiView.dismissView("");
 });
 
+function init(){
+
+}
+
 function setCartCounter(){
     var cartProductsCount = getCartProductsCount();
 
     document.getElementById("cart-counter").textContent = cartProductsCount;
     document.getElementById("cart-counter1").textContent = cartProductsCount;
+}
+
+function goToMyOrders(){
+    PGMultiView.loadView("my-orders.html", "", function(){}, function(){});
 }
 
 function goToCart(){
