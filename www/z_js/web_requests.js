@@ -11,6 +11,8 @@ var PARAM_ROOM_ID = "{roomId}";
 var PARAM_STAND_ID = "{standId}";
 var PARAM_CATEGORY_ID = "{categoryId}";
 var PARAM_PLATFORM_ID = "{platformId}";
+var PARAM_ORDER_ID = "{orderId}";
+var PARAM_PRODUCT_ID = "{productId}";
 
 // REQUESTS PATHS DEFINITIONS
 var REQ_AUTH_PATH = REST_API_URL + "/auth";
@@ -28,6 +30,7 @@ var REQ_ROOM_SUBSCRIPTION_CODE = REST_API_URL + "/rooms/"+ PARAM_ROOM_ID +"/subs
 var REQ_CREATE_SUBSCRIPTION_PLATFORM = REST_API_URL + "/platforms/subscriptions";
 var REQ_PRODUCTS_OF_CATEGORY_OF_STAND = REST_API_URL + "/stand/"+ PARAM_STAND_ID +"/categories/"+ PARAM_CATEGORY_ID +"/products";
 var REQ_CREATE_ORDER = REST_API_URL + "/stands/"+ PARAM_STAND_ID +"/orders";
+var REQ_SET_ORDER_PRODUCT_READY = REST_API_URL + "/orders/"+ PARAM_ORDER_ID +"/products/" + PARAM_PRODUCT_ID + "/ready";
 // END REQUESTS PATHS DEFINITIONS
 
 
@@ -590,6 +593,26 @@ function createOrder(successCallback, failureCallback, standId, data, wasTokenRe
         createOrder(successCallback, failureCallback, standId, data, wasTokenRefreshed);
     }, wasTokenRefreshed);
 }
+
+function setProductsOfOrderReady(successCallback, failureCallback, orderId, productId, endTimeMillis, wasTokenRefreshed = false){
+     var credentials = getStoredCredentials();
+     const options = {
+         method: 'post',
+         data: {
+             closureTime : endTimeMillis
+         },
+         serializer: 'json'
+     };
+
+
+     var formattedRequest = REQ_SET_ORDER_PRODUCT_READY
+        .replace(PARAM_ORDER_ID, orderId)
+        .replace(PARAM_PRODUCT_ID, productId) + "?token=" + credentials.idToken;
+
+     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+         setProductsOfOrderReady(successCallback, failureCallback, orderId, productId, endTimeMillis, wasTokenRefreshed);
+     }, wasTokenRefreshed);
+ }
 // END REQUESTS
 
 //----------------------------------------------------------------------------------------------------------------------

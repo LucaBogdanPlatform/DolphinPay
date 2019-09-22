@@ -28,17 +28,21 @@ var app = {
 }
 app.initialize();
 
+var ordersPendingSize = [];
+
 function handleNewNotification(n){
     var order = JSON.parse(n.order);
     var existingOrderDOM = document.getElementById("order_" + order.id);
     if(existingOrderDOM !== null){
-        existingOrderDOM.append(buildNewProduct(order.products));
+        existingOrderDOM.append(buildNewProduct(order, order.products));
+        ordersPendingSize["order_" + order.id] ++;;
     }else{
         var newOrderDOM = buildNewOrder(order);
         var newOrderRowDOM = buildNewProduct(order, order.products);
 
         newOrderDOM.append(newOrderRowDOM);
         document.getElementById("scrollable-content").append(newOrderDOM);
+        ordersPendingSize["order_" + order.id] = 1;
     }
 }
 
@@ -60,21 +64,50 @@ function buildNewOrder(order){
 function buildNewProduct(order, product){
     var li = document.createElement("li");
 
-
     var divHeader = document.createElement("div");
     divHeader.classList.add("collapsible-header");
 
     var span = document.createElement("span");
-    span.innerHTML = product.name;
-    span.style = "float:left;margin-left:10px;width:100%;text-align:left;";
+    span.innerHTML = product.name + " X " + order.quantity;
+    span.style = "margin-left:10px;width:75%;text-align:left;";
     span.append(document.createElement("br"));
 
     var spanEndPrepare = document.createElement("span");
-    spanEndPrepare.style = "float:left;";
+    spanEndPrepare.style = "text-align:left;";
     spanEndPrepare.innerHTML = "EXPIRE TIME: " + new Date(order.expectedEndTime).toLocaleTimeString('it-IT');
     span.append(spanEndPrepare);
 
+
+    var a = document.createElement("a");
+    a.classList.add("waves-effect");
+    a.classList.add("red");
+    a.classList.add("lighten-2");
+    a.classList.add("btn");
+    a.style = "width:60px;height:30px; padding-top:0px; margin-right:0dp;";
+    a.innerHTML = "DONE";
+
+    a.onclick = function(){
+        a.classList.add("disabled");
+        setProductsOfOrderReady(function(da){
+            a.classList.remove("disabled");
+            ordersPendingSize["order_" + order.id] --;
+            a.classList.remove("red");
+            a.classList.add("green");
+            a.innerHTML = "READY";
+            a.onclick = function(){};
+
+            if(ordersPendingSize["order_" + order.id] == 0){
+                document.getElementById("scrollable-content").removeChild(li.parentNode);
+            }
+        }, function(e){
+            a.classList.remove("disabled");
+           alert("Impossible to set product ready")
+        }, order.id, product.id, Date.now());
+    }
+
+
     divHeader.append(span);
+    divHeader.append(a);
     li.append(divHeader);
     return li;
 }
