@@ -113,7 +113,7 @@ function onClickEnvironmentListener(environment){
 
 function setBackButtonListener(){
     backButtonDOM.onclick = function(){
-        webview.Close();
+        PGMultiView.dismissView("");
     }
 }
 

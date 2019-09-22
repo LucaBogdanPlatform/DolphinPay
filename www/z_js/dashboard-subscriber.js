@@ -11,6 +11,7 @@ var app = {
     onDeviceReady: function() {
         attachBaseMenuListeners();
         attachMenuListeners();
+        attachRetirementButtonListener();
         firebaseObserveNotification(handleNewNotification, handleSubscribeNotificationError);
     },
 
@@ -18,7 +19,7 @@ var app = {
 
     },
     onResume: function(event) {
-
+        firebaseObserveNotification(handleNewNotification, handleSubscribeNotificationError);
     }
 //    onBackKeyDown: function(){
 //        alert("A");
@@ -115,6 +116,24 @@ function buildNewProduct(order, product){
 function handleSubscribeNotificationError(n){
     alert("Impossible to receive push notifications");
 }
+
+function attachRetirementButtonListener(){
+    var retirementButton = document.getElementById("menu-retirement-button");
+    retirementButton.onclick = scanRetirement;
+
+}
+
+function scanRetirement(){
+    scan(function (codeScanned){
+        // TODO scanned request
+        scanRetirement();
+    }, function(){
+        alert("Impossible to access this function");
+    });
+}
+
+
+
 
 function attachMenuListeners(){
     var userNameAndSurname = document.getElementById('menu-configuration-button');

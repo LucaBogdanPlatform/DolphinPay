@@ -10,7 +10,6 @@ var app = {
     },
     onDeviceReady: function() {
         attachBaseMenuListeners();
-        attachBaseLeftMenuListeners();
         initialContent();
         setScrollListener();
     },
