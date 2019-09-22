@@ -27,8 +27,3 @@ function setBackButtonListener(){
         PGMultiView.dismissView("");
     }
 }
-function setBackButtonListener(){
-    backButtonDOM.onclick = function(){
-        PGMultiView.dismissView("");
-    }
-}
