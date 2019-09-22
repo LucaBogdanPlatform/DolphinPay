@@ -34,7 +34,7 @@ function multipleStandCart(Cart){
     }
 
     for(var i = 0; i< keyCartArray.length; i++){
-        var standBlock = getStandBlock();
+        var standBlock = getStandBlock("STAND " + keyCartArray[i]);
         var totalPrice = 0;
         for(var j=0; j<Cart[""+keyCartArray[i]].length; j++){
             var el = (Cart[""+keyCartArray[i]][j]);
@@ -52,7 +52,7 @@ function multipleStandCart(Cart){
         bA.innerHTML = totalPrice + "€";
 
         var bBuy = document.createElement("a");
-        bBuy.style = "width:100%;padding:8px;color:white;";
+        bBuy.style = "width:100%;padding:16px;color:white;";
         bBuy.classList.add("waves-effect");
         bBuy.classList.add("deep-orange");
         bBuy.classList.add("lighten-1");
@@ -166,10 +166,18 @@ function updateStandTotal(standId, elem, addToTotal){
     parseInt(document.getElementById(standId + "_total").innerHTML) + (addToTotal? elem.price : -elem.price) + "€";
 }
 
-function getStandBlock(){
+function getStandBlock(standName){
     var standBlock = document.createElement("ul");
     standBlock.classList.add("collapsible");
     standBlock.style="width:100%;"
+
+
+    var orderNumber = document.createElement("p");
+    orderNumber.innerHTML = standName;
+    orderNumber.style.innerHTML = "padding-top:16px;";
+
+    standBlock.append(orderNumber);
+
     return standBlock;
 }
 

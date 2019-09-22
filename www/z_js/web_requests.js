@@ -288,6 +288,7 @@ function removeCartElement(standId, product){
         }
     }
 }
+
 function addProductToCartStand(standId, product){
     var cart = getCart();
     if(cart[standId] === undefined) {

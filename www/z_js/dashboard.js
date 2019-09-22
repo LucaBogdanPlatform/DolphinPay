@@ -12,12 +12,13 @@ var app = {
         attachBaseMenuListeners();
         initialContent();
         setScrollListener();
+        setCartCounter();
     },
     onPause: function() {
 
     },
     onResume: function(event) {
-
+        setCartCounter();
     }
 }
 app.initialize();
@@ -25,3 +26,14 @@ app.initialize();
 document.addEventListener("backbutton", function (e) {
       PGMultiView.dismissView("");
 });
+
+function setCartCounter(){
+    var cartProductsCount = getCartProductsCount();
+
+    document.getElementById("cart-counter").textContent = cartProductsCount;
+    document.getElementById("cart-counter1").textContent = cartProductsCount;
+}
+
+function goToCart(){
+    PGMultiView.loadView("Cart.html", "", function(){}, function(){});
+}

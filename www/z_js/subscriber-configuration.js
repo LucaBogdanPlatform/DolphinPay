@@ -73,7 +73,7 @@ function getConfiguredCategories(){
 
 function setBackButtonListener(){
     backButtonDOM.onclick = function(){
-        webview.Close();
+        PGMultiView.dismissView("");
     }
 }
 

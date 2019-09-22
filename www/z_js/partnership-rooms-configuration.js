@@ -66,7 +66,7 @@ function getRoomDOMObject(room){
 
 function setBackButtonListener(){
     backButtonDOM.onclick = function(){
-        PGMultiView.dismissView();
+        PGMultiView.dismissView("");
     }
 }
 
