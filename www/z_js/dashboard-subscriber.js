@@ -32,23 +32,40 @@ app.initialize();
 var ordersPendingSize = [];
 
 function handleNewNotification(n){
-    if(n.p_code != "0"){
-        return;
-    }
-
-
     var order = JSON.parse(n.order);
-    var existingOrderDOM = document.getElementById("order_" + order.id);
-    if(existingOrderDOM !== null){
-        existingOrderDOM.append(buildNewProduct(order, order.products));
-        ordersPendingSize["order_" + order.id] ++;;
-    }else{
-        var newOrderDOM = buildNewOrder(order);
-        var newOrderRowDOM = buildNewProduct(order, order.products);
+    if(n.p_code == "3"){
+        handleProductOrderClosed(order, order.products);
+        return;
+    }else if(n.p_code == "0"){
+        var existingOrderDOM = document.getElementById("order_" + order.id);
+        if(existingOrderDOM !== null){
+            existingOrderDOM.append(buildNewProduct(order, order.products));
+            ordersPendingSize["order_" + order.id] ++;;
+        }else{
+            var newOrderDOM = buildNewOrder(order);
+            var newOrderRowDOM = buildNewProduct(order, order.products);
 
-        newOrderDOM.append(newOrderRowDOM);
-        document.getElementById("scrollable-content").append(newOrderDOM);
-        ordersPendingSize["order_" + order.id] = 1;
+            newOrderDOM.append(newOrderRowDOM);
+            document.getElementById("scrollable-content").append(newOrderDOM);
+            ordersPendingSize["order_" + order.id] = 1;
+        }
+    }
+}
+
+function handleProductOrderClosed(order, product){
+    var a = document.getElementById("button_close_" + order.id + "_" + product.id);
+     if(a!==null){
+        a.classList.remove("disabled");
+        ordersPendingSize["order_" + order.id] --;
+        a.classList.remove("red");
+        a.classList.add("green");
+        a.innerHTML = "READY";
+        a.onclick = function(){};
+
+        if(ordersPendingSize["order_" + order.id] == 0){
+            document.getElementById("scrollable-content").removeChild(a.parentNode.parentNode.parentNode);
+        }
+
     }
 }
 
@@ -89,6 +106,7 @@ function buildNewProduct(order, product){
     a.classList.add("red");
     a.classList.add("lighten-2");
     a.classList.add("btn");
+    a.id = "button_close_" + order.id + "_" + product.id;
     a.style = "width:60px;height:30px; padding-top:0px; margin-right:0dp;";
     a.innerHTML = "DONE";
 
@@ -142,9 +160,6 @@ function scanRetirement(){
         alert("Impossible to access this function");
     });
 }
-
-
-
 
 function attachMenuListeners(){
     var userNameAndSurname = document.getElementById('menu-configuration-button');

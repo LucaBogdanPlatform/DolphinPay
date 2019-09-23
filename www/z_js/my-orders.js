@@ -12,12 +12,14 @@ var app = {
     onDeviceReady: function() {
         setBackButtonListener();
         loadOrders();
+        attachFirebaseListeners();
     },
 
     onPause: function() {
 
     },
     onResume: function(event) {
+        attachFirebaseListeners();
         setBackButtonListener();
     }
 }
@@ -28,7 +30,6 @@ function setBackButtonListener(){
         PGMultiView.dismissView("");
     }
 }
-
 function loadOrders(){
     getOrdersNotRetired(function (ords){
         buildOrdersList(ords);
@@ -36,7 +37,6 @@ function loadOrders(){
         alert("Impossible to load your orders");
     });
 }
-
 function buildOrdersList(ords){
     if(ords.ordersProducts.length == 0){
         document.getElementById("container-orders").innerHTML = "0 pending orders";
@@ -81,7 +81,7 @@ function buildNewOrder(order){
     retireButton.id = "retire_button_" + order.id;
     retireButton.innerHTML = "PICK UP";
     retireButton.onclick = function(e){
-        $('#qrCodeImage').attr("src", getQrCodeImageUrl(order.retireCode));
+        $('#qrCodeImage').attr("src", getQrCodeImageUrl(retireButton.tag));
         $('#qrCodeGenerator').modal('show');
 
     };
@@ -92,7 +92,6 @@ function buildNewOrder(order){
 
     return standBlock;
 }
-
 function buildNewProduct(order, product){
     var orderContainer = document.getElementById("order_" + order.id);
     var retireButton = document.getElementById("retire_button_" + order.id);
@@ -106,6 +105,7 @@ function buildNewProduct(order, product){
             break;
             case 3: {
                 color = "#00e5ff";
+                retireButton.tag = order.retireCode;
                 retireButton.style = "width:100%;padding:16px;color:white;visibility:visible;";
             }
             break;
@@ -131,4 +131,39 @@ function buildNewProduct(order, product){
     divHeader.append(span);
     li.append(divHeader);
     return li;
+}
+
+
+function attachFirebaseListeners(){
+    firebaseObserveNotification(onMessegeReceiveFBListener, handleSubscribeNotificationError);
+}
+
+function onMessegeReceiveFBListener(data){
+    if(data.p_code == "1"){
+        onOrderClosed(JSON.parse(data.order));
+    }else if(data.p_code == "2"){
+        onOrderReady(JSON.parse(data.order));
+    }
+}
+
+function onOrderClosed(order){
+    $('#qrCodeGenerator').modal('hide');
+    var orderLayout = document.getElementById("order_" + order.id);
+    if(orderLayout !== null){
+        document.getElementById("container-orders").removeChild(orderLayout);
+    }
+}
+
+function onOrderReady(order){
+    var orderLayout = document.getElementById("order_" + order.id);
+    if(orderLayout !== null){
+        var retireButton = document.getElementById("retire_button_" + order.id);
+        orderLayout.style= "width:100%; background:#00e5ff;";
+        retireButton.tag = order.retireCode;
+        retireButton.style = "width:100%;padding:16px;color:white;visibility:visible;";
+    }
+}
+
+function handleSubscribeNotificationError(e){
+    alert("Impossible to receive push notifications");
 }
