@@ -31,6 +31,7 @@ var REQ_CREATE_SUBSCRIPTION_PLATFORM = REST_API_URL + "/platforms/subscriptions"
 var REQ_PRODUCTS_OF_CATEGORY_OF_STAND = REST_API_URL + "/stand/"+ PARAM_STAND_ID +"/categories/"+ PARAM_CATEGORY_ID +"/products";
 var REQ_CREATE_ORDER = REST_API_URL + "/stands/"+ PARAM_STAND_ID +"/orders";
 var REQ_SET_ORDER_PRODUCT_READY = REST_API_URL + "/orders/"+ PARAM_ORDER_ID +"/products/" + PARAM_PRODUCT_ID + "/ready";
+var REQ_ORDER_NOT_RETIRED = REST_API_URL + "/orders";
 // END REQUESTS PATHS DEFINITIONS
 
 
@@ -614,6 +615,37 @@ function setProductsOfOrderReady(successCallback, failureCallback, orderId, prod
          setProductsOfOrderReady(successCallback, failureCallback, orderId, productId, endTimeMillis, wasTokenRefreshed);
      }, wasTokenRefreshed);
  }
+
+function getOrdersNotRetired(successCallback, failureCallback, wasTokenRefreshed = false){
+    var credentials = getStoredCredentials();
+    const options = {
+        method: 'get'
+    };
+    var formattedRequest = REQ_ORDER_NOT_RETIRED+ "?token=" + credentials.idToken;
+
+    execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+        getOrdersNotRetired(successCallback, failureCallback, wasTokenRefreshed);
+    }, wasTokenRefreshed);
+}
+
+function retireOrder(successCallback, failureCallback, retireCode, wasTokenRefreshed = false){
+     var credentials = getStoredCredentials();
+     const options = {
+         method: 'post',
+         data: {
+             retireOrderCode : retireCode
+         },
+         serializer: 'json'
+     };
+
+
+     var formattedRequest = REQ_ORDER_NOT_RETIRED + "?token=" + credentials.idToken;
+
+     execHttpRequest(formattedRequest, options, successCallback, failureCallback, function(wasTokenRefreshed){
+         retireOrder(successCallback, failureCallback, retireCode, wasTokenRefreshed);
+     }, wasTokenRefreshed);
+ }
+
 // END REQUESTS
 
 //----------------------------------------------------------------------------------------------------------------------

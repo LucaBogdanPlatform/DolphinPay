@@ -107,7 +107,7 @@ function buildNewProduct(order, product){
             }
         }, function(e){
             a.classList.remove("disabled");
-           alert("Impossible to set product ready")
+            alert("Impossible to set product ready")
         }, order.id, product.id, Date.now());
     }
 
@@ -130,8 +130,14 @@ function attachRetirementButtonListener(){
 
 function scanRetirement(){
     scan(function (codeScanned){
-        // TODO scanned request
-        scanRetirement();
+        console.log("CODE SCANNED --> " + codeScanned);
+        retireOrder(function(data){
+            alert("Operation success");
+            scanRetirement();
+        }, function(e){
+            console.log(JSON.stringify(e));
+            alert("Code non recognised")
+        },codeScanned);
     }, function(){
         alert("Impossible to access this function");
     });
